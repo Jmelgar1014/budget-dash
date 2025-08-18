@@ -10,12 +10,12 @@ import {
 } from "recharts";
 
 const budgetData = [
-  { name: "Housing", value: 1200, color: "hsl(var(--chart-1))" },
-  { name: "Food & Dining", value: 650, color: "hsl(var(--chart-2))" },
-  { name: "Transportation", value: 420, color: "hsl(var(--chart-3))" },
-  { name: "Entertainment", value: 280, color: "hsl(var(--chart-4))" },
-  { name: "Shopping", value: 380, color: "hsl(var(--chart-5))" },
-  { name: "Utilities", value: 180, color: "hsl(var(--accent))" },
+  { name: "Housing", value: 1200, color: "green" },
+  { name: "Food & Dining", value: 650, color: "blue" },
+  { name: "Transportation", value: 420, color: "orange" },
+  { name: "Entertainment", value: 280, color: "pink" },
+  { name: "Shopping", value: 380, color: "brown" },
+  { name: "Utilities", value: 180, color: "purple" },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

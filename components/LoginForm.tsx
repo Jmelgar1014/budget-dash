@@ -3,31 +3,11 @@
 import type React from "react";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, TrendingUp, Shield, BarChart3 } from "lucide-react";
+import { SignIn, SignUp } from "@clerk/nextjs";
 
 export function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    // Simulate login
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
@@ -83,109 +63,11 @@ export function LoginForm() {
             </TabsList>
 
             <TabsContent value="login">
-              <Card className="border-0 shadow-xl">
-                <CardHeader className="space-y-2 text-center">
-                  <CardTitle className="text-2xl font-serif">
-                    Welcome Back
-                  </CardTitle>
-                  <CardDescription>
-                    Enter your credentials to access your dashboard
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        required
-                        className="h-11"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="password">Password</Label>
-                      <Input
-                        id="password"
-                        type="password"
-                        required
-                        className="h-11"
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full h-11 text-base font-medium"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Signing In..." : "Sign In"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+              <SignIn routing="hash" fallbackRedirectUrl={"/home"} />
             </TabsContent>
 
             <TabsContent value="signup">
-              <Card className="border-0 shadow-xl">
-                <CardHeader className="space-y-2 text-center">
-                  <CardTitle className="text-2xl font-serif">
-                    Create Account
-                  </CardTitle>
-                  <CardDescription>
-                    Start your financial journey today
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input
-                          id="firstName"
-                          placeholder="John"
-                          required
-                          className="h-11"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          placeholder="Doe"
-                          required
-                          className="h-11"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signupEmail">Email</Label>
-                      <Input
-                        id="signupEmail"
-                        type="email"
-                        placeholder="john@example.com"
-                        required
-                        className="h-11"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signupPassword">Password</Label>
-                      <Input
-                        id="signupPassword"
-                        type="password"
-                        required
-                        className="h-11"
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full h-11 text-base font-medium"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Creating Account..." : "Create Account"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+              <SignUp routing="hash" fallbackRedirectUrl={"/home"} />
             </TabsContent>
           </Tabs>
         </div>
