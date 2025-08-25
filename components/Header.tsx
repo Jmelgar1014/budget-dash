@@ -16,9 +16,7 @@ const Header = () => {
                 <h1 className="text-xl font-serif font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                   BudgetWise
                 </h1>
-                <p className="text-sm text-muted-foreground">
-                  Welcome back, John!
-                </p>
+                <p className="text-sm text-muted-foreground">Welcome back!</p>
               </div>
             </div>
             <div className="flex items-center gap-3">

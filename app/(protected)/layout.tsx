@@ -12,6 +12,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { PiggyBank } from "lucide-react";
+import { ConvexClientProvider } from "../../app/ConvexClientProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,7 +54,7 @@ export default function RootLayout({
                       BudgetWise
                     </h1>
                     <p className="text-sm text-muted-foreground">
-                      Welcome back, John!
+                      Welcome back!
                     </p>
                   </div>
                 </div>
@@ -73,7 +74,7 @@ export default function RootLayout({
               </div>
             </div>
           </header>
-          {children}
+          <ConvexClientProvider>{children}</ConvexClientProvider>
         </body>
       </html>
     </ClerkProvider>
