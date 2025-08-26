@@ -2,7 +2,6 @@
 
 import type React from "react";
 
-import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, TrendingUp, Shield, BarChart3 } from "lucide-react";
 import { SignIn, SignUp } from "@clerk/nextjs";

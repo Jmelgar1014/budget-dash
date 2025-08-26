@@ -1,10 +1,6 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
-import { z } from "zod";
-import {
-  transactionTableType,
-  transactionType,
-} from "../schema/TransactionSchema";
+import { transactionType } from "../schema/TransactionSchema";
 
 // Create a new task with the given text
 export const addTransaction = mutation({
