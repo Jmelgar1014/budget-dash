@@ -1,6 +1,28 @@
 "use client";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { toast } from "sonner";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
 import type React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { float32, float64, z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -15,25 +37,52 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { X, DollarSign, Calendar, Tag, FileText } from "lucide-react";
+import { X, DollarSign, Tag, FileText } from "lucide-react";
+import {
+  transactionType,
+  transactionTableType,
+} from "@/schema/TransactionSchema";
 
 interface AddTransactionModalProps {
   onClose: () => void;
 }
 
 export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
-  const [formData, setFormData] = useState({
-    type: "",
-    amount: "",
-    category: "",
-    description: "",
-    date: new Date().toISOString().split("T")[0],
+  const form = useForm<z.infer<typeof transactionType>>({
+    resolver: zodResolver(transactionType),
+    defaultValues: {
+      Vendor: "",
+      Amount: 0,
+      PurchaseDate: "",
+      PurchaseType: "",
+    },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Transaction data:", formData);
+  const handleSubmit = async (data: z.infer<typeof transactionType>) => {
+    const transformData = {
+      ...data,
+      Amount: Number(data.Amount),
+      PurchaseDate: data.PurchaseDate.toString(),
+    };
+
+    try {
+      const response = await fetch("/api/addtransaction", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(transformData),
+      });
+
+      const result = await response.json();
+
+      console.log(result);
+      form.reset();
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(data);
     onClose();
   };
 
@@ -61,8 +110,130 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Transaction Type */}
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleSubmit)}
+              className="space-y-8"
+            >
+              <FormField
+                control={form.control}
+                name="Vendor"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Vendor</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Vendor" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="Amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {" "}
+                      <DollarSign className="h-4 w-4 text-green-500" />
+                      Amount
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        step="0.01"
+                        placeholder="0.00"
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />{" "}
+              <FormField
+                control={form.control}
+                name="PurchaseDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Vendor</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={new Date(field.value)}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          captionLayout="dropdown"
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="PurchaseType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <Tag className="h-4 w-4 text-purple-500" />
+                      Transaction Type
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Income">Income</SelectItem>
+                        <SelectItem value="Expense">Expense</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Submit</Button>
+            </form>
+          </Form>
+          {/* <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="type" className="flex items-center gap-2">
                 <Tag className="h-4 w-4 text-purple-500" />
@@ -88,7 +259,6 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               </Select>
             </div>
 
-            {/* Amount */}
             <div className="space-y-2">
               <Label htmlFor="amount" className="flex items-center gap-2">
                 <DollarSign className="h-4 w-4 text-green-500" />
@@ -107,7 +277,6 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               />
             </div>
 
-            {/* Category */}
             <div className="space-y-2">
               <Label htmlFor="category" className="flex items-center gap-2">
                 <Tag className="h-4 w-4 text-pink-500" />
@@ -137,7 +306,6 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               </Select>
             </div>
 
-            {/* Date */}
             <div className="space-y-2">
               <Label htmlFor="date" className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-cyan-500" />
@@ -154,7 +322,6 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               />
             </div>
 
-            {/* Description */}
             <div className="space-y-2">
               <Label htmlFor="description" className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-purple-500" />
@@ -172,7 +339,6 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               />
             </div>
 
-            {/* Action Buttons */}
             <div className="flex gap-3 pt-4">
               <Button
                 type="button"
@@ -190,7 +356,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                 Add Transaction
               </Button>
             </div>
-          </form>
+          </form> */}
         </CardContent>
       </Card>
     </div>
