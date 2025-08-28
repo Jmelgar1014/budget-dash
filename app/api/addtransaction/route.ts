@@ -4,6 +4,7 @@ import { fetchMutation } from "convex/nextjs";
 
 export async function POST(req: Request) {
   const json = await req.json();
+  console.log("testing new mac")
 
   try {
     await fetchMutation(api.transactionsFuncs.addTransaction, json);

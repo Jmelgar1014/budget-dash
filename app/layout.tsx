@@ -1,6 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter,  } from "next/font/google";
 import "./globals.css";
 
 import {
@@ -18,12 +18,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-poppins",
-});
+
 
 export const metadata: Metadata = {
   title: "BudgetWise - Smart Financial Management",

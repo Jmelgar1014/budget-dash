@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,7 +11,6 @@ import { BudgetChart } from "@/components/BudgetChart";
 import { RecentTransactions } from "@/components/RecentTransactions";
 import { BudgetStats } from "@/components/BudgetStats";
 import { TrendingUp, DollarSign, Target } from "lucide-react";
-import Header from "./Header";
 
 export function Dashboard() {
   return (
