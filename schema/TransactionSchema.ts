@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const transactionType = z.object({
   Vendor: z.string(),
-  Amount: z.float64(),
-  PurchaseDate: z.string(),
+  Amount: z.number(),
+  PurchaseDate: z.date(),
   PurchaseType: z.string(),
 });
 

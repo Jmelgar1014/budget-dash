@@ -1,23 +1,24 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
-import { transactionType } from "../schema/TransactionSchema";
 
 // Create a new task with the given text
 export const addTransaction = mutation({
   args: {
     Vendor: v.string(),
-    Amount: v.float64(),
-    PurchaseDate: v.string(),
+    Amount: v.number(),
+    PurchaseDate: v.number(),
     PurchaseType: v.string(),
   },
   handler: async (ctx, args) => {
-    const parsed = transactionType.safeParse(args);
+    
+    
+    // const parsed = transactionType.safeParse(args);
 
-    if (!parsed.success) {
-      throw new Error(`Validation failed: ${parsed.error.message}`);
-    }
+    // if (!parsed.success) {
+    //   throw new Error(`Validation failed: ${parsed.error.message}`);
+    // }
 
-    const newTransaction = await ctx.db.insert("transactions", parsed.data);
+    const newTransaction = await ctx.db.insert("transactions", {Vendor: args.Vendor, Amount: args.Amount, PurchaseDate: args.PurchaseDate, PurchaseType: args.PurchaseType});
     return newTransaction;
   },
 });

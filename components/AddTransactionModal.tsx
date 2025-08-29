@@ -1,7 +1,6 @@
 "use client";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { toast } from "sonner";
 import {
   Popover,
   PopoverContent,
@@ -13,7 +12,7 @@ import { Calendar } from "@/components/ui/calendar";
 import type React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { float32, float64, z } from "zod";
+import {  z } from "zod";
 import {
   Form,
   FormControl,
@@ -24,11 +23,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -36,11 +33,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { X, DollarSign, Tag, FileText } from "lucide-react";
+import { X, DollarSign, Tag,  } from "lucide-react";
 import {
   transactionType,
-  transactionTableType,
 } from "@/schema/TransactionSchema";
 
 interface AddTransactionModalProps {
@@ -52,8 +47,6 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
     resolver: zodResolver(transactionType),
     defaultValues: {
       Vendor: "",
-      Amount: 0,
-      PurchaseDate: "",
       PurchaseType: "",
     },
   });
@@ -61,9 +54,9 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
   const handleSubmit = async (data: z.infer<typeof transactionType>) => {
     const transformData = {
       ...data,
-      Amount: Number(data.Amount),
-      PurchaseDate: data.PurchaseDate.toString(),
-    };
+      PurchaseDate: data.PurchaseDate.getTime()
+    }
+
 
     try {
       const response = await fetch("/api/addtransaction", {
@@ -147,6 +140,8 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                         placeholder="0.00"
                         type="number"
                         {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={field.value}
                       />
                     </FormControl>
                     <FormDescription>
@@ -184,7 +179,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
-                          selected={new Date(field.value)}
+                          selected={field.value}
                           onSelect={field.onChange}
                           disabled={(date) =>
                             date > new Date() || date < new Date("1900-01-01")
