@@ -1,4 +1,5 @@
-import { mutation } from "./_generated/server";
+import { mutation,query } from "./_generated/server";
+
 import { v } from "convex/values";
 
 // Create a new task with the given text
@@ -22,3 +23,11 @@ export const addTransaction = mutation({
     return newTransaction;
   },
 });
+
+
+export const getTransactions = query({
+  handler: async(ctx) =>{
+    const transactions = await ctx.db.query("transactions").collect();
+    return transactions
+  } 
+})

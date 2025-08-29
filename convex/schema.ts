@@ -7,5 +7,6 @@ export default defineSchema({
     Amount: v.number(),
     PurchaseDate: v.number(),
     PurchaseType: v.string(),
+  
   }),
 });

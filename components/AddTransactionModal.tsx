@@ -59,7 +59,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
 
 
     try {
-      const response = await fetch("/api/addtransaction", {
+      const response = await fetch("/api/transactions", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -83,7 +83,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md border-0 shadow-2xl bg-card/95 backdrop-blur-sm">
         <CardHeader className="relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-25"></div>
+          <div className="absolute -inset-1  rounded-lg blur opacity-25"></div>
           <div className="relative">
             <CardTitle className="text-xl font-serif flex items-center gap-2">
               <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
@@ -92,7 +92,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               Add Transaction
             </CardTitle>
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               className="absolute -top-2 -right-2 h-8 w-8 p-0 cursor-pointer"
               onClick={onClose}
@@ -141,7 +141,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                         type="number"
                         {...field}
                         onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={field.value}
+                        value={field.value || 0}
                       />
                     </FormControl>
                     <FormDescription>
@@ -225,7 +225,8 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <Button className="cursor-pointer m-2" variant="outline" onClick={()=>onClose()}>Cancel</Button>
+              <Button className="cursor-pointer m-2 bg-purple-600 hover:bg-purple-800" type="submit">Submit</Button>
             </form>
           </Form>
           {/* <form onSubmit={handleSubmit} className="space-y-4">

@@ -11,8 +11,50 @@ import { BudgetChart } from "@/components/BudgetChart";
 import { RecentTransactions } from "@/components/RecentTransactions";
 import { BudgetStats } from "@/components/BudgetStats";
 import { TrendingUp, DollarSign, Target } from "lucide-react";
+import BalanceCard from "./BalanceCard";
+import { useEffect, useState } from "react";
+
+
+type Transaction = {
+    Amount: number;
+    Vendor: string;
+    PurchaseDate: number;
+    PurchaseType: string;
+  }
 
 export function Dashboard() {
+  const [balance, setBalance] = useState<Transaction[]>([])
+
+
+  useEffect(() => {
+    const getBalance = async () => {
+      try{
+        const response = await fetch("/api/transactions",{
+          method: "GET",
+          headers:{
+            "Content-Type": "application/json"
+          }
+        })
+
+        const result = await response.json()
+        setBalance(result)
+
+        console.log( result)
+      }catch(error){
+        return {error: `${error}`}
+      }
+    }
+
+    getBalance()
+    console.log(balance)
+
+  },[])
+  console.log(balance)
+
+  const totalBalance = balance.length>0 ?balance.reduce((total,current) => {return total + current.Amount},0) : 0
+
+  const result = totalBalance.toString()
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10">
       {/* Header */}
@@ -21,18 +63,8 @@ export function Dashboard() {
       <main className="container mx-auto px-4 py-8 space-y-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 text-white">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium opacity-90">
-                Total Balance
-              </CardTitle>
-              <DollarSign className="h-4 w-4 opacity-90" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$12,847.50</div>
-              <p className="text-xs opacity-80 mt-1">+12.5% from last month</p>
-            </CardContent>
-          </Card>
+          <BalanceCard total={result}/>
+          
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-pink-500 to-pink-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
