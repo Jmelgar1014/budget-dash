@@ -224,11 +224,10 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                       <SelectContent>
                         <SelectItem value="Income">Income</SelectItem>
                         <SelectItem value="Expense">Expense</SelectItem>
+                        <SelectItem value="Savings">Savings</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
+
                     <FormMessage />
                   </FormItem>
                 )}

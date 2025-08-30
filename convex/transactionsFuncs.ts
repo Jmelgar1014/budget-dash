@@ -1,4 +1,4 @@
-import { mutation,query } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 import { v } from "convex/values";
 
@@ -11,23 +11,25 @@ export const addTransaction = mutation({
     PurchaseType: v.string(),
   },
   handler: async (ctx, args) => {
-    
-    
     // const parsed = transactionType.safeParse(args);
 
     // if (!parsed.success) {
     //   throw new Error(`Validation failed: ${parsed.error.message}`);
     // }
 
-    const newTransaction = await ctx.db.insert("transactions", {Vendor: args.Vendor, Amount: args.Amount, PurchaseDate: args.PurchaseDate, PurchaseType: args.PurchaseType});
+    const newTransaction = await ctx.db.insert("transactions", {
+      Vendor: args.Vendor,
+      Amount: args.Amount,
+      PurchaseDate: args.PurchaseDate,
+      PurchaseType: args.PurchaseType,
+    });
     return newTransaction;
   },
 });
 
-
 export const getTransactions = query({
-  handler: async(ctx) =>{
+  handler: async (ctx) => {
     const transactions = await ctx.db.query("transactions").collect();
-    return transactions
-  } 
-})
+    return transactions;
+  },
+});
