@@ -1,6 +1,6 @@
 "use client";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Loader2Icon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -12,7 +12,7 @@ import { Calendar } from "@/components/ui/calendar";
 import type React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {  z } from "zod";
+import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -33,16 +33,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { X, DollarSign, Tag,  } from "lucide-react";
-import {
-  transactionType,
-} from "@/schema/TransactionSchema";
+import { X, DollarSign, Tag } from "lucide-react";
+import { transactionType } from "@/schema/TransactionSchema";
+import { useState } from "react";
 
 interface AddTransactionModalProps {
   onClose: () => void;
 }
 
 export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof transactionType>>({
     resolver: zodResolver(transactionType),
     defaultValues: {
@@ -52,11 +53,11 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
   });
 
   const handleSubmit = async (data: z.infer<typeof transactionType>) => {
+    setIsLoading(true);
     const transformData = {
       ...data,
-      PurchaseDate: data.PurchaseDate.getTime()
-    }
-
+      PurchaseDate: data.PurchaseDate.getTime(),
+    };
 
     try {
       const response = await fetch("/api/transactions", {
@@ -67,16 +68,25 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
         body: JSON.stringify(transformData),
       });
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
+      }
+
       const result = await response.json();
+
+      setIsLoading(false);
 
       console.log(result);
       form.reset();
+      onClose();
     } catch (error) {
       console.log(error);
     }
 
     console.log(data);
-    onClose();
   };
 
   return (
@@ -144,9 +154,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                         value={field.value || 0}
                       />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
+
                     <FormMessage />
                   </FormItem>
                 )}
@@ -156,7 +164,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                 name="PurchaseDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Vendor</FormLabel>
+                    <FormLabel>Date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -225,8 +233,28 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                   </FormItem>
                 )}
               />
-              <Button className="cursor-pointer m-2" variant="outline" onClick={()=>onClose()}>Cancel</Button>
-              <Button className="cursor-pointer m-2 bg-purple-600 hover:bg-purple-800" type="submit">Submit</Button>
+              <Button
+                className="cursor-pointer m-2"
+                variant="outline"
+                onClick={() => onClose()}
+                disabled={isLoading}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="cursor-pointer m-2 bg-purple-600 hover:bg-purple-800"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2Icon className="animate-spin mr-2 h-4 w-4" />
+                    Please wait...
+                  </>
+                ) : (
+                  "Submit"
+                )}
+              </Button>
             </form>
           </Form>
           {/* <form onSubmit={handleSubmit} className="space-y-4">

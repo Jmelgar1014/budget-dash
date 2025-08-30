@@ -26,6 +26,9 @@ export function Dashboard() {
   const [balance, setBalance] = useState<Transaction[]>([])
 
 
+  const totalBalance = balance.length>0 ?balance.reduce((total,current) => {return total + current.Amount},0) : 0
+
+
   useEffect(() => {
     const getBalance = async () => {
       try{
@@ -49,9 +52,7 @@ export function Dashboard() {
     console.log(balance)
 
   },[])
-  console.log(balance)
-
-  const totalBalance = balance.length>0 ?balance.reduce((total,current) => {return total + current.Amount},0) : 0
+  
 
   const result = totalBalance.toString()
 
