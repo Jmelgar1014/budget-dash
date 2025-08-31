@@ -28,8 +28,22 @@ export const addTransaction = mutation({
 });
 
 export const getTransactions = query({
-  handler: async (ctx) => {
-    const transactions = await ctx.db.query("transactions").collect();
+  args: {
+    month: v.number(),
+    year: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const startOfMonth = new Date(args.year, args.month - 1, 1).getTime();
+    const endOfMonth = new Date(args.year, args.month, 0, 23, 59, 59).getTime();
+    const transactions = await ctx.db
+      .query("transactions")
+      .filter((item) =>
+        item.and(
+          item.gte(item.field("PurchaseDate"), startOfMonth),
+          item.lte(item.field("PurchaseDate"), endOfMonth)
+        )
+      )
+      .collect();
     return transactions;
   },
 });
