@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Card,
   CardContent,
@@ -10,9 +9,9 @@ import {
 import { BudgetChart } from "@/components/BudgetChart";
 import { RecentTransactions } from "@/components/RecentTransactions";
 import { BudgetStats } from "@/components/BudgetStats";
-import { Target } from "lucide-react";
+
 import BalanceCard from "./BalanceCard";
-import { useEffect, useState } from "react";
+
 import {
   getExpensesOnly,
   getSavingsTotals,
@@ -20,6 +19,8 @@ import {
 } from "@/utilities/utilityFuncs";
 import SpendingCard from "./SpendingCard";
 import SavingsCard from "./SavingsCard";
+import { useQuery } from "@tanstack/react-query";
+import CardSkeleton from "./CardSkeleton";
 
 export type Transaction = {
   Amount: number;
@@ -29,36 +30,43 @@ export type Transaction = {
 };
 
 export function Dashboard() {
-  const [balance, setBalance] = useState<Transaction[]>([]);
+  const { isPending, data, error } = useQuery({
+    queryKey: ["transactions"],
+    queryFn: async () => {
+      const response = await fetch("/api/transactions", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-  const balanceTotals = getTotalBalance(balance);
-
-  const expenseTotals = getExpensesOnly(balance);
-
-  const savingsTotals = getSavingsTotals(balance);
-
-  useEffect(() => {
-    const getBalance = async () => {
-      try {
-        const response = await fetch("/api/transactions", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const result = await response.json();
-        setBalance(result);
-
-        console.log(result);
-      } catch (error) {
-        return { error: `${error}` };
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
       }
-    };
 
-    getBalance();
-    console.log(balance);
-  }, []);
+      const result = await response.json();
+      return result;
+    },
+  });
+
+  const balanceTotals = getTotalBalance(data || []);
+
+  const expenseTotals = getExpensesOnly(data || []);
+
+  const savingsTotals = getSavingsTotals(data || []);
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10">
+        <main className="container mx-auto px-4 py-8">
+          <div className="text-center">
+            <p className="text-red-500">Failed to load transactions</p>
+            <button onClick={() => window.location.reload()}>Retry</button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10">
@@ -68,10 +76,20 @@ export function Dashboard() {
       <main className="container mx-auto px-4 py-8 space-y-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <BalanceCard total={balanceTotals} />
-          <SpendingCard total={expenseTotals} />
+          {isPending ? (
+            <>
+              <CardSkeleton />
+              <CardSkeleton />
+              <CardSkeleton />
+            </>
+          ) : (
+            <>
+              <BalanceCard total={balanceTotals} />
+              <SpendingCard total={expenseTotals} />
 
-          <SavingsCard total={savingsTotals} />
+              <SavingsCard total={savingsTotals} />
+            </>
+          )}
         </div>
 
         {/* Charts and Details */}

@@ -6,7 +6,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import type React from "react";
@@ -22,7 +21,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -35,14 +33,48 @@ import {
 } from "@/components/ui/select";
 import { X, DollarSign, Tag } from "lucide-react";
 import { transactionType } from "@/schema/TransactionSchema";
-import { useState } from "react";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface AddTransactionModalProps {
   onClose: () => void;
 }
 
 export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: async (data: z.infer<typeof transactionType>) => {
+      const transformData = {
+        ...data,
+        PurchaseDate: data.PurchaseDate.getTime(),
+      };
+      const response = await fetch("/api/transactions", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(transformData),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      form.reset();
+      onClose();
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  const isLoading = mutation.isPending;
 
   const form = useForm<z.infer<typeof transactionType>>({
     resolver: zodResolver(transactionType),
@@ -53,40 +85,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
   });
 
   const handleSubmit = async (data: z.infer<typeof transactionType>) => {
-    setIsLoading(true);
-    const transformData = {
-      ...data,
-      PurchaseDate: data.PurchaseDate.getTime(),
-    };
-
-    try {
-      const response = await fetch("/api/transactions", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(transformData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || `HTTP error! status: ${response.status}`
-        );
-      }
-
-      const result = await response.json();
-
-      setIsLoading(false);
-
-      console.log(result);
-      form.reset();
-      onClose();
-    } catch (error) {
-      console.log(error);
-    }
-
-    console.log(data);
+    mutation.mutate(data);
   };
 
   return (
