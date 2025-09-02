@@ -13,6 +13,7 @@ import { BudgetStats } from "@/components/BudgetStats";
 import BalanceCard from "./BalanceCard";
 
 import {
+  convertToChart,
   getExpensesOnly,
   getSavingsTotals,
   getTotalBalance,
@@ -45,15 +46,18 @@ export function Dashboard() {
       }
 
       const result = await response.json();
+
       return result;
     },
   });
 
-  const balanceTotals = getTotalBalance(data || []);
+  const chartData = data ? convertToChart(data) : [];
 
-  const expenseTotals = getExpensesOnly(data || []);
+  const balanceTotals = data ? getTotalBalance(data) : "0.00";
 
-  const savingsTotals = getSavingsTotals(data || []);
+  const expenseTotals = data ? getExpensesOnly(data) : "0.00";
+
+  const savingsTotals = data ? getSavingsTotals(data) : "0.00";
 
   if (error) {
     return (
@@ -105,7 +109,7 @@ export function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <BudgetChart />
+              <BudgetChart dataArray={chartData} />
             </CardContent>
           </Card>
 

@@ -35,3 +35,10 @@ export const getSavingsTotals = (expense: Transaction[]): string => {
 
   return savingsTotal.toFixed(2).toString();
 };
+
+export const convertToChart = (array: Transaction[]) => {
+  const result = array.map((item) => {
+    return { name: item.Vendor, value: item.Amount };
+  });
+  return result;
+};

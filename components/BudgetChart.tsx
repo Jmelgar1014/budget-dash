@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import {
   PieChart,
   Pie,
@@ -19,9 +20,10 @@ const budgetData = [
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CustomTooltip = ({ active, payload }: any) => {
+const CustomTooltip = ({ active, payload, dataArray }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0];
+    console.log(data);
     return (
       <div className="bg-card border rounded-lg shadow-lg p-3">
         <p className="font-medium">{data.name}</p>
@@ -31,7 +33,10 @@ const CustomTooltip = ({ active, payload }: any) => {
         <p className="text-xs text-muted-foreground">
           {(
             (data.value /
-              budgetData.reduce((sum, item) => sum + item.value, 0)) *
+              dataArray.reduce(
+                (sum: never, item: { value: never }) => sum + item.value,
+                0
+              )) *
             100
           ).toFixed(1)}
           % of budget
@@ -42,13 +47,41 @@ const CustomTooltip = ({ active, payload }: any) => {
   return null;
 };
 
-export function BudgetChart() {
+type chartType = {
+  name: string;
+  value: number;
+};
+
+type chartData = {
+  dataArray: chartType[];
+};
+
+export function BudgetChart({ dataArray }: chartData) {
+  const { isPending, data, error } = useQuery({
+    queryKey: ["chart"],
+    queryFn: async () => {
+      const response = await fetch("/api/transactions", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    },
+  });
+
   return (
     <div className="h-80">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
-            data={budgetData}
+            data={dataArray}
             cx="50%"
             cy="50%"
             innerRadius={60}
@@ -60,7 +93,7 @@ export function BudgetChart() {
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip content={<CustomTooltip dataArray={dataArray} />} />
           <Legend
             verticalAlign="bottom"
             height={36}
