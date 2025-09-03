@@ -1,13 +1,22 @@
 import { NextResponse } from "next/server";
 import { api } from "@/convex/_generated/api";
 import { fetchMutation, fetchQuery } from "convex/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: Request) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const json = await req.json();
-  console.log("testing new mac");
 
   try {
-    await fetchMutation(api.transactionsFuncs.addTransaction, json);
+    await fetchMutation(api.transactionsFuncs.addTransaction, {
+      ...json,
+      AuthId: userId,
+    });
     return NextResponse.json({
       Success: {
         message: "Submission was successful",
@@ -25,6 +34,12 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: Request) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { searchParams } = new URL(req.url);
 
   const currentDate = new Date();
@@ -36,6 +51,7 @@ export async function GET(req: Request) {
 
   try {
     const data = await fetchQuery(api.transactionsFuncs.getTransactions, {
+      AuthId: userId,
       month,
       year,
     });

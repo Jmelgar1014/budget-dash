@@ -23,7 +23,7 @@ const budgetData = [
 const CustomTooltip = ({ active, payload, dataArray }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0];
-    console.log(data);
+
     return (
       <div className="bg-card border rounded-lg shadow-lg p-3">
         <p className="font-medium">{data.name}</p>

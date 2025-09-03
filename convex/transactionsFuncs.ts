@@ -9,6 +9,7 @@ export const addTransaction = mutation({
     Amount: v.number(),
     PurchaseDate: v.number(),
     PurchaseType: v.string(),
+    AuthId: v.string(),
   },
   handler: async (ctx, args) => {
     // const parsed = transactionType.safeParse(args);
@@ -22,6 +23,7 @@ export const addTransaction = mutation({
       Amount: args.Amount,
       PurchaseDate: args.PurchaseDate,
       PurchaseType: args.PurchaseType,
+      AuthId: args.AuthId,
     });
     return newTransaction;
   },
@@ -31,6 +33,7 @@ export const getTransactions = query({
   args: {
     month: v.number(),
     year: v.number(),
+    AuthId: v.string(),
   },
   handler: async (ctx, args) => {
     const startOfMonth = new Date(args.year, args.month - 1, 1).getTime();
@@ -40,7 +43,8 @@ export const getTransactions = query({
       .filter((item) =>
         item.and(
           item.gte(item.field("PurchaseDate"), startOfMonth),
-          item.lte(item.field("PurchaseDate"), endOfMonth)
+          item.lte(item.field("PurchaseDate"), endOfMonth),
+          item.eq(item.field("AuthId"), args.AuthId)
         )
       )
       .collect();

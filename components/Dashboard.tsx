@@ -22,6 +22,8 @@ import SpendingCard from "./SpendingCard";
 import SavingsCard from "./SavingsCard";
 import { useQuery } from "@tanstack/react-query";
 import CardSkeleton from "./CardSkeleton";
+import { useAuth } from "@clerk/nextjs";
+import { useCallback, useEffect, useState } from "react";
 
 export type Transaction = {
   Amount: number;
@@ -105,7 +107,7 @@ export function Dashboard() {
                 Budget Breakdown
               </CardTitle>
               <CardDescription>
-                Your spending categories for this month
+                {/* Your spending categories for this month */}
               </CardDescription>
             </CardHeader>
             <CardContent>
