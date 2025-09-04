@@ -6,21 +6,19 @@ import { v } from "convex/values";
 export const addTransaction = mutation({
   args: {
     Vendor: v.string(),
+    Category: v.string(),
+    Description: v.optional(v.string()),
     Amount: v.number(),
     PurchaseDate: v.number(),
     PurchaseType: v.string(),
     AuthId: v.string(),
   },
   handler: async (ctx, args) => {
-    // const parsed = transactionType.safeParse(args);
-
-    // if (!parsed.success) {
-    //   throw new Error(`Validation failed: ${parsed.error.message}`);
-    // }
-
     const newTransaction = await ctx.db.insert("transactions", {
       Vendor: args.Vendor,
       Amount: args.Amount,
+      Category: args.Category,
+      Description: args.Description,
       PurchaseDate: args.PurchaseDate,
       PurchaseType: args.PurchaseType,
       AuthId: args.AuthId,

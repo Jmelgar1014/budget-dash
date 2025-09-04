@@ -10,15 +10,14 @@ import {
   Tooltip,
 } from "recharts";
 
-const budgetData = [
-  { name: "Housing", value: 1200, color: "green" },
-  { name: "Food & Dining", value: 650, color: "blue" },
-  { name: "Transportation", value: 420, color: "orange" },
-  { name: "Entertainment", value: 280, color: "pink" },
-  { name: "Shopping", value: 380, color: "brown" },
-  { name: "Utilities", value: 180, color: "purple" },
+const CHART_COLORS = [
+  "#a855f7", // purple-500 (matches Balance card)
+  "#ec4899", // pink-500 (matches Spending card)
+  "#06b6d4", // cyan-500 (matches Savings card)
+  "#8b5cf6", // violet-500 (complementary)
+  "#f97316", // orange-500 (accent color)
+  "#10b981", // emerald-500 (additional color)
 ];
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CustomTooltip = ({ active, payload, dataArray }: any) => {
   if (active && payload && payload.length) {
@@ -57,25 +56,6 @@ type chartData = {
 };
 
 export function BudgetChart({ dataArray }: chartData) {
-  const { isPending, data, error } = useQuery({
-    queryKey: ["chart"],
-    queryFn: async () => {
-      const response = await fetch("/api/transactions", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      return result;
-    },
-  });
-
   return (
     <div className="h-80">
       <ResponsiveContainer width="100%" height="100%">
@@ -89,8 +69,11 @@ export function BudgetChart({ dataArray }: chartData) {
             paddingAngle={2}
             dataKey="value"
           >
-            {budgetData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
+            {dataArray.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={CHART_COLORS[index % CHART_COLORS.length]}
+              />
             ))}
           </Pie>
           <Tooltip content={<CustomTooltip dataArray={dataArray} />} />

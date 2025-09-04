@@ -35,6 +35,7 @@ import { X, DollarSign, Tag } from "lucide-react";
 import { transactionType } from "@/schema/TransactionSchema";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Textarea } from "./ui/textarea";
 
 interface AddTransactionModalProps {
   onClose: () => void;
@@ -129,6 +130,55 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                     <FormDescription>
                       This is your public display name.
                     </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="Category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Food">Food</SelectItem>
+                        <SelectItem value="Transportation">
+                          Transportation
+                        </SelectItem>
+                        <SelectItem value="Utilities">Utilities</SelectItem>
+                        <SelectItem value="Salary">Salary</SelectItem>
+                        <SelectItem value="Fixed Expense">
+                          Fixed Expense
+                        </SelectItem>
+                        <SelectItem value="Misc">Misc</SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="Description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Description" {...field} />
+                    </FormControl>
+                    {/* <FormDescription>
+                      This is your public display name.
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}

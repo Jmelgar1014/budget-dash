@@ -1,4 +1,4 @@
-import { Transaction } from "@/components/Dashboard";
+import { Transaction } from "@/Types/types";
 
 //get Total balance
 export const getTotalBalance = (expenses: Transaction[]): string => {
@@ -37,8 +37,19 @@ export const getSavingsTotals = (expense: Transaction[]): string => {
 };
 
 export const convertToChart = (array: Transaction[]) => {
-  const result = array.map((item) => {
-    return { name: item.Vendor, value: item.Amount };
-  });
-  return result;
+  const result = array.reduce(
+    (acc, item) => {
+      if (acc[item.Category]) {
+        acc[item.Category] += item.Amount;
+      } else {
+        acc[item.Category] = item.Amount;
+      }
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+  return Object.entries(result).map(([category, total]) => ({
+    name: category,
+    value: total,
+  }));
 };
