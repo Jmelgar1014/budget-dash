@@ -6,12 +6,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PiggyBank, TrendingUp, Shield, BarChart3 } from "lucide-react";
 import { SignIn, SignUp } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
-
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 export function LoginForm() {
-  const { isLoaded } = useUser();
+  const router = useRouter();
+  const { isLoaded, isSignedIn } = useUser();
+  useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.push("/home");
+    }
+  }, [isLoaded, isSignedIn, router]);
+
   return (
     <>
-      {isLoaded && (
+      {isLoaded && !isSignedIn && (
         <div className="min-h-screen flex items-center justify-center p-4">
           <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
             {/* Left side - Branding */}
