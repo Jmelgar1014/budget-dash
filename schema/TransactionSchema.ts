@@ -23,3 +23,14 @@ export const TransactionDetailed = z.object({
   AuthId: z.string(),
 });
 export type DetailedTransaction = z.infer<typeof TransactionDetailed>;
+
+export const convertDate = transactionType.transform((date) => date.valueOf());
+
+export const addTransactionForm = z.object({
+  Vendor: z.string(),
+  Amount: z.number(),
+  Category: z.string(),
+  Description: z.string().optional(),
+  PurchaseDate: z.number(),
+  PurchaseType: z.string(),
+});

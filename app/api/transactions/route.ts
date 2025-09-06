@@ -4,10 +4,12 @@ import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import {
-  DetailedTransaction,
-  TransactionApiResponse,
+  addTransactionForm,
+  convertDate,
   TransactionDetailed,
+  transactionType,
 } from "@/schema/TransactionSchema";
+import { addTransaction } from "@/convex/transactionsFuncs";
 
 export async function POST(req: Request) {
   const { userId } = await auth();
@@ -18,11 +20,25 @@ export async function POST(req: Request) {
 
   const json = await req.json();
 
+  const parsedResult = addTransactionForm.safeParse(json);
+
+  if (!parsedResult.success) {
+    return NextResponse.json({
+      error: {
+        message: "Data is not valid",
+        status: 401,
+      },
+    });
+  }
+
+  console.log(parsedResult.data);
+
   try {
     await fetchMutation(api.transactionsFuncs.addTransaction, {
-      ...json,
+      ...parsedResult.data,
       AuthId: userId,
     });
+
     return NextResponse.json({
       Success: {
         message: "Submission was successful",
@@ -67,7 +83,7 @@ export async function GET(req: Request) {
     if (!result.success) {
       return NextResponse.json({
         error: {
-          message: result,
+          message: "Data is not valid",
           status: 401,
         },
       });
