@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { TransactionDetailed } from "@/Types/types";
 import { Car, Home, Utensils, Gamepad2, Zap } from "lucide-react";
 
 const transactions = [
@@ -49,45 +50,45 @@ const transactions = [
   },
 ];
 
-export function RecentTransactions() {
+type TransactionArray = {
+  TransactionData: TransactionDetailed[];
+};
+
+export function RecentTransactions({ TransactionData }: TransactionArray) {
   return (
     <div className="space-y-3">
-      {transactions.map((transaction) => {
-        const Icon = transaction.icon;
+      {TransactionData.map((transaction) => {
         return (
           <div
-            key={transaction.id}
+            key={transaction.Id}
             className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-card/80 transition-colors"
           >
             <div className="flex items-center gap-3">
               <div
                 className="p-2 rounded-lg"
-                style={{ backgroundColor: `${transaction.color}15` }}
+                style={{ backgroundColor: "green" }}
               >
-                <Icon
-                  className="h-4 w-4"
-                  style={{ color: transaction.color }}
-                />
+                {/* <Icon className="h-4 w-4" style={{ color: "green" }} /> */}
               </div>
               <div>
-                <p className="font-medium text-sm">{transaction.description}</p>
+                <p className="font-medium text-sm">{transaction.Description}</p>
                 <div className="flex items-center gap-2 mt-1">
                   <Badge variant="secondary" className="text-xs">
-                    {transaction.category}
+                    {transaction.Category}
                   </Badge>
                   <span className="text-xs text-muted-foreground">
-                    {transaction.date}
+                    {transaction.PurchaseDate}
                   </span>
                 </div>
               </div>
             </div>
             <div
               className={`font-semibold ${
-                transaction.amount > 0 ? "text-green-600" : "text-red-600"
+                transaction.Amount > 0 ? "text-green-600" : "text-red-600"
               }`}
             >
-              {transaction.amount > 0 ? "+" : ""}$
-              {transaction.amount.toFixed(2)}
+              {transaction.Amount > 0 ? "+" : ""}$
+              {transaction.Amount.toFixed(2)}
             </div>
           </div>
         );

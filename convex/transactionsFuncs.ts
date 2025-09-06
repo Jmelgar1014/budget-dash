@@ -45,6 +45,7 @@ export const getTransactions = query({
           item.eq(item.field("AuthId"), args.AuthId)
         )
       )
+      .order("desc")
       .collect();
     return transactions;
   },

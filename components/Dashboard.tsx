@@ -42,6 +42,9 @@ export function Dashboard() {
     },
   });
 
+  const recentTransactions = data ? data.slice(0, 5) : [];
+  console.log(recentTransactions);
+
   const chartData = data ? convertToChart(data) : [];
 
   const balanceTotals = data ? getTotalBalance(data) : "0.00";
@@ -113,7 +116,7 @@ export function Dashboard() {
               <CardDescription>Your latest financial activity</CardDescription>
             </CardHeader>
             <CardContent>
-              <RecentTransactions />
+              <RecentTransactions TransactionData={recentTransactions} />
             </CardContent>
           </Card>
         </div>

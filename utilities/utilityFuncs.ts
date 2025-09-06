@@ -1,7 +1,7 @@
-import { Transaction } from "@/Types/types";
+import { Transaction, TransactionDetailed } from "@/Types/types";
 
 //get Total balance
-export const getTotalBalance = (expenses: Transaction[]): string => {
+export const getTotalBalance = (expenses: TransactionDetailed[]): string => {
   const totalExpenses = expenses.reduce((total, current) => {
     let result;
     if (current.PurchaseType === "Expense") {
@@ -14,7 +14,7 @@ export const getTotalBalance = (expenses: Transaction[]): string => {
   return totalExpenses.toFixed(2).toString();
 };
 
-export const getExpensesOnly = (expenses: Transaction[]): string => {
+export const getExpensesOnly = (expenses: TransactionDetailed[]): string => {
   const allExpenses = expenses.filter(
     (item) => item.PurchaseType === "Expense"
   );
@@ -26,7 +26,7 @@ export const getExpensesOnly = (expenses: Transaction[]): string => {
   return totals.toFixed(2).toString();
 };
 
-export const getSavingsTotals = (expense: Transaction[]): string => {
+export const getSavingsTotals = (expense: TransactionDetailed[]): string => {
   const savingsList = expense.filter((item) => item.PurchaseType === "Savings");
 
   const savingsTotal = savingsList.reduce((total, current) => {
@@ -36,7 +36,7 @@ export const getSavingsTotals = (expense: Transaction[]): string => {
   return savingsTotal.toFixed(2).toString();
 };
 
-export const convertToChart = (array: Transaction[]) => {
+export const convertToChart = (array: TransactionDetailed[]) => {
   const result = array.reduce(
     (acc, item) => {
       if (acc[item.Category]) {

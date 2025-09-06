@@ -8,3 +8,10 @@
 [x]fix converToChart function to gruop transactions by transaction type so the chart does not keep adding per transaction
 [x]update table to add transaction type
 [x]update add transaction form to add transaction type
+[]make recent transactions query db
+[]make endpoint for most recent transactions
+[]authenticate recent transactions endpoint
+[]make tests using jest
+[]look at convex queries to see where to optimize
+[]look into server components
+[]improve error UI
