@@ -20,6 +20,8 @@ import SpendingCard from "./SpendingCard";
 import SavingsCard from "./SavingsCard";
 import { useQuery } from "@tanstack/react-query";
 import CardSkeleton from "./CardSkeleton";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export function Dashboard() {
   const { isPending, data, error } = useQuery({
@@ -109,12 +111,24 @@ export function Dashboard() {
 
           {/* Recent Transactions */}
           <Card className="border-0 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-xl font-serif">
-                Recent Transactions
-              </CardTitle>
-              <CardDescription>Your latest financial activity</CardDescription>
-            </CardHeader>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+              <CardHeader className="pb-2 sm:pb-3 sm:pt-3 ">
+                <CardTitle className="text-xl font-serif">
+                  Recent Transactions
+                </CardTitle>
+                <CardDescription>
+                  Your latest financial activity
+                </CardDescription>
+              </CardHeader>
+              <div className="flex justify-center sm:justify-center px-6 sm:px-0">
+                <Button
+                  className="w-full sm:max-w-52 cursor-pointer"
+                  variant="outline"
+                >
+                  <Link href="/transactions">View All Transactions</Link>
+                </Button>
+              </div>
+            </div>
             <CardContent>
               <RecentTransactions TransactionData={recentTransactions} />
             </CardContent>
