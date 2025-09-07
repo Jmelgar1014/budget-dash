@@ -5,11 +5,8 @@ import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import {
   addTransactionForm,
-  convertDate,
   TransactionDetailed,
-  transactionType,
 } from "@/schema/TransactionSchema";
-import { addTransaction } from "@/convex/transactionsFuncs";
 
 export async function POST(req: Request) {
   const { userId } = await auth();
