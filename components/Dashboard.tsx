@@ -22,6 +22,7 @@ import { useQuery } from "@tanstack/react-query";
 import CardSkeleton from "./CardSkeleton";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import MonthSelect from "./MonthSelect";
 
 export function Dashboard() {
   const { isPending, data, error } = useQuery({
@@ -74,6 +75,11 @@ export function Dashboard() {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 space-y-8">
+        <div className="flex">
+          <span className="p-2 mx-2">Transactions TimeFrame: </span>
+          <MonthSelect />
+        </div>
+
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {isPending ? (

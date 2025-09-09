@@ -20,7 +20,9 @@ export function RecentTransactions({ TransactionData }: TransactionArray) {
   return (
     <div className="space-y-3">
       {TransactionData.map((transaction) => {
-        const millisecondsToDate = new Date(transaction.PurchaseDate);
+        const millisecondsToDate = new Date(
+          transaction.PurchaseDate
+        ).toLocaleDateString('en-US');
         const Icon = categoryIcons[transaction.Category] || Circle;
         return (
           <div
@@ -37,8 +39,8 @@ export function RecentTransactions({ TransactionData }: TransactionArray) {
                   <Badge variant="secondary" className="text-xs">
                     {transaction.Category}
                   </Badge>
-                  <span className="text-xs text-muted-foreground">
-                    {millisecondsToDate.toDateString()}
+                  <span className="text-xs text-muted-foreground font-semibold">
+                    {millisecondsToDate}
                   </span>
                 </div>
               </div>

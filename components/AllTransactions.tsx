@@ -1,10 +1,8 @@
 "use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-
 import { Car, Home, Utensils, Zap, Circle, ShoppingBag } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { TransactionDetailed } from "@/Types/types";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,6 +38,14 @@ const AllTransactions = () => {
   const results = data ? data : [];
   console.log(results);
 
+  if (error) {
+    return (
+      <>
+        <div>There was an error. Please try again</div>
+      </>
+    );
+  }
+
   if (isPending) {
     return (
       <div className="space-y-3">
@@ -66,12 +72,14 @@ const AllTransactions = () => {
     <>
       <div className="space-y-3">
         {results.map((transaction: DetailedTransaction) => {
-          const millisecondsToDate = new Date(transaction.PurchaseDate);
+          const millisecondsToDate = new Date(
+            transaction.PurchaseDate
+          ).toLocaleDateString("en-US");
           const Icon = categoryIcons[transaction.Category] || Circle;
           return (
             <div
               key={transaction._id}
-              className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-card/80 transition-colors"
+              className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-card/80 transition-colors hover:shadow-md"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg" style={{ backgroundColor: "" }}>
@@ -83,8 +91,8 @@ const AllTransactions = () => {
                     <Badge variant="secondary" className="text-xs">
                       {transaction.Category}
                     </Badge>
-                    <span className="text-xs text-muted-foreground">
-                      {millisecondsToDate.toDateString()}
+                    <span className="text-xs text-muted-foreground font-semibold">
+                      {millisecondsToDate}
                     </span>
                   </div>
                 </div>
