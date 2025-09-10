@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Car, Home, Utensils, Zap, Circle, ShoppingBag } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
+import { useSearchParams } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -16,10 +17,14 @@ const categoryIcons: Record<string, any> = {
 };
 
 const AllTransactions = () => {
+  const searchParams = useSearchParams();
   const { isPending, data, error } = useQuery({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", searchParams.toString()],
     queryFn: async () => {
-      const response = await fetch("/api/transactions", {
+      const url = searchParams.toString()
+        ? `/api/transactions?${searchParams.toString()}`
+        : "/api/transactions";
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

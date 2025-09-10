@@ -28,40 +28,40 @@ const MonthSelect = () => {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Months</SelectLabel>
-            <SelectItem className="cursor-pointer" value="January">
+            <SelectItem className="cursor-pointer" value="01">
               January
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="February">
+            <SelectItem className="cursor-pointer" value="02">
               February
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="March">
+            <SelectItem className="cursor-pointer" value="03">
               March
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="April">
+            <SelectItem className="cursor-pointer" value="04">
               April
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="May">
+            <SelectItem className="cursor-pointer" value="05">
               May
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="June">
+            <SelectItem className="cursor-pointer" value="06">
               June
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="July">
+            <SelectItem className="cursor-pointer" value="07">
               July
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="August">
+            <SelectItem className="cursor-pointer" value="08">
               August
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="September">
+            <SelectItem className="cursor-pointer" value="09">
               September
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="October">
+            <SelectItem className="cursor-pointer" value="10">
               October
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="November">
+            <SelectItem className="cursor-pointer" value="11">
               November
             </SelectItem>
-            <SelectItem className="cursor-pointer" value="December">
+            <SelectItem className="cursor-pointer" value="12">
               December
             </SelectItem>
           </SelectGroup>

@@ -1,9 +1,11 @@
+"use client";
 import AllTransactions from "@/components/AllTransactions";
 import TransactionCards from "@/components/TransactionCards";
 import React from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import MonthSelect from "@/components/MonthSelect";
 
 const page = () => {
   return (
@@ -15,6 +17,7 @@ const page = () => {
             Back to Dashboard
           </Link>
         </Button>
+        <MonthSelect />
         <TransactionCards />
         <AllTransactions />
       </main>

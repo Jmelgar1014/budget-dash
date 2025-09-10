@@ -23,17 +23,23 @@ import CardSkeleton from "./CardSkeleton";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import MonthSelect from "./MonthSelect";
+import { useSearchParams } from "next/navigation";
 
 export function Dashboard() {
+  const searchParams = useSearchParams();
   const { isPending, data, error } = useQuery({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", searchParams.toString()],
     queryFn: async () => {
-      const response = await fetch("/api/transactions", {
+      const url = searchParams.toString()
+        ? `/api/transactions?${searchParams.toString()}`
+        : "/api/transactions";
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(url);
 
       if (!response.ok) {
         throw new Error(`HTTP error status: ${response.status}`);
