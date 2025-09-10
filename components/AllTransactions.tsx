@@ -1,10 +1,19 @@
 "use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Car, Home, Utensils, Zap, Circle, ShoppingBag } from "lucide-react";
+import {
+  Car,
+  Home,
+  Utensils,
+  Zap,
+  Circle,
+  ShoppingBag,
+  Trash2,
+} from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { useSearchParams } from "next/navigation";
+import { Button } from "./ui/button";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -102,16 +111,25 @@ const AllTransactions = () => {
                   </div>
                 </div>
               </div>
-              <div
-                className={`font-semibold ${
-                  transaction.PurchaseType === "Income" ||
-                  transaction.PurchaseType === "Savings"
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                {transaction.PurchaseType === "Expense" ? "-" : "+"}$
-                {transaction.Amount.toFixed(2)}
+              <div className="flex">
+                <div
+                  className={`font-semibold flex items-center ${
+                    transaction.PurchaseType === "Income" ||
+                    transaction.PurchaseType === "Savings"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {transaction.PurchaseType === "Expense" ? "-" : "+"}$
+                  {transaction.Amount.toFixed(2)}
+                </div>
+                <Button
+                  className="m-2 cursor-pointer "
+                  variant="ghost"
+                  onClick={() => console.log("deleted")}
+                >
+                  <Trash2 className="" />
+                </Button>
               </div>
             </div>
           );

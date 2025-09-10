@@ -50,3 +50,16 @@ export const getTransactions = query({
     return transactions;
   },
 });
+
+export const deleteTransaction = mutation({
+  args: { id: v.id("transactions") },
+  handler: async (ctx, args) => {
+    const transactionExists = await ctx.db.get(args.id);
+
+    if (!transactionExists) {
+      throw new Error("Transaction not found");
+    }
+    const removedTransaction = await ctx.db.delete(args.id);
+    return removedTransaction;
+  },
+});
