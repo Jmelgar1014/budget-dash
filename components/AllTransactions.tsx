@@ -10,7 +10,7 @@ import {
   ShoppingBag,
   Trash2,
 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { useSearchParams } from "next/navigation";
 import { Button } from "./ui/button";
@@ -26,6 +26,7 @@ const categoryIcons: Record<string, any> = {
 };
 
 const AllTransactions = () => {
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const { isPending, data, error } = useQuery({
     queryKey: ["transactions", searchParams.toString()],
@@ -52,6 +53,29 @@ const AllTransactions = () => {
   const results = data ? data : [];
   console.log(results);
 
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const response = await fetch(`/api/transactions/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = response.json();
+
+      console.log(result);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["transactions"],
+      });
+    },
+  });
+  const handleDelete = async (id: string) => {
+    deleteMutation.mutate(id);
+  };
+
   if (error) {
     return (
       <>
@@ -59,6 +83,10 @@ const AllTransactions = () => {
       </>
     );
   }
+
+  // if (data.length <= 0) {
+  //   return <div>There are no transactions for this Month</div>;
+  // }
 
   if (isPending) {
     return (
@@ -126,7 +154,7 @@ const AllTransactions = () => {
                 <Button
                   className="m-2 cursor-pointer "
                   variant="ghost"
-                  onClick={() => console.log("deleted")}
+                  onClick={() => handleDelete(transaction._id)}
                 >
                   <Trash2 className="" />
                 </Button>

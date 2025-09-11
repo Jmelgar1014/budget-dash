@@ -10,12 +10,17 @@ import {
   getSavingsTotals,
   getTotalBalance,
 } from "@/utilities/utilityFuncs";
+import { useSearchParams } from "next/navigation";
 
 const TransactionCards = () => {
+  const searchParams = useSearchParams();
   const { isPending, data, error } = useQuery({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", searchParams.toString()],
     queryFn: async () => {
-      const response = await fetch("/api/transactions", {
+      const url = searchParams.toString()
+        ? `/api/transactions?${searchParams.toString()}`
+        : "/api/transactions";
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

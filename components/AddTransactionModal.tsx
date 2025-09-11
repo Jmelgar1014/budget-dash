@@ -127,9 +127,9 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                     <FormControl>
                       <Input placeholder="Vendor" {...field} />
                     </FormControl>
-                    <FormDescription>
+                    {/* <FormDescription>
                       This is your public display name.
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -245,9 +245,9 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormDescription>
+                    {/* <FormDescription>
                       This is your public display name.
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}

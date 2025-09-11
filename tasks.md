@@ -10,17 +10,18 @@
 [x]update add transaction form to add transaction type
 []make tests using jest
 []look at convex queries to see where to optimize
-[]look into server components
+[x]look into server components
 []improve error UI
 [x]add icons to recent transaction
 [x]update chart colors to have defaults for each catregory
 [x]add zod validation to post transaction endpoint
-[]change font of date in recent transactions
+[x]change font of date in recent transactions
 []work on planning budget progess functionality
 []possibliy add extra table for budget goals and budgets for each category
 [x]add view all transaction button in recent transaction card
-[]create page to view all transaction of given time frame
-[]add ability to edit/remove transactions
+[x]create page to view all transaction of given time frame
+[x]add ability to remove transactions
+[]add ability to edit transactions
 []add dark mode button
 []add functionality to export to csv
 []add functionality to export to pdf
@@ -28,5 +29,5 @@
 []add a demo button so users can just click and view how app works
 []add rate limits
 []host on netlify
-[]modify recent transactions for better responsive design
+[x]modify recent transactions for better responsive design
 []fix header in layout to add hamburger menu to free space on header

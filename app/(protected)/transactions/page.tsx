@@ -17,7 +17,10 @@ const page = () => {
             Back to Dashboard
           </Link>
         </Button>
-        <MonthSelect />
+        <div className="flex">
+          <span>Transaction TimeFrame: </span>
+          <MonthSelect />
+        </div>
         <TransactionCards />
         <AllTransactions />
       </main>
