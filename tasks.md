@@ -23,7 +23,7 @@
 [x]add ability to remove transactions
 []add ability to edit transactions
 []add dark mode button
-[]add functionality to export to csv
+[x]add functionality to export to csv
 []add functionality to export to pdf
 []add a demo login user
 []add a demo button so users can just click and view how app works
@@ -31,3 +31,5 @@
 []host on netlify
 [x]modify recent transactions for better responsive design
 []fix header in layout to add hamburger menu to free space on header
+[]add better error handling to exportData function in transactions page
+[]better filtering and order of data in exported csv file
