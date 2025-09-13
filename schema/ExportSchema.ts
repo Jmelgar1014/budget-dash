@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const exportTable = z.object({
-  Amount: z.number(),
   Vendor: z.string(),
+  Amount: z.number(),
   Category: z.string(),
-  PurchaseDate: z.number(),
   PurchaseType: z.string(),
+  PurchaseDate: z.number(),
 });
 
 export type tableExport = z.infer<typeof exportTable>;

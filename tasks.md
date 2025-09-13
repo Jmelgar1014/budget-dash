@@ -33,3 +33,4 @@
 []fix header in layout to add hamburger menu to free space on header
 []add better error handling to exportData function in transactions page
 []better filtering and order of data in exported csv file
+[]need to fix export function(if console log is not printed it wont export)

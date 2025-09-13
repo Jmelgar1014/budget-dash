@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import MonthSelect from "@/components/MonthSelect";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import Papa from "papaparse";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
@@ -15,21 +15,41 @@ import { exportTable } from "@/schema/ExportSchema";
 import { z } from "zod";
 
 const Page = () => {
-  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
+  const { isPending, data, error } = useQuery({
+    queryKey: ["transactions", searchParams.toString()],
+    queryFn: async () => {
+      const url = searchParams.toString()
+        ? `/api/transactions?${searchParams.toString()}`
+        : "/api/transactions";
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-  const transactions = queryClient.getQueryData([
-    "transactions",
-    searchParams.toString(),
-  ]) as DetailedTransaction[] | undefined;
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
+      }
 
+      const result = await response.json();
+
+      return result;
+    },
+  });
   const exportData = () => {
-    if (transactions) {
-      const parsedData = z.array(exportTable).safeParse(transactions);
+    if (data) {
+      const parsedData = z.array(exportTable).safeParse(data);
       if (!parsedData.success) {
         console.log("there is an error");
       } else {
-        const csv = Papa.unparse(parsedData.data);
+        const result = parsedData.data.map((transaction) => ({
+          ...transaction,
+          PurchaseDate: new Date(transaction.PurchaseDate),
+        }));
+        console.log(result);
+        const csv = Papa.unparse(result);
 
         const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
         saveAs(
