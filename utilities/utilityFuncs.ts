@@ -1,10 +1,13 @@
-import { Transaction, TransactionDetailed } from "@/Types/types";
+import { TransactionDetailed } from "@/Types/types";
 
 //get Total balance
 export const getTotalBalance = (expenses: TransactionDetailed[]): string => {
   const totalExpenses = expenses.reduce((total, current) => {
     let result;
-    if (current.PurchaseType === "Expense") {
+    if (
+      current.PurchaseType === "Expense" ||
+      current.PurchaseType === "Savings"
+    ) {
       result = total -= current.Amount;
     } else {
       result = total += current.Amount;

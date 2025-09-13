@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className="dark">
         <body className={`${inter.variable} ${inter.variable} antialiased`}>
           <QueryProvider>{children}</QueryProvider>
           <Toaster position="top-center" richColors />

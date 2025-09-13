@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Car,
@@ -15,6 +15,7 @@ import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { useSearchParams } from "next/navigation";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -29,6 +30,8 @@ const categoryIcons: Record<string, any> = {
 const AllTransactions = () => {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [transactionId, setTransactionId] = useState<string>("");
   const { isPending, data, error } = useQuery({
     queryKey: ["transactions", searchParams.toString()],
     queryFn: async () => {
@@ -52,7 +55,6 @@ const AllTransactions = () => {
     },
   });
   const results = data ? data : [];
-  console.log(results);
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
@@ -85,10 +87,6 @@ const AllTransactions = () => {
       </>
     );
   }
-
-  // if (data.length <= 0) {
-  //   return <div>There are no transactions for this Month</div>;
-  // }
 
   if (isPending) {
     return (
@@ -156,7 +154,11 @@ const AllTransactions = () => {
                 <Button
                   className="m-2 cursor-pointer "
                   variant="ghost"
-                  onClick={() => handleDelete(transaction._id)}
+                  // onClick={() => handleDelete(transaction._id)}
+                  onClick={() => {
+                    setShowConfirm(true);
+                    setTransactionId(transaction._id);
+                  }}
                 >
                   <Trash2 className="" />
                 </Button>
@@ -165,6 +167,13 @@ const AllTransactions = () => {
           );
         })}
       </div>
+      {showConfirm && (
+        <DeleteConfirmation
+          showAlert={showConfirm}
+          setAlert={() => setShowConfirm(false)}
+          deleteTransaction={() => handleDelete(transactionId)}
+        />
+      )}
     </>
   );
 };

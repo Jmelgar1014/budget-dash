@@ -24,7 +24,6 @@
 []add ability to edit transactions
 []add dark mode button
 [x]add functionality to export to csv
-[]add functionality to export to pdf
 []add a demo login user
 []add a demo button so users can just click and view how app works
 []add rate limits
@@ -34,7 +33,8 @@
 []add better error handling to exportData function in transactions page
 [x]better filtering and order of data in exported csv file
 [x]need to fix export function(if console log is not printed it wont export)
-[]add confirmation when deleting transactions
+[x]add confirmation when deleting transactions
 [x]add toast or alert when successfully deleting transaction or adding transaction
-[]fix transaction type as savings adding to the balance instead of removing from balance
+[x]fix transaction type as savings adding to the balance instead of removing from balance
 []improve skeleton ui to match based off screen size
+[x]add confirmation when deleting a transaction
