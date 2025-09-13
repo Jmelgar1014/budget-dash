@@ -14,6 +14,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { useSearchParams } from "next/navigation";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -74,6 +75,7 @@ const AllTransactions = () => {
   });
   const handleDelete = async (id: string) => {
     deleteMutation.mutate(id);
+    toast.success("Transaction has been successfully deleted");
   };
 
   if (error) {

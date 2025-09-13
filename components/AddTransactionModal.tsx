@@ -15,7 +15,6 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -36,6 +35,7 @@ import { transactionType } from "@/schema/TransactionSchema";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Textarea } from "./ui/textarea";
+import { toast } from "sonner";
 
 interface AddTransactionModalProps {
   onClose: () => void;
@@ -69,6 +69,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       form.reset();
       onClose();
+      toast.success("Transaction has been added");
     },
     onError: (error) => {
       console.error(error);
@@ -90,7 +91,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 ">
       <Card className="w-full max-w-md border-0 shadow-2xl bg-card/95 backdrop-blur-sm">
         <CardHeader className="relative">
           <div className="absolute -inset-1  rounded-lg blur opacity-25"></div>
@@ -305,130 +306,6 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               </Button>
             </form>
           </Form>
-          {/* <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="type" className="flex items-center gap-2">
-                <Tag className="h-4 w-4 text-purple-500" />
-                Transaction Type
-              </Label>
-              <Select
-                value={formData.type}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, type: value })
-                }
-              >
-                <SelectTrigger className="border-purple-200 focus:border-purple-500">
-                  <SelectValue placeholder="Select type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="income">
-                    <span className="text-green-600 font-medium">Income</span>
-                  </SelectItem>
-                  <SelectItem value="expense">
-                    <span className="text-red-600 font-medium">Expense</span>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="amount" className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-green-500" />
-                Amount
-              </Label>
-              <Input
-                id="amount"
-                type="number"
-                step="0.01"
-                placeholder="0.00"
-                value={formData.amount}
-                onChange={(e) =>
-                  setFormData({ ...formData, amount: e.target.value })
-                }
-                className="border-purple-200 focus:border-purple-500"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="category" className="flex items-center gap-2">
-                <Tag className="h-4 w-4 text-pink-500" />
-                Category
-              </Label>
-              <Select
-                value={formData.category}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, category: value })
-                }
-              >
-                <SelectTrigger className="border-purple-200 focus:border-purple-500">
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="food">🍕 Food & Dining</SelectItem>
-                  <SelectItem value="transport">🚗 Transportation</SelectItem>
-                  <SelectItem value="entertainment">
-                    🎬 Entertainment
-                  </SelectItem>
-                  <SelectItem value="shopping">🛍️ Shopping</SelectItem>
-                  <SelectItem value="bills">💡 Bills & Utilities</SelectItem>
-                  <SelectItem value="healthcare">🏥 Healthcare</SelectItem>
-                  <SelectItem value="salary">💼 Salary</SelectItem>
-                  <SelectItem value="other">📦 Other</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="date" className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-cyan-500" />
-                Date
-              </Label>
-              <Input
-                id="date"
-                type="date"
-                value={formData.date}
-                onChange={(e) =>
-                  setFormData({ ...formData, date: e.target.value })
-                }
-                className="border-purple-200 focus:border-purple-500"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="description" className="flex items-center gap-2">
-                <FileText className="h-4 w-4 text-purple-500" />
-                Description (Optional)
-              </Label>
-              <Textarea
-                id="description"
-                placeholder="Add a note about this transaction..."
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
-                className="border-purple-200 focus:border-purple-500 resize-none"
-                rows={3}
-              />
-            </div>
-
-            <div className="flex gap-3 pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onClose}
-                className="flex-1 bg-transparent cursor-pointer hover:bg-gray-200/60"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={onClose}
-                type="submit"
-                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 cursor-pointer"
-              >
-                Add Transaction
-              </Button>
-            </div>
-          </form> */}
         </CardContent>
       </Card>
     </div>

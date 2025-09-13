@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { QueryProvider } from "@/hooks/QueryProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${inter.variable} ${inter.variable} antialiased`}>
           <QueryProvider>{children}</QueryProvider>
+          <Toaster position="top-center" richColors />
         </body>
       </html>
     </ClerkProvider>

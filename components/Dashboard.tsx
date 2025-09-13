@@ -64,7 +64,7 @@ export function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10">
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10 ">
         <main className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="text-red-500">Failed to load transactions</p>
@@ -76,11 +76,11 @@ export function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10 ">
       {/* Header */}
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 space-y-8">
+      <main className="container mx-auto px-4 py-8 space-y-8 ">
         <div className="flex">
           <span className="p-2 mx-2">Transactions TimeFrame: </span>
           <MonthSelect />
@@ -107,9 +107,9 @@ export function Dashboard() {
         {/* Charts and Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Budget Breakdown Chart */}
-          <Card className="border-0 shadow-lg">
+          <Card className="border-0 shadow-lg ">
             <CardHeader>
-              <CardTitle className="text-xl font-serif">
+              <CardTitle className="text-xl font-serif ">
                 Budget Breakdown
               </CardTitle>
               <CardDescription>

@@ -6,13 +6,13 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import MonthSelect from "@/components/MonthSelect";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import Papa from "papaparse";
-import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { saveAs } from "file-saver";
 import { exportTable } from "@/schema/ExportSchema";
 import { z } from "zod";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -59,29 +59,61 @@ const Page = () => {
       }
     }
   };
+  if (error) {
+    return (
+      <>
+        <div>
+          <h1>There is an error. Please try again later </h1>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <main className="container mx-auto px-4 py-8 space-y-8">
-        <Button className="cursor-pointer " variant="ghost" asChild>
-          <Link href="/">
-            <ArrowLeft />
-            Back to Dashboard
-          </Link>
-        </Button>
+        {isPending ? (
+          <>
+            <Skeleton className="h-9 w-32" />
+          </>
+        ) : (
+          <>
+            <Button className="cursor-pointer " variant="ghost" asChild>
+              <Link href="/">
+                <ArrowLeft />
+                Back to Dashboard
+              </Link>
+            </Button>
+          </>
+        )}
         <div className="flex justify-between">
           <div className="flex">
-            <span className="px-3 py-2">Transaction TimeFrame: </span>
-            <MonthSelect />
+            {isPending ? (
+              <>
+                <Skeleton className="h-9 w-36 mr-4" />
+                <Skeleton className="h-9 w-32" />
+              </>
+            ) : (
+              <>
+                <span className="px-3 py-2">Transaction TimeFrame: </span>
+                <MonthSelect />
+              </>
+            )}
           </div>
           <div>
-            <Button
-              className="cursor-pointer"
-              variant="outline"
-              onClick={() => exportData()}
-            >
-              Export Transactions
-            </Button>
+            {isPending ? (
+              <>
+                <Skeleton className="h-9 w-32" />
+              </>
+            ) : (
+              <Button
+                className="cursor-pointer"
+                variant="outline"
+                onClick={() => exportData()}
+              >
+                Export Transactions
+              </Button>
+            )}
           </div>
         </div>
         <TransactionCards />

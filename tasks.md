@@ -32,5 +32,9 @@
 [x]modify recent transactions for better responsive design
 []fix header in layout to add hamburger menu to free space on header
 []add better error handling to exportData function in transactions page
-[]better filtering and order of data in exported csv file
-[]need to fix export function(if console log is not printed it wont export)
+[x]better filtering and order of data in exported csv file
+[x]need to fix export function(if console log is not printed it wont export)
+[]add confirmation when deleting transactions
+[x]add toast or alert when successfully deleting transaction or adding transaction
+[]fix transaction type as savings adding to the balance instead of removing from balance
+[]improve skeleton ui to match based off screen size
