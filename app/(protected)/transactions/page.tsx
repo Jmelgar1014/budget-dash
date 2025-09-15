@@ -69,6 +69,20 @@ const Page = () => {
     );
   }
 
+  if (data) {
+    if (data.length === 0) {
+      return (
+        <>
+          <main className="container mx-auto px-4 py-8 space-y-8">
+            <h1 className="font-semibold">
+              There are no transactions for the current month
+            </h1>
+          </main>
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <main className="container mx-auto px-4 py-8 space-y-8">

@@ -8,9 +8,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { deleteTransaction } from "@/convex/transactionsFuncs";
 type confirmation = {
   showAlert: boolean;
   setAlert: () => void;
@@ -34,10 +32,14 @@ const DeleteConfirmation = ({
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel onClick={() => setAlert()}>
+              <AlertDialogCancel
+                className="cursor-pointer"
+                onClick={() => setAlert()}
+              >
                 Cancel
               </AlertDialogCancel>
               <AlertDialogAction
+                className="cursor-pointer"
                 onClick={() => {
                   deleteTransaction();
                   setAlert();

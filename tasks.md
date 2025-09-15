@@ -38,3 +38,9 @@
 [x]fix transaction type as savings adding to the balance instead of removing from balance
 []improve skeleton ui to match based off screen size
 [x]add confirmation when deleting a transaction
+[]add UI to let users know that there is no data for given timeframe instead of jsut being empty
+[x]if user selects month in dashboard and clicks on view all transactions it should show transactions from selected month
+[]add search and filter component to transactions page
+[]add ability to duplicate an entry
+[]rollover unused budget to next month
+[]average spending per category

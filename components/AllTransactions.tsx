@@ -87,7 +87,19 @@ const AllTransactions = () => {
       </>
     );
   }
-
+  if (results) {
+    if (results.length === 0) {
+      return (
+        <>
+          <main className="container mx-auto px-4 py-8 space-y-8">
+            <h1 className="font-semibold">
+              There are no transactions for the current month
+            </h1>
+          </main>
+        </>
+      );
+    }
+  }
   if (isPending) {
     return (
       <div className="space-y-3">

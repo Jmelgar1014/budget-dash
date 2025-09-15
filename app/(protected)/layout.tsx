@@ -11,7 +11,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { PiggyBank, Plus } from "lucide-react";
+import { MoonStar, PiggyBank, Plus, Sun } from "lucide-react";
 import { ConvexClientProvider } from "../../app/ConvexClientProvider";
 import { Button } from "@/components/ui/button";
 import { AddTransactionModal } from "@/components/AddTransactionModal";
@@ -23,6 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  const handleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+    if (darkMode == true) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   return (
     <ClerkProvider>
@@ -50,6 +60,13 @@ export default function RootLayout({
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Transaction
+              </Button>
+              <Button onClick={handleDarkMode}>
+                {darkMode ? (
+                  <MoonStar className="cursor-pointer" />
+                ) : (
+                  <Sun className="cursor-pointer" />
+                )}
               </Button>
               <SignedOut>
                 <SignInButton />

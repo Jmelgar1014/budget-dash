@@ -137,7 +137,7 @@ export function Dashboard() {
                   className="w-full sm:max-w-52 cursor-pointer"
                   variant="outline"
                 >
-                  <Link href="/transactions">View All Transactions</Link>
+                  <Link href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ''}`}>View All Transactions</Link>
                 </Button>
               </div>
             </div>
@@ -148,7 +148,7 @@ export function Dashboard() {
         </div>
 
         {/* Budget Statistics */}
-        <BudgetStats />
+        {/* <BudgetStats /> */}
       </main>
     </div>
   );

@@ -1,6 +1,4 @@
 "use client";
-
-import { useQuery } from "@tanstack/react-query";
 import {
   PieChart,
   Pie,
@@ -56,6 +54,15 @@ type chartData = {
 };
 
 export function BudgetChart({ dataArray }: chartData) {
+  if (dataArray.length == 0) {
+    return (
+      <div className="h-80 flex justify-center">
+        <h1 className="font-semibold">
+          There are no transactions for the current month.
+        </h1>
+      </div>
+    );
+  }
   return (
     <div className="h-80">
       <ResponsiveContainer width="100%" height="100%">

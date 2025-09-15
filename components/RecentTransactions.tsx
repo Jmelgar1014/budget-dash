@@ -17,12 +17,21 @@ const categoryIcons: Record<string, any> = {
 };
 
 export function RecentTransactions({ TransactionData }: TransactionArray) {
+  if (TransactionData.length === 0) {
+    return (
+      <div className="space-y-3 flex justify-center">
+        <h1 className="font-semibold">
+          There are no transactions for the current month
+        </h1>
+      </div>
+    );
+  }
   return (
     <div className="space-y-3">
       {TransactionData.map((transaction) => {
         const millisecondsToDate = new Date(
           transaction.PurchaseDate
-        ).toLocaleDateString('en-US');
+        ).toLocaleDateString("en-US");
         const Icon = categoryIcons[transaction.Category] || Circle;
         return (
           <div
