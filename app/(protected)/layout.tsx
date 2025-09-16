@@ -1,7 +1,7 @@
 "use client";
 import type React from "react";
 import "../globals.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ClerkProvider,
@@ -26,13 +26,32 @@ export default function RootLayout({
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const handleDarkMode = () => {
-    setDarkMode((prev) => !prev);
-    if (darkMode == true) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    setDarkMode((prev) => {
+      const newMode = !prev;
+      if (newMode) {
+        localStorage.setItem("theme", "dark");
+        document.documentElement.classList.add("dark");
+      } else {
+        localStorage.setItem("theme", "light");
+        document.documentElement.classList.remove("dark");
+      }
+      return newMode;
+    });
   };
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        setDarkMode(true);
+        document.documentElement.classList.add("dark");
+      } else {
+        setDarkMode(false);
+        document.documentElement.classList.remove("dark");
+      }
+    };
+
+    checkTheme();
+  }, []);
 
   return (
     <ClerkProvider>
@@ -63,9 +82,9 @@ export default function RootLayout({
               </Button>
               <Button onClick={handleDarkMode}>
                 {darkMode ? (
-                  <MoonStar className="cursor-pointer" />
-                ) : (
                   <Sun className="cursor-pointer" />
+                ) : (
+                  <MoonStar className="cursor-pointer" />
                 )}
               </Button>
               <SignedOut>

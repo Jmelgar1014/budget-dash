@@ -44,3 +44,4 @@
 []add ability to duplicate an entry
 []rollover unused budget to next month
 []average spending per category
+[]learn to use docker to deploy myself
