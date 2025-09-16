@@ -22,7 +22,7 @@
 [x]create page to view all transaction of given time frame
 [x]add ability to remove transactions
 []add ability to edit transactions
-[]add dark mode button
+[x]add dark mode button
 [x]add functionality to export to csv
 []add a demo login user
 []add a demo button so users can just click and view how app works
@@ -45,3 +45,4 @@
 []rollover unused budget to next month
 []average spending per category
 []learn to use docker to deploy myself
+[]make each component more responsive
