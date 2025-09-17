@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Select,
@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const MonthSelect = () => {
+const MonthSelectContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const changeMonth = (month: string) => {
@@ -68,6 +68,14 @@ const MonthSelect = () => {
         </SelectContent>
       </Select>
     </>
+  );
+};
+
+const MonthSelect = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MonthSelectContent />
+    </Suspense>
   );
 };
 

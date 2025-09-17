@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { useQuery } from "@tanstack/react-query";
 import CardSkeleton from "./CardSkeleton";
 import BalanceCard from "./BalanceCard";
@@ -12,9 +12,9 @@ import {
 } from "@/utilities/utilityFuncs";
 import { useSearchParams } from "next/navigation";
 
-const TransactionCards = () => {
+const TransactionCardsContent = () => {
   const searchParams = useSearchParams();
-  const { isPending, data, error } = useQuery({
+  const { isPending, data } = useQuery({
     queryKey: ["transactions", searchParams.toString()],
     queryFn: async () => {
       const url = searchParams.toString()
@@ -67,6 +67,14 @@ const TransactionCards = () => {
         )}
       </div>
     </>
+  );
+};
+
+const TransactionCards = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TransactionCardsContent />
+    </Suspense>
   );
 };
 

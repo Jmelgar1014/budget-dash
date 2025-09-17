@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Car,
@@ -27,7 +27,7 @@ const categoryIcons: Record<string, any> = {
   Misc: ShoppingBag,
 };
 
-const AllTransactions = () => {
+const AllTransactionsContent = () => {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
@@ -187,6 +187,14 @@ const AllTransactions = () => {
         />
       )}
     </>
+  );
+};
+
+const AllTransactions = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AllTransactionsContent />
+    </Suspense>
   );
 };
 

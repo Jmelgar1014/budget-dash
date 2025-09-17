@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { BudgetChart } from "@/components/BudgetChart";
 import { RecentTransactions } from "@/components/RecentTransactions";
-import { BudgetStats } from "@/components/BudgetStats";
+// import { BudgetStats } from "@/components/BudgetStats";
 import BalanceCard from "./BalanceCard";
 import {
   convertToChart,
@@ -24,6 +24,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import MonthSelect from "./MonthSelect";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export function Dashboard() {
   const searchParams = useSearchParams();
@@ -76,7 +77,8 @@ export function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10 ">
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10 ">
       {/* Header */}
 
       {/* Main Content */}
@@ -137,7 +139,11 @@ export function Dashboard() {
                   className="w-full sm:max-w-52 cursor-pointer"
                   variant="outline"
                 >
-                  <Link href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ''}`}>View All Transactions</Link>
+                  <Link
+                    href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+                  >
+                    View All Transactions
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -150,6 +156,7 @@ export function Dashboard() {
         {/* Budget Statistics */}
         {/* <BudgetStats /> */}
       </main>
-    </div>
+      </div>
+    </Suspense>
   );
 }

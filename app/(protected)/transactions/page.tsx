@@ -1,7 +1,7 @@
 "use client";
 import AllTransactions from "@/components/AllTransactions";
 import TransactionCards from "@/components/TransactionCards";
-import React from "react";
+import React, { Suspense } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import { exportTable } from "@/schema/ExportSchema";
 import { z } from "zod";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const Page = () => {
+const TransactionsPageContent = () => {
   const searchParams = useSearchParams();
   const { isPending, data, error } = useQuery({
     queryKey: ["transactions", searchParams.toString()],
@@ -70,56 +70,62 @@ const Page = () => {
   }
 
   return (
-    <>
-      <main className="container mx-auto px-4 py-8 space-y-8">
-        {isPending ? (
-          <>
-            <Skeleton className="h-9 w-32" />
-          </>
-        ) : (
-          <>
-            <Button className="cursor-pointer " variant="ghost" asChild>
-              <Link href="/">
-                <ArrowLeft />
-                Back to Dashboard
-              </Link>
-            </Button>
-          </>
-        )}
-        <div className="flex justify-between">
-          <div className="flex">
-            {isPending ? (
-              <>
-                <Skeleton className="h-9 w-36 mr-4" />
-                <Skeleton className="h-9 w-32" />
-              </>
-            ) : (
-              <>
-                <span className="px-3 py-2">Transaction TimeFrame: </span>
-                <MonthSelect />
-              </>
-            )}
-          </div>
-          <div>
-            {isPending ? (
-              <>
-                <Skeleton className="h-9 w-32" />
-              </>
-            ) : (
-              <Button
-                className="cursor-pointer"
-                variant="outline"
-                onClick={() => exportData()}
-              >
-                Export Transactions
-              </Button>
-            )}
-          </div>
+    <main className="container mx-auto px-4 py-8 space-y-8">
+      {isPending ? (
+        <>
+          <Skeleton className="h-9 w-32" />
+        </>
+      ) : (
+        <>
+          <Button className="cursor-pointer " variant="ghost" asChild>
+            <Link href="/">
+              <ArrowLeft />
+              Back to Dashboard
+            </Link>
+          </Button>
+        </>
+      )}
+      <div className="flex justify-between">
+        <div className="flex">
+          {isPending ? (
+            <>
+              <Skeleton className="h-9 w-36 mr-4" />
+              <Skeleton className="h-9 w-32" />
+            </>
+          ) : (
+            <>
+              <span className="px-3 py-2">Transaction TimeFrame: </span>
+              <MonthSelect />
+            </>
+          )}
         </div>
-        <TransactionCards />
-        <AllTransactions />
-      </main>
-    </>
+        <div>
+          {isPending ? (
+            <>
+              <Skeleton className="h-9 w-32" />
+            </>
+          ) : (
+            <Button
+              className="cursor-pointer"
+              variant="outline"
+              onClick={() => exportData()}
+            >
+              Export Transactions
+            </Button>
+          )}
+        </div>
+      </div>
+      <TransactionCards />
+      <AllTransactions />
+    </main>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TransactionsPageContent />
+    </Suspense>
   );
 };
 

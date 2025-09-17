@@ -47,3 +47,4 @@
 []learn to use docker to deploy myself
 []make each component more responsive
 []add ability to add receipts
+[] review what the suspense wrapper is and what it is used for
