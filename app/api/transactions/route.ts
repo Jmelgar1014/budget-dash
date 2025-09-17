@@ -7,12 +7,38 @@ import {
   addTransactionForm,
   TransactionDetailed,
 } from "@/schema/TransactionSchema";
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/rateLimit";
+
+const rateLimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(10, "60 s"),
+  prefix: "@upstash/ratelimit",
+  analytics: true,
+});
 
 export async function POST(req: Request) {
-  const { userId } = await auth();
+  const { userId, getToken } = await auth();
+
+  const token = await getToken();
+  console.log(token);
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { success, limit, remaining } = await rateLimit.limit(userId);
+
+  if (!success) {
+    return NextResponse.json(
+      {
+        error: "Rate limit exceeded",
+        limit,
+        remaining,
+        reset: new Date(Date.now() + 60000), // 60s from now
+      },
+      { status: 429 }
+    );
   }
 
   const json = await req.json();
@@ -38,6 +64,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       Success: {
+        redis: success,
+        limit: limit,
+        remaining: remaining,
         message: "Submission was successful",
         status: 200,
       },
@@ -45,6 +74,9 @@ export async function POST(req: Request) {
   } catch (error) {
     return NextResponse.json({
       error: {
+        redis: success,
+        limit: limit,
+        remaining: remaining,
         message: `${error}`,
         status: 401,
       },
@@ -53,7 +85,11 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: Request) {
-  const { userId } = await auth();
+  const { userId, getToken } = await auth();
+
+  const token = await getToken();
+
+  console.log(token);
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

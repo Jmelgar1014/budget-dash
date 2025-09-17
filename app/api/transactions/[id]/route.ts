@@ -3,6 +3,15 @@ import { api } from "@/convex/_generated/api";
 import { fetchMutation } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Id } from "@/convex/_generated/dataModel";
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/rateLimit";
+
+const rateLimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(10, "60 s"),
+  prefix: "@upstash/ratelimit",
+  analytics: true,
+});
 
 export async function DELETE(
   req: Request,
@@ -13,7 +22,19 @@ export async function DELETE(
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  const { success, limit, remaining } = await rateLimit.limit(userId);
 
+  if (!success) {
+    return NextResponse.json(
+      {
+        error: "Rate limit exceeded",
+        limit,
+        remaining,
+        reset: new Date(Date.now() + 60000), // 60s from now
+      },
+      { status: 429 }
+    );
+  }
   const { id } = await params;
   try {
     const result = await fetchMutation(
