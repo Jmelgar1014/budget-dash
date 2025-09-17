@@ -4,7 +4,7 @@ import { fetchMutation } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Id } from "@/convex/_generated/dataModel";
 import { Redis } from "@upstash/redis";
-import { Ratelimit } from "@upstash/rateLimit";
+import { Ratelimit } from "@upstash/ratelimit";
 
 const rateLimit = new Ratelimit({
   redis: Redis.fromEnv(),

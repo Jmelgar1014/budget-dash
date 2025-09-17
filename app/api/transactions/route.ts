@@ -8,7 +8,7 @@ import {
   TransactionDetailed,
 } from "@/schema/TransactionSchema";
 import { Redis } from "@upstash/redis";
-import { Ratelimit } from "@upstash/rateLimit";
+import { Ratelimit } from "@upstash/ratelimit";
 
 const rateLimit = new Ratelimit({
   redis: Redis.fromEnv(),
