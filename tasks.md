@@ -48,3 +48,6 @@
 []make each component more responsive
 []add ability to add receipts
 [] review what the suspense wrapper is and what it is used for
+[]remove all console.logs in main branch
+[]check clerk cookie error
+[x]deploy on vercel
