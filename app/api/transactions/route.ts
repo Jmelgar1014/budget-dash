@@ -46,12 +46,16 @@ export async function POST(req: Request) {
   const parsedResult = addTransactionForm.safeParse(json);
 
   if (!parsedResult.success) {
-    return NextResponse.json({
-      error: {
-        message: "Data is not valid",
-        status: 401,
+    return NextResponse.json(
+      {
+        error: {
+          message: "Data is not valid",
+          details: parsedResult.error,
+          status: 400,
+        },
       },
-    });
+      { status: 400 }
+    );
   }
 
   console.log(parsedResult.data);
@@ -62,25 +66,31 @@ export async function POST(req: Request) {
       AuthId: userId,
     });
 
-    return NextResponse.json({
-      Success: {
-        redis: success,
-        limit: limit,
-        remaining: remaining,
-        message: "Submission was successful",
-        status: 200,
+    return NextResponse.json(
+      {
+        Success: {
+          redis: success,
+          limit: limit,
+          remaining: remaining,
+          message: "Submission was successful",
+          status: 200,
+        },
       },
-    });
+      { status: 200 }
+    );
   } catch (error) {
-    return NextResponse.json({
-      error: {
-        redis: success,
-        limit: limit,
-        remaining: remaining,
-        message: `${error}`,
-        status: 401,
+    return NextResponse.json(
+      {
+        error: {
+          redis: success,
+          limit: limit,
+          remaining: remaining,
+          message: `${error}`,
+          status: 401,
+        },
       },
-    });
+      { status: 500 }
+    );
   }
 }
 
