@@ -40,7 +40,7 @@ export function Dashboard() {
           "Content-Type": "application/json",
         },
       });
-      console.log(url);
+      // console.log(url);
 
       if (!response.ok) {
         throw new Error(`HTTP error status: ${response.status}`);
@@ -53,7 +53,7 @@ export function Dashboard() {
   });
 
   const recentTransactions = data ? data.slice(0, 5) : [];
-  console.log(recentTransactions);
+  // console.log(recentTransactions);
 
   const chartData = data ? convertToChart(data) : [];
 
@@ -79,83 +79,86 @@ export function Dashboard() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10 ">
-      {/* Header */}
+        {/* Header */}
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 space-y-8 ">
-        <div className="flex">
-          <span className="p-2 mx-2">Transactions TimeFrame: </span>
-          <MonthSelect />
-        </div>
+        {/* Main Content */}
+        <main className="container mx-auto px-4 py-8 space-y-8 ">
+          <div className="flex">
+            <span className="p-2 mx-2">Transactions TimeFrame: </span>
+            <MonthSelect />
+          </div>
 
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {isPending ? (
-            <>
-              <CardSkeleton />
-              <CardSkeleton />
-              <CardSkeleton />
-            </>
-          ) : (
-            <>
-              <BalanceCard total={balanceTotals} />
-              <SpendingCard total={expenseTotals} />
+          {/* Stats Overview */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {isPending ? (
+              <>
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+              </>
+            ) : (
+              <>
+                <BalanceCard total={balanceTotals} />
+                <SpendingCard total={expenseTotals} />
 
-              <SavingsCard total={savingsTotals} />
-            </>
-          )}
-        </div>
+                <SavingsCard total={savingsTotals} />
+              </>
+            )}
+          </div>
 
-        {/* Charts and Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Budget Breakdown Chart */}
-          <Card className="border-0 shadow-lg ">
-            <CardHeader>
-              <CardTitle className="text-xl font-serif ">
-                Budget Breakdown
-              </CardTitle>
-              <CardDescription>
-                {/* Your spending categories for this month */}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <BudgetChart dataArray={chartData} />
-            </CardContent>
-          </Card>
-
-          {/* Recent Transactions */}
-          <Card className="border-0 shadow-lg">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-              <CardHeader className="pb-2 sm:pb-3 sm:pt-3 ">
-                <CardTitle className="text-xl font-serif">
-                  Recent Transactions
+          {/* Charts and Details */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Budget Breakdown Chart */}
+            <Card className="border-0 shadow-lg ">
+              <CardHeader>
+                <CardTitle className="text-xl font-serif ">
+                  Budget Breakdown
                 </CardTitle>
                 <CardDescription>
-                  Your latest financial activity
+                  {/* Your spending categories for this month */}
                 </CardDescription>
               </CardHeader>
-              <div className="flex justify-center sm:justify-center px-6 sm:px-0">
-                <Button
-                  className="w-full sm:max-w-52 cursor-pointer"
-                  variant="outline"
-                >
-                  <Link
-                    href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
-                  >
-                    View All Transactions
-                  </Link>
-                </Button>
-              </div>
-            </div>
-            <CardContent>
-              <RecentTransactions TransactionData={recentTransactions} />
-            </CardContent>
-          </Card>
-        </div>
+              <CardContent>
+                <BudgetChart dataArray={chartData} />
+              </CardContent>
+            </Card>
 
-        {/* Budget Statistics */}
-        {/* <BudgetStats /> */}
-      </main>
+            {/* Recent Transactions */}
+            <Card className="border-0 shadow-lg">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                <CardHeader className="pb-2 sm:pb-3 sm:pt-3 ">
+                  <CardTitle className="text-xl font-serif">
+                    Recent Transactions
+                  </CardTitle>
+                  <CardDescription>
+                    Your latest financial activity
+                  </CardDescription>
+                </CardHeader>
+                <div className="flex justify-center sm:justify-center px-6 sm:px-0">
+                  <Button
+                    className="w-full sm:max-w-52 cursor-pointer"
+                    variant="outline"
+                  >
+                    <Link
+                      href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+                    >
+                      View All Transactions
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+              <CardContent>
+                <RecentTransactions
+                  TransactionData={recentTransactions}
+                  isPending={isPending}
+                />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Budget Statistics */}
+          {/* <BudgetStats /> */}
+        </main>
       </div>
     </Suspense>
   );

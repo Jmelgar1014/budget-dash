@@ -67,7 +67,7 @@ const AllTransactionsContent = () => {
 
       const result = response.json();
 
-      console.log(result);
+      // console.log(result);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -88,7 +88,7 @@ const AllTransactionsContent = () => {
     );
   }
   if (results) {
-    if (results.length === 0) {
+    if (!isPending && results.length === 0) {
       return (
         <>
           <main className="container mx-auto px-4 py-8 space-y-8">
