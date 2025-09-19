@@ -83,7 +83,7 @@ export function Dashboard() {
 
         {/* Main Content */}
         <main className="container mx-auto px-4 py-8 space-y-8 ">
-          <div className="flex">
+          <div className="flex justify-center sm:justify-start">
             <span className="p-2 mx-2">Transactions TimeFrame: </span>
             <MonthSelect />
           </div>
@@ -138,6 +138,7 @@ export function Dashboard() {
                   <Button
                     className="w-full sm:max-w-52 cursor-pointer"
                     variant="outline"
+                    asChild
                   >
                     <Link
                       href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}

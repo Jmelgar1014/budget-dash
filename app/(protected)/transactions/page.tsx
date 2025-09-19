@@ -79,20 +79,24 @@ const TransactionsPageContent = () => {
         </Link>
       </Button>
 
-      <div className="flex justify-between">
-        <div className="flex">
+      <div className="flex flex-col items-center sm:justify-between  sm:flex-row">
+        <div className="flex flex-col items-center sm:flex-row">
           <span className="px-3 py-2">Transaction TimeFrame: </span>
           <MonthSelect />
         </div>
-        <div>
-          <Button
-            className="cursor-pointer"
-            variant="outline"
-            onClick={() => exportData()}
-          >
-            Export Transactions
-          </Button>
-        </div>
+        {data && data.length == 0 ? (
+          ""
+        ) : (
+          <div className="mt-4 sm:mt-0">
+            <Button
+              className="cursor-pointer w-[180px]"
+              variant="outline"
+              onClick={() => exportData()}
+            >
+              Export Transactions
+            </Button>
+          </div>
+        )}
       </div>
       <TransactionCards />
       <AllTransactions />

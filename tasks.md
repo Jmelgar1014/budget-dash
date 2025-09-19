@@ -55,3 +55,5 @@
 []remove export button when there are no transactions in month
 []add theme selection based off OS selection
 []check to see if clerk signIn/signUp components allow for dark mode
+[]fix layout of timeframe and export button when in mobile screen
+[]change transaction icon colors in dark mode
