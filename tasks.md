@@ -48,3 +48,12 @@
 []make each component more responsive
 []add ability to add receipts
 [] review what the suspense wrapper is and what it is used for
+[]remove all console.logs in main branch
+[]check clerk cookie error
+[x]deploy on vercel
+[]remove nextjs api routes to external api
+[]remove export button when there are no transactions in month
+[]add theme selection based off OS selection
+[]check to see if clerk signIn/signUp components allow for dark mode
+[]fix layout of timeframe and export button when in mobile screen
+[]change transaction icon colors in dark mode

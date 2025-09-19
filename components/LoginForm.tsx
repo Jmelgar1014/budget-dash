@@ -73,11 +73,11 @@ export function LoginForm() {
                   <TabsTrigger value="signup">Sign Up</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="login">
+                <TabsContent value="login" className="flex justify-center">
                   <SignIn routing="hash" fallbackRedirectUrl={"/home"} />
                 </TabsContent>
 
-                <TabsContent value="signup">
+                <TabsContent value="signup" className="flex justify-center">
                   <SignUp routing="hash" fallbackRedirectUrl={"/home"} />
                 </TabsContent>
               </Tabs>

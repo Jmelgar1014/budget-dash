@@ -4,6 +4,7 @@ import { Car, Home, Utensils, Zap, Circle, ShoppingBag } from "lucide-react";
 
 type TransactionArray = {
   TransactionData: DetailedTransaction[];
+  isPending: boolean;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,8 +17,11 @@ const categoryIcons: Record<string, any> = {
   Misc: ShoppingBag,
 };
 
-export function RecentTransactions({ TransactionData }: TransactionArray) {
-  if (TransactionData.length === 0) {
+export function RecentTransactions({
+  TransactionData,
+  isPending,
+}: TransactionArray) {
+  if (!isPending && TransactionData.length === 0) {
     return (
       <div className="space-y-3 flex justify-center">
         <h1 className="font-semibold">

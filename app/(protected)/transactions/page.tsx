@@ -13,6 +13,7 @@ import { saveAs } from "file-saver";
 import { exportTable } from "@/schema/ExportSchema";
 import { z } from "zod";
 import { Skeleton } from "@/components/ui/skeleton";
+import TransactionPageSkeleton from "@/components/TransactionPageSkeleton";
 
 const TransactionsPageContent = () => {
   const searchParams = useSearchParams();
@@ -48,7 +49,7 @@ const TransactionsPageContent = () => {
           ...transaction,
           PurchaseDate: new Date(transaction.PurchaseDate),
         }));
-        console.log(result);
+        // console.log(result);
         const csv = Papa.unparse(result);
 
         const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
@@ -71,49 +72,31 @@ const TransactionsPageContent = () => {
 
   return (
     <main className="container mx-auto px-4 py-8 space-y-8">
-      {isPending ? (
-        <>
-          <Skeleton className="h-9 w-32" />
-        </>
-      ) : (
-        <>
-          <Button className="cursor-pointer " variant="ghost" asChild>
-            <Link href="/">
-              <ArrowLeft />
-              Back to Dashboard
-            </Link>
-          </Button>
-        </>
-      )}
-      <div className="flex justify-between">
-        <div className="flex">
-          {isPending ? (
-            <>
-              <Skeleton className="h-9 w-36 mr-4" />
-              <Skeleton className="h-9 w-32" />
-            </>
-          ) : (
-            <>
-              <span className="px-3 py-2">Transaction TimeFrame: </span>
-              <MonthSelect />
-            </>
-          )}
+      <Button className="cursor-pointer " variant="ghost" asChild>
+        <Link href="/">
+          <ArrowLeft />
+          Back to Dashboard
+        </Link>
+      </Button>
+
+      <div className="flex flex-col items-center sm:justify-between  sm:flex-row">
+        <div className="flex flex-col items-center sm:flex-row">
+          <span className="px-3 py-2">Transaction TimeFrame: </span>
+          <MonthSelect />
         </div>
-        <div>
-          {isPending ? (
-            <>
-              <Skeleton className="h-9 w-32" />
-            </>
-          ) : (
+        {data && data.length == 0 ? (
+          ""
+        ) : (
+          <div className="mt-4 sm:mt-0">
             <Button
-              className="cursor-pointer"
+              className="cursor-pointer w-[180px]"
               variant="outline"
               onClick={() => exportData()}
             >
               Export Transactions
             </Button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <TransactionCards />
       <AllTransactions />
@@ -123,7 +106,7 @@ const TransactionsPageContent = () => {
 
 const Page = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<TransactionPageSkeleton />}>
       <TransactionsPageContent />
     </Suspense>
   );
