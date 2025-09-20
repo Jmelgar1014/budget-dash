@@ -2,7 +2,7 @@
 import type React from "react";
 import "../globals.css";
 import { useEffect, useState } from "react";
-
+import { shadcn } from "@clerk/themes";
 import {
   ClerkProvider,
   SignInButton,
@@ -54,7 +54,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ baseTheme: shadcn }}>
       <header className="flex justify-end items-center p-4 gap-4 sm:h-16  border-b bg-card/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex sm:items-center sm:justify-between flex-col sm:flex-row ">

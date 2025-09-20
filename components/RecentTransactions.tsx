@@ -44,7 +44,7 @@ export function RecentTransactions({
           >
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg" style={{ backgroundColor: "" }}>
-                <Icon className="h-4 w-4" style={{ color: "black" }} />
+                <Icon className="h-4 w-4" style={{ color: "#8b5cf6" }} />
               </div>
               <div>
                 <p className="font-medium text-sm">{transaction.Vendor}</p>
