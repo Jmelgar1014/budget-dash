@@ -26,7 +26,7 @@
 [x]add functionality to export to csv
 []add a demo login user
 []add a demo button so users can just click and view how app works
-[]add rate limits
+[x]add rate limits
 [x]host on vercel
 [x]modify recent transactions for better responsive design
 [x]fix header in layout to add hamburger menu to free space on header
@@ -56,5 +56,7 @@
 []add theme selection based off OS selection
 [x]check to see if clerk signIn/signUp components allow for dark mode
 [x]fix layout of timeframe and export button when in mobile screen
-[]change transaction icon colors in dark mode
+[x]change transaction icon colors in dark mode
 [x]fix issue where i can access routes that should be protected
+[]change amount input so i can erase the 0. Currently you cant remove it and reduces UX
+[]check if shadcn calendar can show future dates and select them
