@@ -27,7 +27,7 @@
 []add a demo login user
 []add a demo button so users can just click and view how app works
 []add rate limits
-[]host on netlify
+[x]host on vercel
 [x]modify recent transactions for better responsive design
 [x]fix header in layout to add hamburger menu to free space on header
 []add better error handling to exportData function in transactions page
@@ -45,7 +45,7 @@
 []rollover unused budget to next month
 []average spending per category
 []learn to use docker to deploy myself
-[]make each component more responsive
+[x]make each component more responsive
 []add ability to add receipts
 [x] review what the suspense wrapper is and what it is used for
 [x]remove all console.logs in main branch
@@ -54,7 +54,7 @@
 []remove nextjs api routes to external api
 [x]remove export button when there are no transactions in month
 []add theme selection based off OS selection
-[]check to see if clerk signIn/signUp components allow for dark mode
+[x]check to see if clerk signIn/signUp components allow for dark mode
 [x]fix layout of timeframe and export button when in mobile screen
 []change transaction icon colors in dark mode
 [x]fix issue where i can access routes that should be protected

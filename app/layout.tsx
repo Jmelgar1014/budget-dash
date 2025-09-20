@@ -6,6 +6,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { QueryProvider } from "@/hooks/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { shadcn } from "@clerk/themes";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ baseTheme: shadcn }}>
       <html lang="en" className="dark">
         <head>
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
