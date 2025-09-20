@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "BudgetWise - Smart Financial Management",
   description: "Modern budgeting app with intelligent insights",
   generator: "v0.app",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -27,6 +30,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className="dark">
+        <head>
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        </head>
         <body className={`${inter.variable} ${inter.variable} antialiased`}>
           <QueryProvider>{children}</QueryProvider>
           <Toaster position="top-center" richColors />
