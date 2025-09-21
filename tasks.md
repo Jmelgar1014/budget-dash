@@ -60,3 +60,6 @@
 [x]fix issue where i can access routes that should be protected
 []change amount input so i can erase the 0. Currently you cant remove it and reduces UX
 []check if shadcn calendar can show future dates and select them
+[]create button to navigate to budget endpoint
+[]create budget endpoint
+[]

@@ -11,4 +11,9 @@ export default defineSchema({
     PurchaseType: v.string(),
     AuthId: v.string(),
   }),
+  budgets: defineTable({
+    AuthId: v.string(),
+    BudgetName: v.string(),
+    Amount: v.number(),
+  }),
 });

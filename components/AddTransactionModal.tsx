@@ -198,10 +198,11 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                       <Input
                         step="0.01"
                         placeholder="0.00"
+                        // pattern="[0-9]+(\.[0-9]{1,2})?"
                         type="number"
                         {...field}
                         onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={field.value || 0}
+                        value={field.value || ""}
                       />
                     </FormControl>
 
