@@ -56,3 +56,7 @@ export const convertToChart = (array: TransactionDetailed[]) => {
     value: total,
   }));
 };
+
+export const adding = (num1: number, num2: number): number => {
+  return num1 + num2;
+};
