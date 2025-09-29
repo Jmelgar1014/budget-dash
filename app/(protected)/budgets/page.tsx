@@ -13,6 +13,7 @@ const page = () => {
             Back to Dashboard
           </Link>
         </Button>
+
         <BudgetContainer />
       </main>
     </>

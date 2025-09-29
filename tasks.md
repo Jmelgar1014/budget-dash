@@ -62,4 +62,5 @@
 []check if shadcn calendar can show future dates and select them
 []create button to navigate to budget endpoint
 []create budget endpoint
-[]
+[]add progress bar in budget page
+[]make progress bar dynamic with user input

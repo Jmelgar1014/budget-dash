@@ -4,6 +4,7 @@ import { Plus, Target } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./ui/button";
 import BudgetForm from "./FormComponents/BudgetForm";
+import BudgetCard from "./budgetComponents/BudgetCard";
 const BudgetContainer = () => {
   const [budgetModal, setBudgetModal] = useState<boolean>(false);
   const queryClient = useQueryClient();
@@ -40,6 +41,31 @@ const BudgetContainer = () => {
   const handleBudget = () => {
     setBudgetModal(true);
   };
+  if (data.data) {
+    return (
+      <>
+        <Button
+          onClick={() => handleBudget()}
+          className="mt-4 cursor-pointer"
+          variant="outline"
+        >
+          <Plus />
+          Add Budget
+        </Button>
+        {budgetModal && <BudgetForm onClose={() => setBudgetModal(false)} />}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {data.data.map((item, index) => {
+            return (
+              <div key={index}>
+                <BudgetCard />
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
+  console.log(data);
   return (
     <>
       <div className="flex justify-center">
