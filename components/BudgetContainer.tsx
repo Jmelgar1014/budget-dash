@@ -6,10 +6,35 @@ import { Button } from "./ui/button";
 import BudgetForm from "./FormComponents/BudgetForm";
 import BudgetCard from "./budgetComponents/BudgetCard";
 import { getBudgetType } from "@/schema/budgetSchema";
+import { DetailedTransaction } from "@/schema/TransactionSchema";
 const BudgetContainer = () => {
   const [budgetModal, setBudgetModal] = useState<boolean>(false);
+
   const queryClient = useQueryClient();
-  const { isPending, data, error } = useQuery({
+  const transactionQuery = useQuery({
+    queryKey: ["transactions"],
+    queryFn: async () => {
+      const url = "/api/transactions";
+      //   const url = searchParams.toString()
+      //     ? `/api/transactions?${searchParams.toString()}`
+      //     : "/api/transactions";
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      return result;
+    },
+  });
+  const budgetQuery = useQuery({
     queryKey: ["budgets"],
     queryFn: async () => {
       const response = await fetch("/api/budgets", {
@@ -30,19 +55,34 @@ const BudgetContainer = () => {
     },
   });
 
-  if (error) {
-    console.log(error);
+  const transactionList: DetailedTransaction[] = transactionQuery.data
+    ? transactionQuery.data
+    : [];
+
+  const categorySpendingAmount = transactionList.reduce(
+    (acc, transaction) => {
+      if (transaction.PurchaseType === "Expense") {
+        acc[transaction.Category] =
+          (acc[transaction.Category] || 0) + transaction.Amount;
+      }
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
+  if (budgetQuery.error) {
+    console.log(budgetQuery.error);
     return <div>There is an error</div>;
   }
 
-  if (isPending) {
+  if (budgetQuery.isPending) {
     return <div>Loading</div>;
   }
 
   const handleBudget = () => {
     setBudgetModal(true);
   };
-  if (data.data.length > 0) {
+  if (budgetQuery.data.data.length > 0) {
     return (
       <>
         <Button
@@ -55,10 +95,12 @@ const BudgetContainer = () => {
         </Button>
         {budgetModal && <BudgetForm onClose={() => setBudgetModal(false)} />}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {data.data.map((item: getBudgetType) => {
+          {budgetQuery.data.data.map((item: getBudgetType) => {
             return (
               <div key={item._id}>
                 <BudgetCard
+                  budgetCategory={item.Category}
+                  spentAmount={categorySpendingAmount[item.Category] || 0}
                   budgetName={item.BudgetName}
                   budgetAmount={item.Amount}
                 />
@@ -69,7 +111,7 @@ const BudgetContainer = () => {
       </>
     );
   }
-  console.log(data);
+  console.log(budgetQuery.data);
   return (
     <>
       <div className="flex justify-center">

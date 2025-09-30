@@ -1,14 +1,27 @@
 "use client";
 import { Pencil } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Progress } from "../ui/progress";
 
 interface budgetInfo {
   budgetName: string;
   budgetAmount: number;
+  spentAmount: number;
+  budgetCategory: string;
 }
 
-const BudgetCard = ({ budgetAmount, budgetName }: budgetInfo) => {
+const BudgetCard = ({
+  budgetAmount,
+  budgetName,
+  spentAmount,
+  budgetCategory,
+}: budgetInfo) => {
+  const [percent, setPercent] = useState<number>(0);
+
+  useEffect(() => {
+    setPercent((spentAmount / budgetAmount) * 100);
+  }, [spentAmount, budgetAmount]);
+
   return (
     <>
       <div className="h-48 rounded-md shadow-lg ">
@@ -20,10 +33,13 @@ const BudgetCard = ({ budgetAmount, budgetName }: budgetInfo) => {
         </div>
         <div className="px-8 py-6">
           <div className="flex justify-between">
-            <p>{budgetAmount}</p>
-            <p>0.0%</p>
+            <p>
+              {spentAmount}/{budgetAmount}
+            </p>
+            <p>{budgetCategory}</p>
+            <p>{`${percent.toFixed(2)}%`}</p>
           </div>
-          <Progress value={60} />
+          <Progress value={percent} />
         </div>
       </div>
     </>
