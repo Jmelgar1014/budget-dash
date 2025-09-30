@@ -24,7 +24,7 @@ const BudgetCard = ({
 
   return (
     <>
-      <div className="h-48 rounded-md shadow-lg ">
+      <div className="h-48 rounded-md shadow-lg bg-card ">
         <div className="flex justify-between px-8 py-6">
           <p className="font-semibold flex items-center">{budgetName}</p>
           <span className="m-4">
@@ -37,9 +37,11 @@ const BudgetCard = ({
               {spentAmount}/{budgetAmount}
             </p>
             <p>{budgetCategory}</p>
-            <p>{`${percent.toFixed(2)}%`}</p>
+            <p
+              className={`${percent < 100 ? "text-green-600" : "text-red-600"} font-semibold`}
+            >{`${percent.toFixed(2)}%`}</p>
           </div>
-          <Progress value={percent} />
+          <Progress value={percent <= 100 ? percent : 100} />
         </div>
       </div>
     </>

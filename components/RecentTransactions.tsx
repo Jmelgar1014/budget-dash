@@ -23,7 +23,7 @@ export function RecentTransactions({
 }: TransactionArray) {
   if (!isPending && TransactionData.length === 0) {
     return (
-      <div className="space-y-3 flex justify-center">
+      <div className="space-y-3 flex justify-center items-center h-60">
         <h1 className="font-semibold">
           There are no transactions for the current month
         </h1>

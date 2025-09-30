@@ -12,15 +12,15 @@ const ManageBudgets = () => {
             href="/budgets"
             className="block rounded-md shadow-md h-28 bg-card p-4 hover:shadow-xl hover:cursor-pointer group"
           >
-            <div className="flex items-center">
+            <div className="flex items-center h-full">
               <div className="m-2">
-                <div className="bg-green-600 h-9 w-10 rounded-md flex items-center justify-center group-hover:scale-110 transition-transform duration-200 ease-in-out">
+                <div className="bg-purple-500 h-9 w-10 rounded-md flex items-center justify-center group-hover:scale-110 transition-transform duration-200 ease-in-out">
                   <Settings2 color="white" size={18} className="" />
                 </div>
               </div>
               <div className="m-2">
-                <p className="text-xl font-bold">Manage Budgets</p>
-                <p className="font-semibold text-zinc-500">
+                <h3 className=" font-semibold">Manage Budgets</h3>
+                <p className="text-sm text-muted-foreground ">
                   Set and track your budget goals
                 </p>
               </div>
