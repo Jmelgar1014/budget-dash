@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./ui/button";
 import BudgetForm from "./FormComponents/BudgetForm";
 import BudgetCard from "./budgetComponents/BudgetCard";
+import { getBudgetType } from "@/schema/budgetSchema";
 const BudgetContainer = () => {
   const [budgetModal, setBudgetModal] = useState<boolean>(false);
   const queryClient = useQueryClient();
@@ -41,7 +42,7 @@ const BudgetContainer = () => {
   const handleBudget = () => {
     setBudgetModal(true);
   };
-  if (data.data) {
+  if (data.data.length > 0) {
     return (
       <>
         <Button
@@ -54,10 +55,13 @@ const BudgetContainer = () => {
         </Button>
         {budgetModal && <BudgetForm onClose={() => setBudgetModal(false)} />}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {data.data.map((item, index) => {
+          {data.data.map((item: getBudgetType) => {
             return (
-              <div key={index}>
-                <BudgetCard />
+              <div key={item._id}>
+                <BudgetCard
+                  budgetName={item.BudgetName}
+                  budgetAmount={item.Amount}
+                />
               </div>
             );
           })}

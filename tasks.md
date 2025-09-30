@@ -64,3 +64,4 @@
 []create budget endpoint
 []add progress bar in budget page
 []make progress bar dynamic with user input
+[]create proper loading screen for budgets page

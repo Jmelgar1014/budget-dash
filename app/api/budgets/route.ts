@@ -3,6 +3,7 @@ import { api } from "@/convex/_generated/api";
 import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
+import { getBudgetData } from "@/schema/budgetSchema";
 import { Redis } from "@upstash/redis";
 import { Ratelimit } from "@upstash/ratelimit";
 import { budgetTable } from "@/schema/budgetSchema";
@@ -26,13 +27,24 @@ export async function GET(req: Request) {
       AuthId: userId,
     });
 
+    const parsedData = z.array(getBudgetData).safeParse(data);
+
+    if (!parsedData.success) {
+      return NextResponse.json({
+        error: {
+          message: "Data is not valid",
+          status: 401,
+        },
+      });
+    }
+
     console.log(data);
 
     if (data == null) {
       return NextResponse.json([]);
     }
 
-    return NextResponse.json({ message: "Success", data: data });
+    return NextResponse.json({ message: "Success", data: parsedData.data });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }

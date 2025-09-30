@@ -15,5 +15,6 @@ export default defineSchema({
     AuthId: v.string(),
     BudgetName: v.string(),
     Amount: v.number(),
+    Category: v.string(),
   }),
 });

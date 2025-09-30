@@ -14,10 +14,17 @@ import {
 import { Input } from "../ui/input";
 import { budgetTable } from "@/schema/budgetSchema";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { DollarSign, Loader2Icon, X } from "lucide-react";
+import { DollarSign, Loader2Icon, Tag, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 interface budgetFormProps {
   onClose: () => void;
@@ -141,6 +148,42 @@ const BudgetForm = ({ onClose }: budgetFormProps) => {
                       {/* <FormDescription>
                       This is your public display name.
                     </FormDescription> */}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="Category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        <Tag className="h-4 w-4 text-purple-500" />
+                        Category
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Food">Food</SelectItem>
+                          <SelectItem value="Transportation">
+                            Transportation
+                          </SelectItem>
+                          <SelectItem value="Utilities">Utilities</SelectItem>
+                          <SelectItem value="Salary">Salary</SelectItem>
+                          <SelectItem value="Fixed Expense">
+                            Fixed Expense
+                          </SelectItem>
+                          <SelectItem value="Misc">Misc</SelectItem>
+                        </SelectContent>
+                      </Select>
+
                       <FormMessage />
                     </FormItem>
                   )}

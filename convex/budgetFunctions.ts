@@ -2,12 +2,18 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const createBudget = mutation({
-  args: { AuthId: v.string(), BudgetName: v.string(), Amount: v.number() },
+  args: {
+    AuthId: v.string(),
+    BudgetName: v.string(),
+    Amount: v.number(),
+    Category: v.string(),
+  },
   handler: async (ctx, args) => {
     const newBudget = await ctx.db.insert("budgets", {
       AuthId: args.AuthId,
       BudgetName: args.BudgetName,
       Amount: args.Amount,
+      Category: args.Category,
     });
     return newBudget;
   },
