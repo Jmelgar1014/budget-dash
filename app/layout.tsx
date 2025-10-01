@@ -30,11 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider appearance={{ baseTheme: shadcn }}>
-      <html lang="en" className="dark">
+      <html lang="en" className="dark ">
         <head>
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         </head>
-        <body className={`${inter.variable} ${inter.variable} antialiased`}>
+        <body
+          className={`${inter.variable} ${inter.variable} antialiased dark:bg-richBlack`}
+        >
           <QueryProvider>{children}</QueryProvider>
           <Toaster position="top-center" richColors />
         </body>

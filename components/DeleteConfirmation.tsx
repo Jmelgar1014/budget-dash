@@ -39,7 +39,7 @@ const DeleteConfirmation = ({
                 Cancel
               </AlertDialogCancel>
               <AlertDialogAction
-                className="cursor-pointer"
+                className="cursor-pointer bg-mikadoYellow text-yaleBlue hover:bg-gold"
                 onClick={() => {
                   deleteTransaction();
                   setAlert();

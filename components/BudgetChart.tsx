@@ -64,7 +64,7 @@ export function BudgetChart({ dataArray }: chartData) {
     );
   }
   return (
-    <div className="h-80">
+    <div className="h-80 ">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie

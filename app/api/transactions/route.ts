@@ -96,10 +96,11 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   const { userId, getToken } = await auth();
+  console.log(userId);
 
   const token = await getToken();
 
-  console.log(token);
+  // console.log(token);
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -108,7 +109,9 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
   const currentDate = new Date();
+  console.log(currentDate);
   const currentMonth = currentDate.getMonth() + 1;
+  console.log(currentMonth);
   const currentYear = currentDate.getFullYear();
 
   const month = parseInt(searchParams.get("month") || currentMonth.toString());

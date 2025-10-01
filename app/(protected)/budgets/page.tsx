@@ -7,7 +7,11 @@ const page = () => {
   return (
     <>
       <main className="container mx-auto px-4 py-8 space-y-8">
-        <Button className="cursor-pointer " variant="ghost" asChild>
+        <Button
+          className="cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue "
+          variant="ghost"
+          asChild
+        >
           <Link href="/">
             <ArrowLeft />
             Back to Dashboard

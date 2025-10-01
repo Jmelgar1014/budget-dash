@@ -108,7 +108,7 @@ const BudgetContainer = () => {
       <>
         <Button
           onClick={() => handleBudget()}
-          className=" cursor-pointer float-right"
+          className=" cursor-pointer float-right hover:bg-mikadoYellow hover:text-yaleBlue"
           variant="outline"
         >
           <Plus />
@@ -137,8 +137,8 @@ const BudgetContainer = () => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="container rounded-lg shadow-md sm:max-w-[500px]">
-          <div className="flex flex-col items-center px-6 py-18 bg-card rounded-lg">
+        <div className="container rounded-lg shadow-md sm:max-w-[500px] dark:bg-oxfordBlue">
+          <div className="flex flex-col items-center px-4 py-16 bg rounded-lg">
             <Target size={48} />
             <p className="text-lg font-semibold m-2">No budgets yet</p>
             <p className=" text-center m-2">
@@ -147,7 +147,7 @@ const BudgetContainer = () => {
             </p>
             <Button
               onClick={() => handleBudget()}
-              className="mt-4 cursor-pointer"
+              className="mt-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue"
               variant="outline"
             >
               <Plus />

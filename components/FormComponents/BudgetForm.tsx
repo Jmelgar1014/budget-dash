@@ -85,12 +85,12 @@ const BudgetForm = ({ onClose }: budgetFormProps) => {
   return (
     <>
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 ">
-        <Card className="w-full max-w-md border-0 shadow-2xl bg-card/95 backdrop-blur-sm">
+        <Card className="w-full max-w-md border-0 shadow-2xl dark:bg-richBlack backdrop-blur-sm">
           <CardHeader className="relative">
             <div className="absolute -inset-1  rounded-lg blur opacity-25"></div>
             <div className="relative">
               <CardTitle className="text-xl font-serif flex items-center gap-2">
-                <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
+                <div className="p-2 bg-gradient-to-br from-richBlack to-oxfordBlue rounded-lg">
                   <DollarSign className="h-4 w-4 text-white" />
                 </div>
                 Add Budget
@@ -158,7 +158,7 @@ const BudgetForm = ({ onClose }: budgetFormProps) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        <Tag className="h-4 w-4 text-purple-500" />
+                        <Tag className="h-4 w-4 text-mikadoYellow" />
                         Category
                       </FormLabel>
                       <Select
@@ -190,7 +190,7 @@ const BudgetForm = ({ onClose }: budgetFormProps) => {
                 />
                 {/* <div className="flex justify-center"> */}
                 <Button
-                  className="cursor-pointer mx-2"
+                  className="cursor-pointer mx-2 "
                   variant="outline"
                   disabled={isLoading}
                   onClick={() => onClose()}
@@ -198,7 +198,7 @@ const BudgetForm = ({ onClose }: budgetFormProps) => {
                   Cancel
                 </Button>
                 <Button
-                  className="cursor-pointer mx-2"
+                  className="cursor-pointer mx-2 bg-mikadoYellow hover:bg-gold text-oxfordBlue"
                   type="submit"
                   disabled={isLoading}
                 >

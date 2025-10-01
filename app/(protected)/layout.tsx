@@ -55,16 +55,16 @@ export default function RootLayout({
 
   return (
     <ClerkProvider appearance={{ baseTheme: shadcn }}>
-      <header className="flex justify-end items-center p-4 gap-4 sm:h-16  border-b bg-card/50 backdrop-blur-sm">
+      <header className="flex justify-end items-center p-4 gap-4 sm:h-16  border-b  dark:bg-richBlack backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex sm:items-center sm:justify-between flex-col sm:flex-row ">
             <Link href="/">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg">
+                <div className="p-2 bg-gradient-to-br from-gold to-yaleBlue rounded-lg">
                   <PiggyBank className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-serif font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  <h1 className="text-xl font-serif font-semibold bg-gradient-to-r from-gold to-yaleBlue bg-clip-text text-transparent">
                     BudgetWise
                   </h1>
                   <p className="text-sm text-muted-foreground">Welcome back!</p>
@@ -74,7 +74,7 @@ export default function RootLayout({
             <div className="flex items-center sm:gap-3 gap-6 flex-col sm:flex-row m-4">
               <Button
                 variant="outline"
-                className="cursor-pointer w-full sm:w-40"
+                className="cursor-pointer w-full sm:w-40 dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue"
                 onClick={() => setIsModalOpen(true)}
               >
                 <Plus className="h-4 w-4 mr-2" />
