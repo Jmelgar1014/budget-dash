@@ -25,6 +25,7 @@ import Link from "next/link";
 import MonthSelect from "./MonthSelect";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import ManageBudgets from "./ManageBudgets";
 
 export function Dashboard() {
   const searchParams = useSearchParams();
@@ -105,6 +106,7 @@ export function Dashboard() {
               </>
             )}
           </div>
+          <ManageBudgets />
 
           {/* Charts and Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

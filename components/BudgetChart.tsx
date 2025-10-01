@@ -56,7 +56,7 @@ type chartData = {
 export function BudgetChart({ dataArray }: chartData) {
   if (dataArray.length == 0) {
     return (
-      <div className="h-80 flex justify-center">
+      <div className="h-80 flex justify-center items-center">
         <h1 className="font-semibold">
           There are no transactions for the current month.
         </h1>

@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean | null>(null);
 
   const handleDarkMode = () => {
     setDarkMode((prev) => {
