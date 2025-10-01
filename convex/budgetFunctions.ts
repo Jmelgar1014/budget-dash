@@ -19,6 +19,23 @@ export const createBudget = mutation({
   },
 });
 
+export const deleteBudget = mutation({
+  args: {
+    AuthId: v.string(),
+    Id: v.id("budgets"),
+  },
+  handler: async (ctx, args) => {
+    const budgetExists = await ctx.db.get(args.Id);
+
+    if (!budgetExists || budgetExists.AuthId !== args.AuthId) {
+      throw new Error("Budget is not Found or Unauthorized");
+    }
+    const removedBudget = await ctx.db.delete(args.Id);
+
+    return removedBudget;
+  },
+});
+
 export const getBudgets = query({
   args: { AuthId: v.string() },
   handler: async (ctx, args) => {

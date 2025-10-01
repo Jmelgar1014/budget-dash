@@ -58,13 +58,14 @@
 [x]fix layout of timeframe and export button when in mobile screen
 [x]change transaction icon colors in dark mode
 [x]fix issue where i can access routes that should be protected
-[]change amount input so i can erase the 0. Currently you cant remove it and reduces UX
-[]check if shadcn calendar can show future dates and select them
-[]create button to navigate to budget endpoint
-[]create budget endpoint
-[]add progress bar in budget page
-[]make progress bar dynamic with user input
+[x]change amount input so i can erase the 0. Currently you cant remove it and reduces UX
+[x]check if shadcn calendar can show future dates and select them
+[x]create button to navigate to budget endpoint
+[x]create budget endpoint
+[x]add progress bar in budget page
+[x]make progress bar dynamic with user input
 []create proper loading screen for budgets page
 []budgets can be viewed from other months
 []change progress bar color
-[] change percentage amount color based on being within budget or not
+[x] change percentage amount color based on being within budget or not
+[]add confirmation when deleting budget

@@ -1,5 +1,5 @@
 "use client";
-import { Pencil } from "lucide-react";
+import { Pencil, SquareX } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Progress } from "../ui/progress";
 
@@ -8,6 +8,7 @@ interface budgetInfo {
   budgetAmount: number;
   spentAmount: number;
   budgetCategory: string;
+  deleteBudget: () => void;
 }
 
 const BudgetCard = ({
@@ -15,6 +16,7 @@ const BudgetCard = ({
   budgetName,
   spentAmount,
   budgetCategory,
+  deleteBudget,
 }: budgetInfo) => {
   const [percent, setPercent] = useState<number>(0);
 
@@ -27,8 +29,8 @@ const BudgetCard = ({
       <div className="h-48 rounded-md shadow-lg bg-card ">
         <div className="flex justify-between px-8 py-6">
           <p className="font-semibold flex items-center">{budgetName}</p>
-          <span className="m-4">
-            <Pencil />
+          <span className="m-4 hover:cursor-pointer " onClick={deleteBudget}>
+            <SquareX />
           </span>
         </div>
         <div className="px-8 py-6">

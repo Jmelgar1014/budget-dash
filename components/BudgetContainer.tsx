@@ -7,8 +7,10 @@ import BudgetForm from "./FormComponents/BudgetForm";
 import BudgetCard from "./budgetComponents/BudgetCard";
 import { getBudgetType } from "@/schema/budgetSchema";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
+import { toast } from "sonner";
 const BudgetContainer = () => {
   const [budgetModal, setBudgetModal] = useState<boolean>(false);
+  const [budgetId, setBudgetId] = useState<string>("");
 
   const queryClient = useQueryClient();
   const transactionQuery = useQuery({
@@ -55,6 +57,25 @@ const BudgetContainer = () => {
     },
   });
 
+  const deleteBudget = useMutation({
+    mutationFn: async (id: string) => {
+      const response = await fetch(`/api/budgets/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const result = await response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["budgets"] });
+    },
+  });
+
+  const handleDeleteBudget = (id: string) => {
+    deleteBudget.mutate(id);
+    toast.success("Budget has been successfully deleted");
+  };
+
   const transactionList: DetailedTransaction[] = transactionQuery.data
     ? transactionQuery.data
     : [];
@@ -87,7 +108,7 @@ const BudgetContainer = () => {
       <>
         <Button
           onClick={() => handleBudget()}
-          className="mt-4 cursor-pointer"
+          className=" cursor-pointer float-right"
           variant="outline"
         >
           <Plus />
@@ -103,6 +124,7 @@ const BudgetContainer = () => {
                   spentAmount={categorySpendingAmount[item.Category] || 0}
                   budgetName={item.BudgetName}
                   budgetAmount={item.Amount}
+                  deleteBudget={() => handleDeleteBudget(item._id)}
                 />
               </div>
             );
@@ -116,7 +138,7 @@ const BudgetContainer = () => {
     <>
       <div className="flex justify-center">
         <div className="container rounded-lg shadow-md sm:max-w-[500px]">
-          <div className="flex flex-col items-center px-6 py-18">
+          <div className="flex flex-col items-center px-6 py-18 bg-card rounded-lg">
             <Target size={48} />
             <p className="text-lg font-semibold m-2">No budgets yet</p>
             <p className=" text-center m-2">
