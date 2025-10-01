@@ -9,7 +9,7 @@ type SpendingTotal = {
 const SpendingCard = ({ total }: SpendingTotal) => {
   return (
     <>
-      <Card className="border-0 shadow-lg bg-gradient-to-br from-pink-500 to-pink-600 text-white">
+      <Card className="border-0 shadow-lg bg-gradient-to-br from-richBlack to-oxfordBlue text-white">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium opacity-90">
             Monthly Spending

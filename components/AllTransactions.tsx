@@ -92,7 +92,7 @@ const AllTransactionsContent = () => {
       return (
         <>
           <main className="container mx-auto px-4 py-8 space-y-8">
-            <div className="bg-card h-96 flex justify-center items-center rounded-lg">
+            <div className="dark:bg-gradient-to-br from-oxfordBlue to-yaleBlue h-96 flex justify-center items-center rounded-lg">
               <h1 className="font-semibold">
                 There are no transactions for the current month
               </h1>
@@ -139,12 +139,15 @@ const AllTransactionsContent = () => {
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg" style={{ backgroundColor: "" }}>
-                  <Icon className="h-4 w-4" style={{ color: "#8b5cf6" }} />
+                  <Icon className="h-4 w-4" style={{ color: "#ffd60a" }} />
                 </div>
                 <div>
                   <p className="font-medium text-sm">{transaction.Vendor}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <Badge variant="secondary" className="text-xs">
+                    <Badge
+                      variant="secondary"
+                      className="text-xs dark:text-mikadoYellow"
+                    >
                       {transaction.Category}
                     </Badge>
                     <span className="text-xs text-muted-foreground font-semibold">

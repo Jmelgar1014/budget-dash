@@ -66,7 +66,7 @@ export function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10 ">
+      <div className="min-h-screen dark:bg-richBlack ">
         <main className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="text-red-500">Failed to load transactions</p>
@@ -79,7 +79,7 @@ export function Dashboard() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-500/10 ">
+      <div className="min-h-screen  dark:bg-richBlack ">
         {/* Header */}
 
         {/* Main Content */}
@@ -111,7 +111,7 @@ export function Dashboard() {
           {/* Charts and Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Budget Breakdown Chart */}
-            <Card className="border-0 shadow-lg ">
+            <Card className="border-0 shadow-lg dark:bg-gradient-to-br from-richBlack to-oxfordBlue ">
               <CardHeader>
                 <CardTitle className="text-xl font-serif ">
                   Budget Breakdown
@@ -126,7 +126,7 @@ export function Dashboard() {
             </Card>
 
             {/* Recent Transactions */}
-            <Card className="border-0 shadow-lg">
+            <Card className="border-0 shadow-lg  dark:bg-gradient-to-br from-richBlack to-oxfordBlue">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                 <CardHeader className="pb-2 sm:pb-3 sm:pt-3 ">
                   <CardTitle className="text-xl font-serif">
@@ -138,7 +138,7 @@ export function Dashboard() {
                 </CardHeader>
                 <div className="flex justify-center sm:justify-center px-6 sm:px-0">
                   <Button
-                    className="w-full sm:max-w-52 cursor-pointer"
+                    className="w-full sm:max-w-52 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue "
                     variant="outline"
                     asChild
                   >

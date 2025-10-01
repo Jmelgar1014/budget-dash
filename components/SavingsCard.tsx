@@ -9,15 +9,15 @@ type SavingsTotal = {
 const SavingsCard = ({ total }: SavingsTotal) => {
   return (
     <>
-      <Card className="border-0 shadow-lg bg-gradient-to-br from-cyan-400 to-cyan-500 text-white">
+      <Card className="border-0 shadow-lg bg-gradient-to-br from-mikadoYellow to-gold text-white">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium opacity-90">
+          <CardTitle className="text-sm font-medium opacity-90 text-oxfordBlue">
             Monthly Savings
           </CardTitle>
-          <Target className="h-4 w-4 opacity-90" />
+          <Target className="h-4 w-4 opacity-90 text-oxfordBlue" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{`$${total}`}</div>
+          <div className="text-2xl font-bold text-oxfordBlue">{`$${total}`}</div>
           {/* <p className="text-xs opacity-80 mt-1">$7,800 of $10,000 goal</p> */}
         </CardContent>
       </Card>

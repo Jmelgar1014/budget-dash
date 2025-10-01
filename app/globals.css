@@ -81,8 +81,17 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@theme {
+  --color-richBlack: #000814;
+  --color-oxfordBlue: #001d3d;
+  --color-yaleBlue: #003566;
+  --color-mikadoYellow: #ffc300;
+  --color-gold: #ffd60a;
+}
+
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

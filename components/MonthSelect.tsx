@@ -22,13 +22,13 @@ const MonthSelectContent = () => {
   return (
     <>
       <Select onValueChange={changeMonth}>
-        <SelectTrigger className="w-[180px] cursor-pointer">
+        <SelectTrigger className="w-[180px] cursor-pointer dark:bg-richBlack dark:hover:bg-mikadoYellow dark:hover:text-oxfordBlue">
           <SelectValue placeholder="Select Month" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Months</SelectLabel>
-            <SelectItem className="cursor-pointer" value="01">
+            <SelectItem className="cursor-pointer " value="01">
               January
             </SelectItem>
             <SelectItem className="cursor-pointer" value="02">
