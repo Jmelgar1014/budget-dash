@@ -22,8 +22,8 @@ const MonthSelectContent = () => {
   return (
     <>
       <Select onValueChange={changeMonth}>
-        <SelectTrigger className="w-[180px] cursor-pointer dark:bg-richBlack dark:hover:bg-mikadoYellow dark:hover:text-oxfordBlue">
-          <SelectValue placeholder="Select Month" />
+        <SelectTrigger className="w-[180px] cursor-pointer dark:bg-richBlack dark:hover:bg-mikadoYellow dark:hover:text-oxfordBlue dark:border-mikadoYellow dark:text-white bg-yaleBlue text-white !text-white">
+          <SelectValue placeholder="Select Month" className="" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

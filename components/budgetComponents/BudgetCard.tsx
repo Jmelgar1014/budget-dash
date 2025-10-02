@@ -26,19 +26,26 @@ const BudgetCard = ({
 
   return (
     <>
-      <div className="h-48 rounded-md shadow-lg bg-card ">
+      <div className="h-48 rounded-md shadow-lg  dark:bg-richBlack dark:border dark:border-yaleBlue ">
         <div className="flex justify-between px-8 py-6">
-          <p className="font-semibold flex items-center">{budgetName}</p>
-          <span className="m-4 hover:cursor-pointer " onClick={deleteBudget}>
-            <SquareX />
+          <p className="font-semibold flex items-center text-oxfordBlue dark:text-mikadoYellow">
+            {budgetName}
+          </p>
+          <span
+            className="m-4 hover:cursor-pointer p-1 rounded-md hover:dark:bg-yaleBlue hover:bg-mikadoYellow "
+            onClick={deleteBudget}
+          >
+            <SquareX className="text-oxfordBlue dark:text-mikadoYellow" />
           </span>
         </div>
         <div className="px-8 py-6">
           <div className="flex justify-between">
-            <p>
+            <p className="text-oxfordBlue dark:text-mikadoYellow">
               {spentAmount}/{budgetAmount}
             </p>
-            <p>{budgetCategory}</p>
+            <p className="text-oxfordBlue dark:text-mikadoYellow">
+              {budgetCategory}
+            </p>
             <p
               className={`${percent < 100 ? "text-green-600" : "text-red-600"} font-semibold`}
             >{`${percent.toFixed(2)}%`}</p>

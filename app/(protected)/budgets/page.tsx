@@ -8,7 +8,7 @@ const page = () => {
     <>
       <main className="container mx-auto px-4 py-8 space-y-8">
         <Button
-          className="cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue "
+          className="cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow text-white"
           variant="ghost"
           asChild
         >
