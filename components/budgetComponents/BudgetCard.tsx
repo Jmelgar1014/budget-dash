@@ -39,7 +39,7 @@ const BudgetCard = ({
           </span>
         </div>
         <div className="px-8 py-6">
-          <div className="flex justify-between">
+          <div className="flex justify-between mb-2">
             <p className="text-oxfordBlue dark:text-mikadoYellow">
               {spentAmount}/{budgetAmount}
             </p>
@@ -50,7 +50,10 @@ const BudgetCard = ({
               className={`${percent < 100 ? "text-green-600" : "text-red-600"} font-semibold`}
             >{`${percent.toFixed(2)}%`}</p>
           </div>
-          <Progress value={percent <= 100 ? percent : 100} />
+          <Progress
+            value={percent <= 100 ? percent : 100}
+            className="[&>div]:bg-gold"
+          />
         </div>
       </div>
     </>
