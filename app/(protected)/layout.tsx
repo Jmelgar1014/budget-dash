@@ -74,7 +74,7 @@ export default function RootLayout({
             <div className="flex items-center sm:gap-3 gap-6 flex-col sm:flex-row m-4">
               <Button
                 variant="outline"
-                className="cursor-pointer w-full sm:w-40 dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue"
+                className="cursor-pointer w-full sm:w-40 dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
                 onClick={() => setIsModalOpen(true)}
               >
                 <Plus className="h-4 w-4 mr-2" />

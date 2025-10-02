@@ -9,12 +9,12 @@ import {
 } from "recharts";
 
 const CHART_COLORS = [
-  "#a855f7", // purple-500 (matches Balance card)
-  "#ec4899", // pink-500 (matches Spending card)
-  "#06b6d4", // cyan-500 (matches Savings card)
-  "#8b5cf6", // violet-500 (complementary)
-  "#f97316", // orange-500 (accent color)
-  "#10b981", // emerald-500 (additional color)
+  "#000814", // purple-500 (matches Balance card)
+  "#001d3d", // pink-500 (matches Spending card)
+  "#003566", // cyan-500 (matches Savings card)
+  "#ffc300", // violet-500 (complementary)
+  "#ffd60a", // orange-500 (accent color)
+  "white", // emerald-500 (additional color)
 ];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CustomTooltip = ({ active, payload, dataArray }: any) => {
@@ -89,8 +89,8 @@ export function BudgetChart({ dataArray }: chartData) {
             height={36}
             formatter={(value, entry) => (
               <span
-                style={{ color: entry.color }}
-                className="text-sm font-medium"
+                // style={{ color: "white" }}
+                className="text-sm font-medium dark:text-white text-richBlack"
               >
                 {value}
               </span>
