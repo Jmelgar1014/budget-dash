@@ -157,7 +157,7 @@ const BudgetContainer = () => {
             </p>
             <Button
               onClick={() => handleBudget()}
-              className="mt-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue"
+              className="mt-4 cursor-pointer  dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow text-white"
               variant="outline"
             >
               <Plus />
