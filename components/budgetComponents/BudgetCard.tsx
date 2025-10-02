@@ -1,5 +1,5 @@
 "use client";
-import { Pencil, SquareX } from "lucide-react";
+import { SquareX } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Progress } from "../ui/progress";
 
@@ -9,6 +9,7 @@ interface budgetInfo {
   spentAmount: number;
   budgetCategory: string;
   deleteBudget: () => void;
+  setId: () => void;
 }
 
 const BudgetCard = ({
@@ -17,8 +18,14 @@ const BudgetCard = ({
   spentAmount,
   budgetCategory,
   deleteBudget,
+  setId,
 }: budgetInfo) => {
   const [percent, setPercent] = useState<number>(0);
+
+  const setIdAndConfirmation = () => {
+    deleteBudget();
+    setId();
+  };
 
   useEffect(() => {
     setPercent((spentAmount / budgetAmount) * 100);
@@ -33,7 +40,7 @@ const BudgetCard = ({
           </p>
           <span
             className="m-4 hover:cursor-pointer p-1 rounded-md hover:dark:bg-yaleBlue hover:bg-mikadoYellow "
-            onClick={deleteBudget}
+            onClick={setIdAndConfirmation}
           >
             <SquareX className="text-oxfordBlue dark:text-mikadoYellow" />
           </span>

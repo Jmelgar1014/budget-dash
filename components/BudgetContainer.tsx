@@ -8,9 +8,11 @@ import BudgetCard from "./budgetComponents/BudgetCard";
 import { getBudgetType } from "@/schema/budgetSchema";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { toast } from "sonner";
+import DeleteConfirmation from "./DeleteConfirmation";
 const BudgetContainer = () => {
   const [budgetModal, setBudgetModal] = useState<boolean>(false);
   const [budgetId, setBudgetId] = useState<string>("");
+  const [removeBudget, setDeleteBudget] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
   const transactionQuery = useQuery({
@@ -124,12 +126,20 @@ const BudgetContainer = () => {
                   spentAmount={categorySpendingAmount[item.Category] || 0}
                   budgetName={item.BudgetName}
                   budgetAmount={item.Amount}
-                  deleteBudget={() => handleDeleteBudget(item._id)}
+                  deleteBudget={() => setDeleteBudget(true)}
+                  setId={() => setBudgetId(item._id)}
                 />
               </div>
             );
           })}
         </div>
+        {removeBudget && (
+          <DeleteConfirmation
+            showAlert={removeBudget}
+            setAlert={() => setDeleteBudget(false)}
+            deleteTransaction={() => handleDeleteBudget(budgetId)}
+          />
+        )}
       </>
     );
   }
