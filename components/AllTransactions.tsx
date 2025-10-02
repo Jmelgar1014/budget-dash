@@ -135,18 +135,21 @@ const AllTransactionsContent = () => {
           return (
             <div
               key={transaction._id}
-              className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-card/80 transition-colors hover:shadow-md"
+              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue bg-card/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-yaleBlue/35"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg" style={{ backgroundColor: "" }}>
-                  <Icon className="h-4 w-4" style={{ color: "#ffd60a" }} />
+                  <Icon
+                    className="h-4 w-4 dark:text-mikadoYellow text-oxfordBlue"
+                    // style={{ color: "#ffd60a" }}
+                  />
                 </div>
                 <div>
                   <p className="font-medium text-sm">{transaction.Vendor}</p>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge
                       variant="secondary"
-                      className="text-xs dark:text-mikadoYellow"
+                      className="text-xs dark:text-mikadoYellow text-yaleBlue"
                     >
                       {transaction.Category}
                     </Badge>
@@ -169,7 +172,7 @@ const AllTransactionsContent = () => {
                   {transaction.Amount.toFixed(2)}
                 </div>
                 <Button
-                  className="m-2 cursor-pointer "
+                  className="m-2 cursor-pointer hover:bg-oxfordBlue group dark:hover:bg-oxfordBlue"
                   variant="ghost"
                   // onClick={() => handleDelete(transaction._id)}
                   onClick={() => {
@@ -177,7 +180,7 @@ const AllTransactionsContent = () => {
                     setTransactionId(transaction._id);
                   }}
                 >
-                  <Trash2 className="" />
+                  <Trash2 className="text-oxfordBlue group-hover:text-gold dark:text-gold group-dark:text-gold" />
                 </Button>
               </div>
             </div>

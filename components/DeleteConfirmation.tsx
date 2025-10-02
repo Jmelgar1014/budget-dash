@@ -23,10 +23,12 @@ const DeleteConfirmation = ({
     <>
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <AlertDialog open={showAlert}>
-          <AlertDialogContent>
+          <AlertDialogContent className="dark:bg-richBlack">
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
+              <AlertDialogTitle className="dark:text-gold text-yaleBlue">
+                Are you absolutely sure?
+              </AlertDialogTitle>
+              <AlertDialogDescription className="">
                 This action cannot be undone. This will permanently delete your
                 transaction and remove your data from our servers.
               </AlertDialogDescription>
