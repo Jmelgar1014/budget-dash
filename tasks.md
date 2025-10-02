@@ -66,6 +66,6 @@
 [x]make progress bar dynamic with user input
 []create proper loading screen for budgets page
 []budgets can be viewed from other months
-[]change progress bar color
+[x]change progress bar color
 [x] change percentage amount color based on being within budget or not
-[]add confirmation when deleting budget
+[x]add confirmation when deleting budget
