@@ -137,17 +137,21 @@ export function Dashboard() {
                   </CardDescription>
                 </CardHeader>
                 <div className="flex justify-center sm:justify-center px-6 sm:px-0">
-                  <Button
-                    className="w-full sm:max-w-52 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue dark:border-mikadoYellow bg-yaleBlue text-white"
-                    variant="outline"
-                    asChild
-                  >
-                    <Link
-                      href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+                  {recentTransactions.length > 0 ? (
+                    <Button
+                      className="w-full sm:max-w-52 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue dark:border-mikadoYellow bg-yaleBlue text-white"
+                      variant="outline"
+                      asChild
                     >
-                      View All Transactions
-                    </Link>
-                  </Button>
+                      <Link
+                        href={`/transactions${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
+                      >
+                        View All Transactions
+                      </Link>
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <CardContent>
