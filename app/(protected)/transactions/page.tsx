@@ -12,7 +12,6 @@ import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import { exportTable } from "@/schema/ExportSchema";
 import { z } from "zod";
-import { Skeleton } from "@/components/ui/skeleton";
 import TransactionPageSkeleton from "@/components/TransactionPageSkeleton";
 
 const TransactionsPageContent = () => {
