@@ -16,8 +16,8 @@
 [x]update chart colors to have defaults for each catregory
 [x]add zod validation to post transaction endpoint
 [x]change font of date in recent transactions
-[]work on planning budget progess functionality
-[]possibliy add extra table for budget goals and budgets for each category
+[x]work on planning budget progess functionality
+[x]possibliy add extra table for budget goals and budgets for each category
 [x]add view all transaction button in recent transaction card
 [x]create page to view all transaction of given time frame
 [x]add ability to remove transactions
@@ -30,7 +30,7 @@
 [x]host on vercel
 [x]modify recent transactions for better responsive design
 [x]fix header in layout to add hamburger menu to free space on header
-[]add better error handling to exportData function in transactions page
+[x]add better error handling to exportData function in transactions page
 [x]better filtering and order of data in exported csv file
 [x]need to fix export function(if console log is not printed it wont export)
 [x]add confirmation when deleting transactions
@@ -69,3 +69,5 @@
 [x]change progress bar color
 [x] change percentage amount color based on being within budget or not
 [x]add confirmation when deleting budget
+[]view description of description if provided
+[]add infinite scroll

@@ -9,6 +9,7 @@ import { getBudgetType } from "@/schema/budgetSchema";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { toast } from "sonner";
 import DeleteConfirmation from "./DeleteConfirmation";
+import EmptyBudgetCard from "./budgetComponents/EmptyBudgetCard";
 const BudgetContainer = () => {
   const [budgetModal, setBudgetModal] = useState<boolean>(false);
   const [budgetId, setBudgetId] = useState<string>("");
@@ -146,8 +147,9 @@ const BudgetContainer = () => {
   console.log(budgetQuery.data);
   return (
     <>
-      <div className="flex justify-center">
-        <div className="container rounded-lg shadow-md sm:max-w-[500px] dark:bg-oxfordBlue">
+      <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
+        <EmptyBudgetCard addBudget={() => handleBudget()} />
+        {/* <div className="container rounded-lg shadow-md sm:max-w-[500px] dark:bg-oxfordBlue">
           <div className="flex flex-col items-center px-4 py-16 bg rounded-lg">
             <Target size={48} />
             <p className="text-lg font-semibold m-2">No budgets yet</p>
@@ -164,7 +166,7 @@ const BudgetContainer = () => {
               Add Budget
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
       {budgetModal && <BudgetForm onClose={() => setBudgetModal(false)} />}
     </>
