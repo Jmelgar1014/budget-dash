@@ -118,7 +118,7 @@ const BudgetContainer = () => {
           Add Budget
         </Button>
         {budgetModal && <BudgetForm onClose={() => setBudgetModal(false)} />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {budgetQuery.data.data.map((item: getBudgetType) => {
             return (
               <div key={item._id}>
@@ -149,24 +149,6 @@ const BudgetContainer = () => {
     <>
       <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
         <EmptyBudgetCard addBudget={() => handleBudget()} />
-        {/* <div className="container rounded-lg shadow-md sm:max-w-[500px] dark:bg-oxfordBlue">
-          <div className="flex flex-col items-center px-4 py-16 bg rounded-lg">
-            <Target size={48} />
-            <p className="text-lg font-semibold m-2">No budgets yet</p>
-            <p className=" text-center m-2">
-              Create your first budget to start tracking your spending goals and
-              take control of your finances.
-            </p>
-            <Button
-              onClick={() => handleBudget()}
-              className="mt-4 cursor-pointer  dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow text-white"
-              variant="outline"
-            >
-              <Plus />
-              Add Budget
-            </Button>
-          </div>
-        </div> */}
       </div>
       {budgetModal && <BudgetForm onClose={() => setBudgetModal(false)} />}
     </>

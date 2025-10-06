@@ -71,3 +71,7 @@
 [x]add confirmation when deleting budget
 []view description of description if provided
 []add infinite scroll
+[]find better desing for budgetcard
+[]add icon for each budget category
+[] add a last updated to budget card
+[]fix issue of having multiple budgets of same category
