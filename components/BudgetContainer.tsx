@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Plus, Target } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./ui/button";
 import BudgetForm from "./FormComponents/BudgetForm";

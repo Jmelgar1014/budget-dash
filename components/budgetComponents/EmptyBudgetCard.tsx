@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowUpRightIcon, Target } from "lucide-react";
+import { Target } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
