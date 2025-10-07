@@ -1,5 +1,4 @@
 "use client";
-import { SquareX } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Progress } from "../ui/progress";
 import BudgetHeader from "./BudgetHeader";

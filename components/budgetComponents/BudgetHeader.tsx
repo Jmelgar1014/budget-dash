@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BadgeCheckIcon,
-  ChevronRightIcon,
-  Trash2,
-  Utensils,
-} from "lucide-react";
+import { Trash2, Utensils } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,7 +7,6 @@ import {
   ItemActions,
   ItemContent,
   ItemDescription,
-  ItemMedia,
   ItemTitle,
 } from "@/components/ui/item";
 
