@@ -145,7 +145,7 @@ const AllTransactionsContent = () => {
 
   return (
     <>
-      <div className="space-y-3">
+      <div className="space-y-3 ">
         {results.map((transaction: DetailedTransaction) => {
           const millisecondsToDate = new Date(
             transaction.PurchaseDate
@@ -206,9 +206,15 @@ const AllTransactionsContent = () => {
           );
         })}
       </div>
-      <Button onClick={() => loadMore(10)} disabled={status !== "CanLoadMore"}>
-        Load More
-      </Button>
+      <div className="">
+        <Button
+          className="float-end my-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+          onClick={() => loadMore(10)}
+          disabled={status !== "CanLoadMore"}
+        >
+          Load More
+        </Button>
+      </div>
       {showConfirm && (
         <DeleteConfirmation
           showAlert={showConfirm}
