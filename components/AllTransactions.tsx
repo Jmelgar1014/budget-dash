@@ -10,12 +10,15 @@ import {
   ShoppingBag,
   Trash2,
 } from "lucide-react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { useSearchParams } from "next/navigation";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import DeleteConfirmation from "./DeleteConfirmation";
+import { api } from "@/convex/_generated/api";
+import { usePaginatedQuery } from "convex/react";
+import { useAuth } from "@clerk/nextjs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -29,32 +32,48 @@ const categoryIcons: Record<string, any> = {
 
 const AllTransactionsContent = () => {
   const queryClient = useQueryClient();
+  const { userId } = useAuth();
   const searchParams = useSearchParams();
+
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentYear = currentDate.getFullYear();
+
+  const month = parseInt(searchParams.get("month") || currentMonth.toString());
+  const year = parseInt(searchParams.get("year") || currentYear.toString());
+
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [transactionId, setTransactionId] = useState<string>("");
-  const { isPending, data, error } = useQuery({
-    queryKey: ["transactions", searchParams.toString()],
-    queryFn: async () => {
-      const url = searchParams.toString()
-        ? `/api/transactions?${searchParams.toString()}`
-        : "/api/transactions";
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`);
-      }
+  const { results, status, loadMore, isLoading } = usePaginatedQuery(
+    api.transactionsFuncs.getTransactionsPaginated,
+    userId ? { AuthId: userId, month: month, year: year } : "skip",
+    { initialNumItems: 10 }
+  );
 
-      const result = await response.json();
+  // const { isPending, data, error } = useQuery({
+  //   queryKey: ["transactions", searchParams.toString()],
+  //   queryFn: async () => {
+  //     const url = searchParams.toString()
+  //       ? `/api/transactions?${searchParams.toString()}`
+  //       : "/api/transactions";
+  //     const response = await fetch(url, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
 
-      return result;
-    },
-  });
-  const results = data ? data : [];
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error status: ${response.status}`);
+  //     }
+
+  //     const result = await response.json();
+
+  //     return result;
+  //   },
+  // });
+  // const results = data ? data : [];
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
@@ -80,15 +99,15 @@ const AllTransactionsContent = () => {
     toast.success("Transaction has been successfully deleted");
   };
 
-  if (error) {
-    return (
-      <>
-        <div>There was an error. Please try again</div>
-      </>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <>
+  //       <div>There was an error. Please try again</div>
+  //     </>
+  //   );
+  // }
   if (results) {
-    if (!isPending && results.length === 0) {
+    if (!isLoading && results.length === 0) {
       return (
         <>
           <main className="container mx-auto px-4 py-8 space-y-8">
@@ -102,12 +121,12 @@ const AllTransactionsContent = () => {
       );
     }
   }
-  if (isPending) {
+  if (status === "LoadingFirstPage") {
     return (
       <div className="space-y-3">
         {Array.from({ length: 10 }).map((_, index) => (
           <div
-            key={index}
+            key={`skeleton-${index}`}
             className="flex items-center justify-between p-3 rounded-lg border bg-card/50 animate-pulse"
           >
             <div className="flex items-center gap-3">
@@ -126,7 +145,7 @@ const AllTransactionsContent = () => {
 
   return (
     <>
-      <div className="space-y-3">
+      <div className="space-y-3 ">
         {results.map((transaction: DetailedTransaction) => {
           const millisecondsToDate = new Date(
             transaction.PurchaseDate
@@ -186,6 +205,15 @@ const AllTransactionsContent = () => {
             </div>
           );
         })}
+      </div>
+      <div className="">
+        <Button
+          className="float-end my-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+          onClick={() => loadMore(10)}
+          disabled={status !== "CanLoadMore"}
+        >
+          Load More
+        </Button>
       </div>
       {showConfirm && (
         <DeleteConfirmation

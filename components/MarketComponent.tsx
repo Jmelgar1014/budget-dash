@@ -39,7 +39,17 @@ const MarketComponent = () => {
                 </TabsList>
 
                 <TabsContent value="login" className="flex justify-center">
-                  <SignIn routing="hash" fallbackRedirectUrl={"/home"} />
+                  <SignIn
+                    routing="hash"
+                    fallbackRedirectUrl={"/home"}
+                    appearance={{
+                      elements: {
+                        card: {
+                          backgroundColor: "bg-green-400",
+                        },
+                      },
+                    }}
+                  />
                 </TabsContent>
 
                 <TabsContent value="signup" className="flex justify-center">
