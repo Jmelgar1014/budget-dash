@@ -1,4 +1,5 @@
 import { mutation, query } from "./_generated/server";
+import { paginationOptsValidator } from "convex/server";
 
 import { v } from "convex/values";
 
@@ -47,6 +48,31 @@ export const getTransactions = query({
       )
       .order("desc")
       .collect();
+    return transactions;
+  },
+});
+
+export const getTransactionsPaginated = query({
+  args: {
+    month: v.number(),
+    year: v.number(),
+    AuthId: v.string(),
+    paginationOpts: paginationOptsValidator,
+  },
+  handler: async (ctx, args) => {
+    const startOfMonth = new Date(args.year, args.month - 1, 1).getTime();
+    const endOfMonth = new Date(args.year, args.month, 0, 23, 59, 59).getTime();
+    const transactions = await ctx.db
+      .query("transactions")
+      .filter((item) =>
+        item.and(
+          item.gte(item.field("PurchaseDate"), startOfMonth),
+          item.lte(item.field("PurchaseDate"), endOfMonth),
+          item.eq(item.field("AuthId"), args.AuthId)
+        )
+      )
+      .order("desc")
+      .paginate(args.paginationOpts);
     return transactions;
   },
 });
