@@ -96,10 +96,10 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: Request) {
-  const { userId, getToken } = await auth();
+  const { userId } = await auth();
   console.log(userId);
 
-  const token = await getToken();
+  // const token = await getToken();
 
   // console.log(token);
 

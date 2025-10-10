@@ -87,7 +87,7 @@ export function BudgetChart({ dataArray }: chartData) {
           <Legend
             verticalAlign="bottom"
             height={36}
-            formatter={(value, entry) => (
+            formatter={(value) => (
               <span
                 // style={{ color: "white" }}
                 className="text-sm font-medium dark:text-white text-richBlack"
