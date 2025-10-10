@@ -1,4 +1,3 @@
-import { LoginForm } from "@/components/LoginForm";
 import MarketComponent from "@/components/MarketComponent";
 
 export default function Home() {

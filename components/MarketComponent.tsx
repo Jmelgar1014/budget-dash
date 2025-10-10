@@ -1,11 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { SignIn, SignUp } from "@clerk/nextjs";
+import { SignIn, SignUp, useUser } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 const MarketComponent = () => {
   const [clerkModal, setClerkModal] = useState<boolean>(false);
+  const router = useRouter();
+  const { isLoaded, isSignedIn } = useUser();
+  useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.push("/home");
+    }
+  }, [isLoaded, isSignedIn, router]);
+
   return (
     <>
       <div className="min-h-screen flex justify-center items-center">
@@ -39,17 +48,7 @@ const MarketComponent = () => {
                 </TabsList>
 
                 <TabsContent value="login" className="flex justify-center">
-                  <SignIn
-                    routing="hash"
-                    fallbackRedirectUrl={"/home"}
-                    appearance={{
-                      elements: {
-                        card: {
-                          backgroundColor: "bg-green-400",
-                        },
-                      },
-                    }}
-                  />
+                  <SignIn routing="hash" fallbackRedirectUrl={"/home"} />
                 </TabsContent>
 
                 <TabsContent value="signup" className="flex justify-center">

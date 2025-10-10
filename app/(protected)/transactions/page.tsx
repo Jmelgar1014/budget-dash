@@ -16,7 +16,7 @@ import TransactionPageSkeleton from "@/components/TransactionPageSkeleton";
 
 const TransactionsPageContent = () => {
   const searchParams = useSearchParams();
-  const { isPending, data, error } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["transactions", searchParams.toString()],
     queryFn: async () => {
       const url = searchParams.toString()

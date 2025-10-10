@@ -21,7 +21,7 @@ import { usePaginatedQuery } from "convex/react";
 import { useAuth } from "@clerk/nextjs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const categoryIcons: Record<string, any> = {
+export const categoryIcons: Record<string, any> = {
   Food: Utensils,
   Transportation: Car,
   Utilities: Zap,

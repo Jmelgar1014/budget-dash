@@ -70,8 +70,9 @@
 [x] change percentage amount color based on being within budget or not
 [x]add confirmation when deleting budget
 []view description of description if provided
-[]add infinite scroll
-[]find better desing for budgetcard
+[x]add infinite scroll
+[x]find better desing for budgetcard
 []add icon for each budget category
 [] add a last updated to budget card
 []fix issue of having multiple budgets of same category
+[]fix issue with being sent to landing page everytime user clicks on home
