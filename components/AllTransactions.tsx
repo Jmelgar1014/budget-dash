@@ -191,7 +191,10 @@ const AllTransactionsContent = () => {
                 </div>
                 <div>
                   {transaction.ImagePath && (
-                    <Button onClick={() => viewReceipt(transaction.ImagePath)}>
+                    <Button
+                      onClick={() => viewReceipt(transaction.ImagePath)}
+                      className="ml-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+                    >
                       View Receipt
                     </Button>
                   )}
@@ -244,18 +247,25 @@ const AllTransactionsContent = () => {
       ⏺{" "}
       {receiptUrl && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-white p-4 rounded">
-            <button
-              onClick={() => setReceiptUrl("")}
-              className="text-green-600 p-5"
-            >
-              Close
-            </button>
-            <img
-              src={receiptUrl}
-              alt="Receipt"
-              className="h-[400px] w-[400px] object-contain"
-            />
+          <div className=" dark:bg-richBlack border border-mikadoYellow bg-white p-4 rounded h-screen max-w-4xl lg:w-4xl">
+            <div className="flex justify-between">
+              <Button
+                onClick={() => setReceiptUrl("")}
+                className="hover:cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white"
+              >
+                Close
+              </Button>
+              <Button className="hover:cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white">
+                Download
+              </Button>
+            </div>
+            <div className="flex justify-center items-center h-full">
+              <img
+                src={receiptUrl}
+                alt="Receipt"
+                className="h-full w-full object-contain"
+              />
+            </div>
           </div>
         </div>
       )}

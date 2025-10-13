@@ -81,3 +81,4 @@
 []create S3 bucket for receipts
 []create endpoint to insert metadata of receipts
 []create endpoint to get metadata of receipts
+[]add ability to download receipt
