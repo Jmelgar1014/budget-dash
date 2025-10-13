@@ -93,7 +93,8 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
 
       if (file) {
         const userId = "testing";
-        const fileName = "testing122119";
+        // const { userId } = useAuth(); // Get real userId
+        const fileName = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`; // Unique filename
 
         const urlResponse = await fetch("/api/upload/getsignedurl", {
           method: "POST",

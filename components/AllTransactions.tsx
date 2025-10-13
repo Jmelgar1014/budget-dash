@@ -31,6 +31,9 @@ const categoryIcons: Record<string, any> = {
 };
 
 const AllTransactionsContent = () => {
+  // const [receipt, setReceipt] = useState<boolean>(false);
+  const [receiptUrl, setReceiptUrl] = useState<string>("");
+
   const queryClient = useQueryClient();
   const { userId } = useAuth();
   const searchParams = useSearchParams();
@@ -50,6 +53,15 @@ const AllTransactionsContent = () => {
     userId ? { AuthId: userId, month: month, year: year } : "skip",
     { initialNumItems: 10 }
   );
+
+  const viewReceipt = async (objectUrl: string | undefined) => {
+    const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
+      method: "GET",
+    });
+
+    const receiptImage = await response.json();
+    setReceiptUrl(receiptImage.url);
+  };
 
   // const { isPending, data, error } = useQuery({
   //   queryKey: ["transactions", searchParams.toString()],
@@ -177,6 +189,13 @@ const AllTransactionsContent = () => {
                     </span>
                   </div>
                 </div>
+                <div>
+                  {transaction.ImagePath && (
+                    <Button onClick={() => viewReceipt(transaction.ImagePath)}>
+                      View Receipt
+                    </Button>
+                  )}
+                </div>
               </div>
               <div className="flex">
                 <div
@@ -221,6 +240,24 @@ const AllTransactionsContent = () => {
           setAlert={() => setShowConfirm(false)}
           deleteTransaction={() => handleDelete(transactionId)}
         />
+      )}
+      ⏺{" "}
+      {receiptUrl && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+          <div className="bg-white p-4 rounded">
+            <button
+              onClick={() => setReceiptUrl("")}
+              className="text-green-600 p-5"
+            >
+              Close
+            </button>
+            <img
+              src={receiptUrl}
+              alt="Receipt"
+              className="h-[400px] w-[400px] object-contain"
+            />
+          </div>
+        </div>
       )}
     </>
   );

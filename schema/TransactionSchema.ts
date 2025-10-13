@@ -22,6 +22,7 @@ export const TransactionDetailed = z.object({
   _creationTime: z.number(),
   _id: z.string(),
   AuthId: z.string(),
+  ImagePath: z.optional(z.string()),
 });
 export type DetailedTransaction = z.infer<typeof TransactionDetailed>;
 
