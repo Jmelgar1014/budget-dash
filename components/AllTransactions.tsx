@@ -21,7 +21,7 @@ import { usePaginatedQuery } from "convex/react";
 import { useAuth } from "@clerk/nextjs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const categoryIcons: Record<string, any> = {
+const categoryIcons: Record<string, any> = {
   Food: Utensils,
   Transportation: Car,
   Utilities: Zap,
@@ -31,6 +31,9 @@ export const categoryIcons: Record<string, any> = {
 };
 
 const AllTransactionsContent = () => {
+  // const [receipt, setReceipt] = useState<boolean>(false);
+  const [receiptUrl, setReceiptUrl] = useState<string>("");
+
   const queryClient = useQueryClient();
   const { userId } = useAuth();
   const searchParams = useSearchParams();
@@ -50,6 +53,15 @@ const AllTransactionsContent = () => {
     userId ? { AuthId: userId, month: month, year: year } : "skip",
     { initialNumItems: 10 }
   );
+
+  const viewReceipt = async (objectUrl: string | undefined) => {
+    const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
+      method: "GET",
+    });
+
+    const receiptImage = await response.json();
+    setReceiptUrl(receiptImage.url);
+  };
 
   // const { isPending, data, error } = useQuery({
   //   queryKey: ["transactions", searchParams.toString()],
@@ -177,6 +189,16 @@ const AllTransactionsContent = () => {
                     </span>
                   </div>
                 </div>
+                <div>
+                  {transaction.ImagePath && (
+                    <Button
+                      onClick={() => viewReceipt(transaction.ImagePath)}
+                      className="ml-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+                    >
+                      View Receipt
+                    </Button>
+                  )}
+                </div>
               </div>
               <div className="flex">
                 <div
@@ -221,6 +243,31 @@ const AllTransactionsContent = () => {
           setAlert={() => setShowConfirm(false)}
           deleteTransaction={() => handleDelete(transactionId)}
         />
+      )}
+      ⏺{" "}
+      {receiptUrl && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+          <div className=" dark:bg-richBlack border border-mikadoYellow bg-white p-4 rounded h-screen max-w-4xl lg:w-4xl">
+            <div className="flex justify-between">
+              <Button
+                onClick={() => setReceiptUrl("")}
+                className="hover:cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white"
+              >
+                Close
+              </Button>
+              <Button className="hover:cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white">
+                Download
+              </Button>
+            </div>
+            <div className="flex justify-center items-center h-full">
+              <img
+                src={receiptUrl}
+                alt="Receipt"
+                className="h-full w-full object-contain"
+              />
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

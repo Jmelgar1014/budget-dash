@@ -13,6 +13,7 @@ export const addTransaction = mutation({
     PurchaseDate: v.number(),
     PurchaseType: v.string(),
     AuthId: v.string(),
+    ImagePath: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const newTransaction = await ctx.db.insert("transactions", {
@@ -23,6 +24,7 @@ export const addTransaction = mutation({
       PurchaseDate: args.PurchaseDate,
       PurchaseType: args.PurchaseType,
       AuthId: args.AuthId,
+      ImagePath: args.ImagePath,
     });
     return newTransaction;
   },

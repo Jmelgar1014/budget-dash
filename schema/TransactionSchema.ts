@@ -7,6 +7,7 @@ export const transactionType = z.object({
   Description: z.string().optional(),
   PurchaseDate: z.date(),
   PurchaseType: z.string(),
+  ImagePath: z.instanceof(File).optional(),
 });
 
 export type transactionTableType = z.infer<typeof transactionType>;
@@ -21,6 +22,7 @@ export const TransactionDetailed = z.object({
   _creationTime: z.number(),
   _id: z.string(),
   AuthId: z.string(),
+  ImagePath: z.optional(z.string()),
 });
 export type DetailedTransaction = z.infer<typeof TransactionDetailed>;
 
@@ -33,4 +35,5 @@ export const addTransactionForm = z.object({
   Description: z.string().optional(),
   PurchaseDate: z.number(),
   PurchaseType: z.string(),
+  ImagePath: z.optional(z.string()),
 });
