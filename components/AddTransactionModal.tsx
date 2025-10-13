@@ -1,6 +1,6 @@
 "use client";
 import { format } from "date-fns";
-import { CalendarIcon, Loader2Icon } from "lucide-react";
+import { CalendarIcon, Loader2Icon, ReceiptText } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -52,9 +52,8 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
       };
       const response = await fetch("/api/transactions", {
         method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
+        headers: { "Content-type": "application/json" },
+
         body: JSON.stringify(transformData),
       });
       if (!response.ok) {
@@ -87,7 +86,59 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
   });
 
   const handleSubmit = async (data: z.infer<typeof transactionType>) => {
-    mutation.mutate(data);
+    try {
+      const file = data.ImagePath;
+
+      let s3Url = null;
+
+      if (file) {
+        const userId = "testing";
+        const fileName = "testing122119";
+
+        const urlResponse = await fetch("/api/upload/getsignedurl", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: userId,
+            fileName: fileName,
+            fileType: file.type,
+          }),
+        });
+
+        if (!urlResponse.ok) {
+          throw new Error("Fialed to get upload url");
+        }
+
+        const { uploadUrl, fileUrl } = await urlResponse.json();
+
+        const uploadResponse = await fetch(uploadUrl, {
+          method: "PUT",
+          body: file,
+          headers: { "Content-Type": file.type },
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error("Failed to upload file");
+        }
+        s3Url = fileUrl;
+      }
+
+      // const transactionData = { ...data, ImagePath: s3Url || null };
+
+      // mutation.mutate(transactionData);
+
+      mutation.mutate({
+        Vendor: data.Vendor,
+        Amount: data.Amount,
+        Category: data.Category,
+        Description: data.Description,
+        PurchaseDate: data.PurchaseDate,
+        PurchaseType: data.PurchaseType,
+        ImagePath: s3Url || undefined,
+      } as z.infer<typeof transactionType>);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -279,6 +330,29 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
                       </SelectContent>
                     </Select>
 
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="ImagePath"
+                render={({ field: { value, onChange, ...field } }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <ReceiptText className="h-4 w-4 text-mikadoYellow" />
+                      Receipt
+                    </FormLabel>
+                    <Input
+                      type="file"
+                      id="receipt"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        onChange(file);
+                      }}
+                      {...field}
+                    />
                     <FormMessage />
                   </FormItem>
                 )}

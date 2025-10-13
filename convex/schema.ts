@@ -10,6 +10,7 @@ export default defineSchema({
     PurchaseDate: v.number(),
     PurchaseType: v.string(),
     AuthId: v.string(),
+    ImagePath: v.optional(v.string()),
   }),
   budgets: defineTable({
     AuthId: v.string(),

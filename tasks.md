@@ -76,3 +76,8 @@
 [] add a last updated to budget card
 []fix issue of having multiple budgets of same category
 []fix issue with being sent to landing page everytime user clicks on home
+[]create component to upload images
+[]create aws lambda function to uplaod images to S3
+[]create S3 bucket for receipts
+[]create endpoint to insert metadata of receipts
+[]create endpoint to get metadata of receipts
