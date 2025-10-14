@@ -9,6 +9,7 @@ import {
   Circle,
   ShoppingBag,
   Trash2,
+  Receipt,
 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
@@ -176,26 +177,31 @@ const AllTransactionsContent = () => {
                   />
                 </div>
                 <div>
-                  <p className="font-medium text-sm">{transaction.Vendor}</p>
-                  <div className="flex items-center gap-2 mt-1">
+                  <p className="font-medium text-sm mb-2">
+                    {transaction.Vendor}
+                  </p>
+                  <div className="flex flex-col sm:flex-row items-center gap-2 mt-1">
                     <Badge
                       variant="secondary"
                       className="text-xs dark:text-mikadoYellow text-yaleBlue"
                     >
                       {transaction.Category}
                     </Badge>
-                    <span className="text-xs text-muted-foreground font-semibold">
-                      {millisecondsToDate}
-                    </span>
+                    <div className="w-full">
+                      <span className="text-xs text-muted-foreground font-semibold">
+                        {millisecondsToDate}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div>
                   {transaction.ImagePath && (
                     <Button
                       onClick={() => viewReceipt(transaction.ImagePath)}
-                      className="ml-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+                      className="m-2 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
                     >
-                      View Receipt
+                      <Receipt />
+                      <span className="hidden sm:inline">View Receipt</span>
                     </Button>
                   )}
                 </div>
@@ -243,8 +249,7 @@ const AllTransactionsContent = () => {
           setAlert={() => setShowConfirm(false)}
           deleteTransaction={() => handleDelete(transactionId)}
         />
-      )}
-      ⏺{" "}
+      )}{" "}
       {receiptUrl && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
           <div className=" dark:bg-richBlack border border-mikadoYellow bg-white p-4 rounded h-screen max-w-4xl lg:w-4xl">

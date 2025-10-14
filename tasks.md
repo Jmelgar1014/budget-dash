@@ -75,10 +75,17 @@
 []add icon for each budget category
 [] add a last updated to budget card
 []fix issue of having multiple budgets of same category
-[]fix issue with being sent to landing page everytime user clicks on home
-[]create component to upload images
+[x]fix issue with being sent to landing page everytime user clicks on home
+[x]create component to upload images
 []create aws lambda function to uplaod images to S3
-[]create S3 bucket for receipts
-[]create endpoint to insert metadata of receipts
-[]create endpoint to get metadata of receipts
+[x]create S3 bucket for receipts
+[x]create endpoint to insert metadata of receipts
+[x]create endpoint to get metadata of receipts
 []add ability to download receipt
+[x]fixed mobile layout for all transactions component
+[x]added modal to view images from s3
+[x]removed testing userId from function to submit to s3
+[]need to add view receipt button to recent transactions component
+[]change white color for budget chart since it is to off putting
+[]make better ui for transactions with very larger numbers
+[]add comma to transaction amounts if over 999.99
