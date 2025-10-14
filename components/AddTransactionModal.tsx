@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@clerk/nextjs";
 import { format } from "date-fns";
 import { CalendarIcon, Loader2Icon, ReceiptText } from "lucide-react";
 import {
@@ -43,6 +44,7 @@ interface AddTransactionModalProps {
 
 export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
   const queryClient = useQueryClient();
+  const { userId } = useAuth();
 
   const mutation = useMutation({
     mutationFn: async (data: z.infer<typeof transactionType>) => {
@@ -92,7 +94,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
       let s3Url = null;
 
       if (file) {
-        const userId = "testing";
+        const clerkId = userId;
         // const { userId } = useAuth(); // Get real userId
         const fileName = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`; // Unique filename
 
@@ -100,7 +102,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            userId: userId,
+            userId: clerkId,
             fileName: fileName,
             fileType: file.type,
           }),
