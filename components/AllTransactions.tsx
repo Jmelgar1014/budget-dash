@@ -20,6 +20,7 @@ import DeleteConfirmation from "./DeleteConfirmation";
 import { api } from "@/convex/_generated/api";
 import { usePaginatedQuery } from "convex/react";
 import { useAuth } from "@clerk/nextjs";
+import Image from "next/image";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -33,6 +34,7 @@ const categoryIcons: Record<string, any> = {
 
 const AllTransactionsContent = () => {
   // const [receipt, setReceipt] = useState<boolean>(false);
+
   const [receiptUrl, setReceiptUrl] = useState<string>("");
 
   const queryClient = useQueryClient();
@@ -62,6 +64,20 @@ const AllTransactionsContent = () => {
 
     const receiptImage = await response.json();
     setReceiptUrl(receiptImage.url);
+  };
+
+  const downloadImage = async (imageUrl: string): Promise<void> => {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = `receipt-${Date.now()}.jpg`;
+    link.click();
+
+    window.URL.revokeObjectURL(blobUrl);
   };
 
   // const { isPending, data, error } = useQuery({
@@ -216,7 +232,10 @@ const AllTransactionsContent = () => {
                   }`}
                 >
                   {transaction.PurchaseType === "Expense" ? "-" : "+"}$
-                  {transaction.Amount.toFixed(2)}
+                  {transaction.Amount.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </div>
                 <Button
                   className="m-2 cursor-pointer hover:bg-oxfordBlue group dark:hover:bg-oxfordBlue"
@@ -252,7 +271,7 @@ const AllTransactionsContent = () => {
       )}{" "}
       {receiptUrl && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className=" dark:bg-richBlack border border-mikadoYellow bg-white p-4 rounded h-screen max-w-4xl lg:w-4xl">
+          <div className=" dark:bg-richBlack border border-mikadoYellow bg-white p-4 rounded h-[500px] sm:h-[650px] mx-8 max-w-4xl lg:w-4xl">
             <div className="flex justify-between">
               <Button
                 onClick={() => setReceiptUrl("")}
@@ -260,14 +279,19 @@ const AllTransactionsContent = () => {
               >
                 Close
               </Button>
-              <Button className="hover:cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white">
+              <Button
+                onClick={() => downloadImage(receiptUrl)}
+                className="hover:cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white"
+              >
                 Download
               </Button>
             </div>
             <div className="flex justify-center items-center h-full">
-              <img
+              <Image
                 src={receiptUrl}
-                alt="Receipt"
+                alt="Receipt Image"
+                height={500}
+                width={500}
                 className="h-full w-full object-contain"
               />
             </div>
