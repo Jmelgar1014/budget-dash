@@ -88,4 +88,6 @@
 []need to add view receipt button to recent transactions component
 []change white color for budget chart since it is to off putting
 []make better ui for transactions with very larger numbers
-[]add comma to transaction amounts if over 999.99
+[x]add comma to transaction amounts if over 999.99
+[x]add download functionality
+[x]fix image modal to fit properly on mobile
