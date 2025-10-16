@@ -8,14 +8,14 @@ import {
   Tooltip,
 } from "recharts";
 
-const CHART_COLORS = [
-  "#000814", // purple-500 (matches Balance card)
-  "#001d3d", // pink-500 (matches Spending card)
-  "#003566", // cyan-500 (matches Savings card)
-  "#ffc300", // violet-500 (complementary)
-  "#ffd60a", // orange-500 (accent color)
-  "white", // emerald-500 (additional color)
-];
+const CHART_COLORS = {
+  "Fixed Expense": "#000814", // purple-500 (matches Balance card)
+  Food: "#001d3d", // pink-500 (matches Spending card)
+  Misc: "#003566", // cyan-500 (matches Savings card)
+  Salary: "#ffc300", // violet-500 (complementary)
+  Transportation: "#ffd60a", // orange-500 (accent color)
+  Utilities: "white",
+}; // emerald-500 (additional color)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CustomTooltip = ({ active, payload, dataArray }: any) => {
   if (active && payload && payload.length) {
@@ -79,7 +79,7 @@ export function BudgetChart({ dataArray }: chartData) {
             {dataArray.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={CHART_COLORS[index % CHART_COLORS.length]}
+                fill={CHART_COLORS[entry.name as keyof typeof CHART_COLORS]}
               />
             ))}
           </Pie>
