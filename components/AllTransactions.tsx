@@ -36,6 +36,7 @@ const AllTransactionsContent = () => {
   // const [receipt, setReceipt] = useState<boolean>(false);
 
   const [receiptUrl, setReceiptUrl] = useState<string>("");
+  const [imagePath, setImagePath] = useState<string | undefined>("");
 
   const queryClient = useQueryClient();
   const { userId } = useAuth();
@@ -123,19 +124,22 @@ const AllTransactionsContent = () => {
       });
     },
   });
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string, imageUrl: string | undefined) => {
+    if (imageUrl) {
+      const response = await fetch(
+        `/api/receipts/deletereceipt?url=${imageUrl}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const result = await response.json();
+      console.log(result);
+    }
     deleteMutation.mutate(id);
     setReceiptUrl("");
     toast.success("Transaction has been successfully deleted");
   };
 
-  // if (error) {
-  //   return (
-  //     <>
-  //       <div>There was an error. Please try again</div>
-  //     </>
-  //   );
-  // }
   if (results) {
     if (!isLoading && results.length === 0) {
       return (
@@ -245,6 +249,7 @@ const AllTransactionsContent = () => {
                   onClick={() => {
                     setShowConfirm(true);
                     setTransactionId(transaction._id);
+                    setImagePath(transaction.ImagePath);
                   }}
                 >
                   <Trash2 className="text-oxfordBlue group-hover:text-gold dark:text-gold group-dark:text-gold" />
@@ -267,7 +272,7 @@ const AllTransactionsContent = () => {
         <DeleteConfirmation
           showAlert={showConfirm}
           setAlert={() => setShowConfirm(false)}
-          deleteTransaction={() => handleDelete(transactionId)}
+          deleteTransaction={() => handleDelete(transactionId, imagePath)}
         />
       )}{" "}
       {receiptUrl && (
