@@ -49,7 +49,10 @@ export function RecentTransactions({
               <div>
                 <p className="font-medium text-sm">{transaction.Vendor}</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge
+                    variant="secondary"
+                    className="text-xs  dark:text-mikadoYellow text-yaleBlue"
+                  >
                     {transaction.Category}
                   </Badge>
                   <span className="text-xs text-muted-foreground font-semibold">
@@ -67,7 +70,10 @@ export function RecentTransactions({
               }`}
             >
               {transaction.PurchaseType === "Expense" ? "-" : "+"}$
-              {transaction.Amount.toFixed(2)}
+              {transaction.Amount.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </div>
           </div>
         );

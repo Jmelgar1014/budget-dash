@@ -91,3 +91,8 @@
 [x]add comma to transaction amounts if over 999.99
 [x]add download functionality
 [x]fix image modal to fit properly on mobile
+[]check issue with some image not loading when clicking on view receipt(possible size,format,or fetch issue)
+[]add zod schema and safe parse for chart color validation instead of assertion
+[]add more details to view receipt modal like what transaction is being viewed
+[]find a way to add the description of a transaction in UI
+[]let users click on a specific transaction to get all details and images in one go

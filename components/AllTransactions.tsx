@@ -125,6 +125,7 @@ const AllTransactionsContent = () => {
   });
   const handleDelete = async (id: string) => {
     deleteMutation.mutate(id);
+    setReceiptUrl("");
     toast.success("Transaction has been successfully deleted");
   };
 
