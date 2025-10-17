@@ -15,7 +15,7 @@ const TransactionSearch = ({
   inputValue,
   resultAmount,
 }: filterTransactions) => {
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
   return (
