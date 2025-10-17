@@ -97,3 +97,7 @@
 []find a way to add the description of a transaction in UI
 []let users click on a specific transaction to get all details and images in one go
 [x]add endpoint to delete image from s3 when deleteing a transaction that has a receipt
+[]add savings goals
+[]add recurring transactions(weekly,monthly,yearly)
+[]sending alerts when exceeding budget
+[]spending trends
