@@ -21,6 +21,7 @@ import { api } from "@/convex/_generated/api";
 import { usePaginatedQuery } from "convex/react";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
+import TransactionSearch from "./TransactionSearch";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -37,6 +38,7 @@ const AllTransactionsContent = () => {
 
   const [receiptUrl, setReceiptUrl] = useState<string>("");
   const [imagePath, setImagePath] = useState<string | undefined>("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const queryClient = useQueryClient();
   const { userId } = useAuth();
@@ -57,6 +59,14 @@ const AllTransactionsContent = () => {
     userId ? { AuthId: userId, month: month, year: year } : "skip",
     { initialNumItems: 10 }
   );
+
+  const filteredResults = inputValue
+    ? results.filter((transaction) => {
+        return transaction.Vendor.toLowerCase().includes(
+          inputValue.toLowerCase()
+        );
+      })
+    : results;
 
   const viewReceipt = async (objectUrl: string | undefined) => {
     const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
@@ -179,8 +189,13 @@ const AllTransactionsContent = () => {
 
   return (
     <>
+      <TransactionSearch
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        resultAmount={filteredResults.length}
+      />
       <div className="space-y-3 ">
-        {results.map((transaction: DetailedTransaction) => {
+        {filteredResults.map((transaction: DetailedTransaction) => {
           const millisecondsToDate = new Date(
             transaction.PurchaseDate
           ).toLocaleDateString("en-US");
