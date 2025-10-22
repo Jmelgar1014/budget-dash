@@ -11,7 +11,7 @@ import {
   Trash2,
   Receipt,
 } from "lucide-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { useSearchParams } from "next/navigation";
 import { Button } from "./ui/button";
@@ -39,6 +39,7 @@ const AllTransactionsContent = () => {
   const [receiptUrl, setReceiptUrl] = useState<string>("");
   const [imagePath, setImagePath] = useState<string | undefined>("");
   const [inputValue, setInputValue] = useState<string>("");
+  const [selectedCaegory, setSelectedCategory] = useState<string>("");
 
   const queryClient = useQueryClient();
   const { userId } = useAuth();
@@ -60,13 +61,23 @@ const AllTransactionsContent = () => {
     { initialNumItems: 10 }
   );
 
-  const filteredResults = inputValue
-    ? results.filter((transaction) => {
-        return transaction.Vendor.toLowerCase().includes(
-          inputValue.toLowerCase()
-        );
-      })
-    : results;
+  const filters = useQuery({
+    queryKey: ["filtered", inputValue, selectedCaegory],
+    queryFn: async () => {
+      const response = await fetch(
+        `/api/transactions/filters?text=${inputValue}&category=${selectedCaegory}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      return data;
+    },
+    enabled: !!(inputValue || selectedCaegory),
+  });
+
+  const filteredResults = filters.data ? filters.data : results;
 
   const viewReceipt = async (objectUrl: string | undefined) => {
     const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
@@ -193,6 +204,8 @@ const AllTransactionsContent = () => {
         inputValue={inputValue}
         setInputValue={setInputValue}
         resultAmount={filteredResults.length}
+        setCategoryValue={setSelectedCategory}
+        categoryValue={selectedCaegory}
       />
       <div className="space-y-3 ">
         {filteredResults.map((transaction: DetailedTransaction) => {
