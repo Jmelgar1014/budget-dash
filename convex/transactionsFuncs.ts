@@ -91,3 +91,65 @@ export const deleteTransaction = mutation({
     return removedTransaction;
   },
 });
+
+export const getTransactionPerParams = query({
+  args: {
+    AuthId: v.string(),
+    InputValue: v.optional(v.string()),
+    Category: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    if (args.InputValue && args.Category) {
+      return await ctx.db
+        .query("transactions")
+        .withSearchIndex("by_vendor", (q) =>
+          q
+            .search("Vendor", args.InputValue as string)
+            .eq("AuthId", args.AuthId)
+            .eq("Category", args.Category as string)
+        )
+        .collect();
+    }
+    if (args.InputValue) {
+      return await ctx.db
+        .query("transactions")
+        .withSearchIndex("by_vendor", (q) =>
+          q
+            .search("Vendor", args.InputValue as string)
+            .eq("AuthId", args.AuthId)
+        )
+        .collect();
+    }
+
+    if (args.Category) {
+      return await ctx.db
+        .query("transactions")
+        .filter((item) =>
+          item.and(
+            item.eq(item.field("AuthId"), args.AuthId),
+            item.eq(item.field("Category"), args.Category)
+          )
+        )
+        .collect();
+    }
+    // const transactionResults = await ctx.db
+    //   .query("transactions")
+    //   .filter((item) => {
+    //     const userInfo = [item.eq(item.field("AuthId"), args.AuthId)];
+
+    //     if (args.InputValue && args.Category) {
+    //       userInfo.push(item.eq(item.field("Vendor"), args.InputValue));
+    //       userInfo.push(item.eq(item.field("Category"), args.Category));
+    //     } else if (args.InputValue) {
+    //       userInfo.push(item.eq(item.field("Vendor"), args.InputValue));
+    //     } else if (args.Category) {
+    //       userInfo.push(item.eq(item.field("Category"), args.Category));
+    //     }
+
+    //     return item.and(...userInfo);
+    //   })
+    //   .collect();
+
+    // return transactionResults;
+  },
+});

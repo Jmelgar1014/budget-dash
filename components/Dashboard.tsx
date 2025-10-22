@@ -24,10 +24,21 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import MonthSelect from "./MonthSelect";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import ManageBudgets from "./ManageBudgets";
+import { useAuth } from "@clerk/nextjs";
 
 export function Dashboard() {
+  const { getToken } = useAuth();
+  useEffect(() => {
+    const displaytoken = async () => {
+      const token = await getToken();
+      console.log(token);
+    };
+
+    displaytoken();
+  });
+
   const searchParams = useSearchParams();
   const { isPending, data, error } = useQuery({
     queryKey: ["transactions", searchParams.toString()],

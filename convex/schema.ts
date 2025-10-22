@@ -11,6 +11,9 @@ export default defineSchema({
     PurchaseType: v.string(),
     AuthId: v.string(),
     ImagePath: v.optional(v.string()),
+  }).searchIndex("by_vendor", {
+    searchField: "Vendor",
+    filterFields: ["AuthId", "Category"],
   }),
   budgets: defineTable({
     AuthId: v.string(),

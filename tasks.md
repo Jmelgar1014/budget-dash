@@ -101,3 +101,9 @@
 []add recurring transactions(weekly,monthly,yearly)
 []sending alerts when exceeding budget
 []spending trends
+[x]add clear filters button
+[]search features needs backend queries run
+-need to create new convex function that takes in filters
+-create backend that takes searchparams for db queries
+-when user enters filters display queried results
+-when user resets filters display cached original results
