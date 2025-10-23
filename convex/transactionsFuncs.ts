@@ -97,8 +97,12 @@ export const getTransactionPerParams = query({
     AuthId: v.string(),
     InputValue: v.optional(v.string()),
     Category: v.optional(v.string()),
+    Month: v.number(),
+    Year: v.number(),
   },
   handler: async (ctx, args) => {
+    const startOfMonth = new Date(args.Year, args.Month - 1, 1).getTime();
+    const endOfMonth = new Date(args.Year, args.Month, 0, 23, 59, 59).getTime();
     if (args.InputValue && args.Category) {
       return await ctx.db
         .query("transactions")
@@ -107,6 +111,12 @@ export const getTransactionPerParams = query({
             .search("Vendor", args.InputValue as string)
             .eq("AuthId", args.AuthId)
             .eq("Category", args.Category as string)
+        )
+        .filter((item) =>
+          item.and(
+            item.gte(item.field("PurchaseDate"), startOfMonth),
+            item.lte(item.field("PurchaseDate"), endOfMonth)
+          )
         )
         .collect();
     }
@@ -118,6 +128,12 @@ export const getTransactionPerParams = query({
             .search("Vendor", args.InputValue as string)
             .eq("AuthId", args.AuthId)
         )
+        .filter((item) =>
+          item.and(
+            item.gte(item.field("PurchaseDate"), startOfMonth),
+            item.lte(item.field("PurchaseDate"), endOfMonth)
+          )
+        )
         .collect();
     }
 
@@ -127,29 +143,12 @@ export const getTransactionPerParams = query({
         .filter((item) =>
           item.and(
             item.eq(item.field("AuthId"), args.AuthId),
-            item.eq(item.field("Category"), args.Category)
+            item.eq(item.field("Category"), args.Category),
+            item.gte(item.field("PurchaseDate"), startOfMonth),
+            item.lte(item.field("PurchaseDate"), endOfMonth)
           )
         )
         .collect();
     }
-    // const transactionResults = await ctx.db
-    //   .query("transactions")
-    //   .filter((item) => {
-    //     const userInfo = [item.eq(item.field("AuthId"), args.AuthId)];
-
-    //     if (args.InputValue && args.Category) {
-    //       userInfo.push(item.eq(item.field("Vendor"), args.InputValue));
-    //       userInfo.push(item.eq(item.field("Category"), args.Category));
-    //     } else if (args.InputValue) {
-    //       userInfo.push(item.eq(item.field("Vendor"), args.InputValue));
-    //     } else if (args.Category) {
-    //       userInfo.push(item.eq(item.field("Category"), args.Category));
-    //     }
-
-    //     return item.and(...userInfo);
-    //   })
-    //   .collect();
-
-    // return transactionResults;
   },
 });

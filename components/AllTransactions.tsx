@@ -62,10 +62,10 @@ const AllTransactionsContent = () => {
   );
 
   const filters = useQuery({
-    queryKey: ["filtered", inputValue, selectedCaegory],
+    queryKey: ["filtered", inputValue, selectedCaegory, month, year],
     queryFn: async () => {
       const response = await fetch(
-        `/api/transactions/filters?text=${inputValue}&category=${selectedCaegory}`,
+        `/api/transactions/filters?text=${inputValue}&category=${selectedCaegory}&month=${month}&year=${year}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },

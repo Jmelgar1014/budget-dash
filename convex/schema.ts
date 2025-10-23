@@ -13,7 +13,7 @@ export default defineSchema({
     ImagePath: v.optional(v.string()),
   }).searchIndex("by_vendor", {
     searchField: "Vendor",
-    filterFields: ["AuthId", "Category"],
+    filterFields: ["AuthId", "Category", "PurchaseDate"],
   }),
   budgets: defineTable({
     AuthId: v.string(),
