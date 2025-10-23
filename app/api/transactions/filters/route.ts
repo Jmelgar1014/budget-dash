@@ -17,8 +17,15 @@ export async function GET(req: Request) {
 
   const { searchParams } = new URL(req.url);
 
+  const currentDate = new Date();
+  console.log(currentDate);
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentYear = currentDate.getFullYear();
+
   const textValue = searchParams.get("text") || "";
   const category = searchParams.get("category") || "";
+  const month = parseInt(searchParams.get("month") || currentMonth.toString());
+  const year = parseInt(searchParams.get("year") || currentYear.toString());
 
   console.log(textValue);
   console.log(category);
@@ -30,6 +37,8 @@ export async function GET(req: Request) {
         AuthId: userId as Id<"transactions">,
         Category: category,
         InputValue: textValue,
+        Month: month,
+        Year: year,
       }
     );
 
