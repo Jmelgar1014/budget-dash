@@ -22,6 +22,8 @@ import { usePaginatedQuery } from "convex/react";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import TransactionSearch from "./TransactionSearch";
+import { Span } from "next/dist/trace";
+import { useRouter } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -35,7 +37,7 @@ const categoryIcons: Record<string, any> = {
 
 const AllTransactionsContent = () => {
   // const [receipt, setReceipt] = useState<boolean>(false);
-
+  const router = useRouter();
   const [receiptUrl, setReceiptUrl] = useState<string>("");
   const [imagePath, setImagePath] = useState<string | undefined>("");
   const [inputValue, setInputValue] = useState<string>("");
@@ -54,6 +56,10 @@ const AllTransactionsContent = () => {
 
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [transactionId, setTransactionId] = useState<string>("");
+
+  const transactionPage = (id: string) => {
+    router.push(`/transactions/${id}`);
+  };
 
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
     api.transactionsFuncs.getTransactionsPaginated,
@@ -101,30 +107,6 @@ const AllTransactionsContent = () => {
 
     window.URL.revokeObjectURL(blobUrl);
   };
-
-  // const { isPending, data, error } = useQuery({
-  //   queryKey: ["transactions", searchParams.toString()],
-  //   queryFn: async () => {
-  //     const url = searchParams.toString()
-  //       ? `/api/transactions?${searchParams.toString()}`
-  //       : "/api/transactions";
-  //     const response = await fetch(url, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error status: ${response.status}`);
-  //     }
-
-  //     const result = await response.json();
-
-  //     return result;
-  //   },
-  // });
-  // const results = data ? data : [];
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
@@ -216,7 +198,8 @@ const AllTransactionsContent = () => {
           return (
             <div
               key={transaction._id}
-              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue bg-card/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-yaleBlue/35"
+              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue dark:bg-oxfordBlue/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-yaleBlue/35"
+              onClick={() => transactionPage(transaction._id)}
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg" style={{ backgroundColor: "" }}>
@@ -228,6 +211,14 @@ const AllTransactionsContent = () => {
                 <div>
                   <p className="font-medium text-sm mb-2">
                     {transaction.Vendor}
+                  </p>
+                  <p className="font-medium text-sm mb-2">
+                    {transaction.Description && (
+                      <div>
+                        <span className="dark:text-gold">Desc: </span>
+                        {transaction.Description}
+                      </div>
+                    )}
                   </p>
                   <div className="flex flex-col sm:flex-row items-center gap-2 mt-1">
                     <Badge
