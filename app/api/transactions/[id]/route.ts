@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { api } from "@/convex/_generated/api";
-import { fetchMutation } from "convex/nextjs";
+import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Id } from "@/convex/_generated/dataModel";
 import { Redis } from "@upstash/redis";
@@ -12,6 +12,32 @@ const rateLimit = new Ratelimit({
   prefix: "@upstash/ratelimit",
   analytics: true,
 });
+
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    const transaction = await fetchQuery(
+      api.transactionsFuncs.getTransactionDetails,
+      {
+        AuthId: userId,
+        TransactionId: id,
+      }
+    );
+    return NextResponse.json(transaction);
+  } catch (error) {
+    return NextResponse.json({ error: error });
+  }
+}
 
 export async function DELETE(
   req: Request,

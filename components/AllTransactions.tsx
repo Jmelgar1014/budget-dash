@@ -22,7 +22,6 @@ import { usePaginatedQuery } from "convex/react";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import TransactionSearch from "./TransactionSearch";
-import { Span } from "next/dist/trace";
 import { useRouter } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -212,14 +211,12 @@ const AllTransactionsContent = () => {
                   <p className="font-medium text-sm mb-2">
                     {transaction.Vendor}
                   </p>
-                  <p className="font-medium text-sm mb-2">
-                    {transaction.Description && (
-                      <div>
-                        <span className="dark:text-gold">Desc: </span>
-                        {transaction.Description}
-                      </div>
-                    )}
-                  </p>
+                  {transaction.Description && (
+                    <p className="font-medium text-sm mb-2">
+                      <span className="dark:text-gold">Desc: </span>
+                      {transaction.Description}
+                    </p>
+                  )}
                   <div className="flex flex-col sm:flex-row items-center gap-2 mt-1">
                     <Badge
                       variant="secondary"
@@ -237,7 +234,10 @@ const AllTransactionsContent = () => {
                 <div>
                   {transaction.ImagePath && (
                     <Button
-                      onClick={() => viewReceipt(transaction.ImagePath)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        viewReceipt(transaction.ImagePath);
+                      }}
                       className="m-2 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
                     >
                       <Receipt />
@@ -265,7 +265,8 @@ const AllTransactionsContent = () => {
                   className="m-2 cursor-pointer hover:bg-oxfordBlue group dark:hover:bg-oxfordBlue"
                   variant="ghost"
                   // onClick={() => handleDelete(transaction._id)}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setShowConfirm(true);
                     setTransactionId(transaction._id);
                     setImagePath(transaction.ImagePath);

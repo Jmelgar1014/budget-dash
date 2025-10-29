@@ -92,6 +92,30 @@ export const deleteTransaction = mutation({
   },
 });
 
+export const getTransactionDetails = query({
+  args: {
+    AuthId: v.string(),
+    TransactionId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const transaction = await ctx.db
+      .query("transactions")
+      .filter((item) =>
+        item.and(
+          item.eq(item.field("AuthId"), args.AuthId),
+          item.eq(item.field("_id"), args.TransactionId)
+        )
+      )
+      .first();
+
+    if (!transaction) {
+      throw new Error("Transaction not Found");
+    }
+
+    return transaction;
+  },
+});
+
 export const getTransactionPerParams = query({
   args: {
     AuthId: v.string(),

@@ -103,3 +103,5 @@
 []spending trends
 [x]add clear filters button
 [x]search features needs backend queries run
+[]alltransactions component has issue where div is nested inside a p tag which is not allowed
+[]add detailed transaction page
