@@ -23,6 +23,7 @@ import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import TransactionSearch from "./TransactionSearch";
 import { useRouter } from "next/navigation";
+import { viewReceipt } from "@/utilities/utilityFuncs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -84,14 +85,19 @@ const AllTransactionsContent = () => {
 
   const filteredResults = filters.data ? filters.data : results;
 
-  const viewReceipt = async (objectUrl: string | undefined) => {
-    const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
-      method: "GET",
-    });
-
-    const receiptImage = await response.json();
-    setReceiptUrl(receiptImage.url);
+  const viewImage = async (objectUrl: string | undefined) => {
+    const image = await viewReceipt(objectUrl);
+    setReceiptUrl(image.url);
   };
+
+  // const viewReceipt = async (objectUrl: string | undefined) => {
+  //   const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
+  //     method: "GET",
+  //   });
+
+  //   const receiptImage = await response.json();
+  //   setReceiptUrl(receiptImage.url);
+  // };
 
   const downloadImage = async (imageUrl: string): Promise<void> => {
     const response = await fetch(imageUrl);
@@ -197,7 +203,7 @@ const AllTransactionsContent = () => {
           return (
             <div
               key={transaction._id}
-              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue dark:bg-oxfordBlue/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-yaleBlue/35"
+              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue dark:bg-oxfordBlue/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-mikadoYellow"
               onClick={() => transactionPage(transaction._id)}
             >
               <div className="flex items-center gap-3">
@@ -236,9 +242,9 @@ const AllTransactionsContent = () => {
                     <Button
                       onClick={(e) => {
                         e.stopPropagation();
-                        viewReceipt(transaction.ImagePath);
+                        viewImage(transaction.ImagePath);
                       }}
-                      className="m-2 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+                      className="m-2 cursor-pointer dark:bg-richBlack hover:bg-oxfordBlue hover:border hover:border-oxfordBlue hover:text-gold hove dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
                     >
                       <Receipt />
                       <span className="hidden sm:inline">View Receipt</span>

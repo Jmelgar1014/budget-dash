@@ -1,4 +1,5 @@
 "use client";
+import SingleTransactionSkeleton from "@/components/skeletons/SingleTransactionSkeleton";
 import TransactionDetailHeader from "@/components/TransactionDetail/TransactionDetailHeader";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
@@ -32,7 +33,7 @@ const Page = () => {
   });
 
   if (transactionDetails.isLoading) {
-    return <div>Loading</div>;
+    return <SingleTransactionSkeleton />;
   }
 
   return (
@@ -48,11 +49,7 @@ const Page = () => {
             Back to Transactions
           </Link>
         </Button>
-        <TransactionDetailHeader
-          Vendor={transactionDetails.data.Vendor}
-          Date={transactionDetails.data.PurchaseDate}
-          Amount={transactionDetails.data.Amount}
-        />
+        <TransactionDetailHeader transaction={transactionDetails.data} />
       </main>
     </>
   );
