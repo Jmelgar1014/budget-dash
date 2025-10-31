@@ -81,7 +81,7 @@
 [x]create S3 bucket for receipts
 [x]create endpoint to insert metadata of receipts
 [x]create endpoint to get metadata of receipts
-[]add ability to download receipt
+[x]add ability to download receipt
 [x]fixed mobile layout for all transactions component
 [x]added modal to view images from s3
 [x]removed testing userId from function to submit to s3
@@ -94,7 +94,7 @@
 [x]check issue with some image not loading when clicking on view receipt(possible size,format,or fetch issue)
 []add zod schema and safe parse for chart color validation instead of assertion
 []add more details to view receipt modal like what transaction is being viewed
-[]find a way to add the description of a transaction in UI
+[x]find a way to add the description of a transaction in UI
 []let users click on a specific transaction to get all details and images in one go
 [x]add endpoint to delete image from s3 when deleteing a transaction that has a receipt
 []add savings goals
@@ -102,8 +102,6 @@
 []sending alerts when exceeding budget
 []spending trends
 [x]add clear filters button
-[]search features needs backend queries run
--need to create new convex function that takes in filters
--create backend that takes searchparams for db queries
--when user enters filters display queried results
--when user resets filters display cached original results
+[x]search features needs backend queries run
+[]alltransactions component has issue where div is nested inside a p tag which is not allowed
+[]add detailed transaction page

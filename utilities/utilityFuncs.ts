@@ -56,3 +56,26 @@ export const convertToChart = (array: TransactionDetailed[]) => {
     value: total,
   }));
 };
+
+export const viewReceipt = async (objectUrl: string | undefined) => {
+  const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
+    method: "GET",
+  });
+
+  const receiptImage = await response.json();
+  return receiptImage;
+};
+
+export const downloadImage = async (imageUrl: string): Promise<void> => {
+  const response = await fetch(imageUrl);
+  const blob = await response.blob();
+
+  const blobUrl = window.URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = blobUrl;
+  link.download = `receipt-${Date.now()}.jpg`;
+  link.click();
+
+  window.URL.revokeObjectURL(blobUrl);
+};

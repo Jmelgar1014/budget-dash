@@ -22,6 +22,8 @@ import { usePaginatedQuery } from "convex/react";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import TransactionSearch from "./TransactionSearch";
+import { useRouter } from "next/navigation";
+import { downloadImage, viewReceipt } from "@/utilities/utilityFuncs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -35,7 +37,7 @@ const categoryIcons: Record<string, any> = {
 
 const AllTransactionsContent = () => {
   // const [receipt, setReceipt] = useState<boolean>(false);
-
+  const router = useRouter();
   const [receiptUrl, setReceiptUrl] = useState<string>("");
   const [imagePath, setImagePath] = useState<string | undefined>("");
   const [inputValue, setInputValue] = useState<string>("");
@@ -54,6 +56,10 @@ const AllTransactionsContent = () => {
 
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [transactionId, setTransactionId] = useState<string>("");
+
+  const transactionPage = (id: string) => {
+    router.push(`/transactions/${id}`);
+  };
 
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
     api.transactionsFuncs.getTransactionsPaginated,
@@ -79,52 +85,33 @@ const AllTransactionsContent = () => {
 
   const filteredResults = filters.data ? filters.data : results;
 
-  const viewReceipt = async (objectUrl: string | undefined) => {
-    const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
-      method: "GET",
-    });
-
-    const receiptImage = await response.json();
-    setReceiptUrl(receiptImage.url);
+  const viewImage = async (objectUrl: string | undefined) => {
+    const image = await viewReceipt(objectUrl);
+    setReceiptUrl(image.url);
   };
 
-  const downloadImage = async (imageUrl: string): Promise<void> => {
-    const response = await fetch(imageUrl);
-    const blob = await response.blob();
+  // const viewReceipt = async (objectUrl: string | undefined) => {
+  //   const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
+  //     method: "GET",
+  //   });
 
-    const blobUrl = window.URL.createObjectURL(blob);
+  //   const receiptImage = await response.json();
+  //   setReceiptUrl(receiptImage.url);
+  // };
 
-    const link = document.createElement("a");
-    link.href = blobUrl;
-    link.download = `receipt-${Date.now()}.jpg`;
-    link.click();
+  // const downloadImage = async (imageUrl: string): Promise<void> => {
+  //   const response = await fetch(imageUrl);
+  //   const blob = await response.blob();
 
-    window.URL.revokeObjectURL(blobUrl);
-  };
+  //   const blobUrl = window.URL.createObjectURL(blob);
 
-  // const { isPending, data, error } = useQuery({
-  //   queryKey: ["transactions", searchParams.toString()],
-  //   queryFn: async () => {
-  //     const url = searchParams.toString()
-  //       ? `/api/transactions?${searchParams.toString()}`
-  //       : "/api/transactions";
-  //     const response = await fetch(url, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
+  //   const link = document.createElement("a");
+  //   link.href = blobUrl;
+  //   link.download = `receipt-${Date.now()}.jpg`;
+  //   link.click();
 
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error status: ${response.status}`);
-  //     }
-
-  //     const result = await response.json();
-
-  //     return result;
-  //   },
-  // });
-  // const results = data ? data : [];
+  //   window.URL.revokeObjectURL(blobUrl);
+  // };
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
@@ -216,7 +203,8 @@ const AllTransactionsContent = () => {
           return (
             <div
               key={transaction._id}
-              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue bg-card/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-yaleBlue/35"
+              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue dark:bg-oxfordBlue/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-mikadoYellow"
+              onClick={() => transactionPage(transaction._id)}
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg" style={{ backgroundColor: "" }}>
@@ -229,6 +217,12 @@ const AllTransactionsContent = () => {
                   <p className="font-medium text-sm mb-2">
                     {transaction.Vendor}
                   </p>
+                  {transaction.Description && (
+                    <p className="font-medium text-sm mb-2">
+                      <span className="dark:text-gold">Desc: </span>
+                      {transaction.Description}
+                    </p>
+                  )}
                   <div className="flex flex-col sm:flex-row items-center gap-2 mt-1">
                     <Badge
                       variant="secondary"
@@ -246,8 +240,11 @@ const AllTransactionsContent = () => {
                 <div>
                   {transaction.ImagePath && (
                     <Button
-                      onClick={() => viewReceipt(transaction.ImagePath)}
-                      className="m-2 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        viewImage(transaction.ImagePath);
+                      }}
+                      className="m-2 cursor-pointer dark:bg-richBlack hover:bg-oxfordBlue hover:border hover:border-oxfordBlue hover:text-gold hove dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
                     >
                       <Receipt />
                       <span className="hidden sm:inline">View Receipt</span>
@@ -274,7 +271,8 @@ const AllTransactionsContent = () => {
                   className="m-2 cursor-pointer hover:bg-oxfordBlue group dark:hover:bg-oxfordBlue"
                   variant="ghost"
                   // onClick={() => handleDelete(transaction._id)}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setShowConfirm(true);
                     setTransactionId(transaction._id);
                     setImagePath(transaction.ImagePath);
