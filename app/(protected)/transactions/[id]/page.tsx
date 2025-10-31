@@ -1,6 +1,8 @@
 "use client";
 import SingleTransactionSkeleton from "@/components/skeletons/SingleTransactionSkeleton";
+import TransactionDetailDescription from "@/components/TransactionDetail/TransactionDetailDescription";
 import TransactionDetailHeader from "@/components/TransactionDetail/TransactionDetailHeader";
+import TransactionDetailViewReceipt from "@/components/TransactionDetail/TransactionDetailViewReceipt";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
@@ -50,6 +52,8 @@ const Page = () => {
           </Link>
         </Button>
         <TransactionDetailHeader transaction={transactionDetails.data} />
+        <TransactionDetailDescription transaction={transactionDetails.data} />
+        <TransactionDetailViewReceipt />
       </main>
     </>
   );

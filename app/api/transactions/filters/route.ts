@@ -44,9 +44,6 @@ export async function GET(req: Request) {
 
     return NextResponse.json(filteredResults);
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to retrieve transactions" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }

@@ -23,7 +23,7 @@ import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import TransactionSearch from "./TransactionSearch";
 import { useRouter } from "next/navigation";
-import { viewReceipt } from "@/utilities/utilityFuncs";
+import { downloadImage, viewReceipt } from "@/utilities/utilityFuncs";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -99,19 +99,19 @@ const AllTransactionsContent = () => {
   //   setReceiptUrl(receiptImage.url);
   // };
 
-  const downloadImage = async (imageUrl: string): Promise<void> => {
-    const response = await fetch(imageUrl);
-    const blob = await response.blob();
+  // const downloadImage = async (imageUrl: string): Promise<void> => {
+  //   const response = await fetch(imageUrl);
+  //   const blob = await response.blob();
 
-    const blobUrl = window.URL.createObjectURL(blob);
+  //   const blobUrl = window.URL.createObjectURL(blob);
 
-    const link = document.createElement("a");
-    link.href = blobUrl;
-    link.download = `receipt-${Date.now()}.jpg`;
-    link.click();
+  //   const link = document.createElement("a");
+  //   link.href = blobUrl;
+  //   link.download = `receipt-${Date.now()}.jpg`;
+  //   link.click();
 
-    window.URL.revokeObjectURL(blobUrl);
-  };
+  //   window.URL.revokeObjectURL(blobUrl);
+  // };
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {

@@ -1,5 +1,5 @@
 import { Button } from "../ui/button";
-import { Pencil, Trash2 } from "lucide-react";
+import { Calendar, Pencil, Trash2 } from "lucide-react";
 import { DetailedTransaction } from "@/schema/TransactionSchema";
 import { downloadImage, viewReceipt } from "@/utilities/utilityFuncs";
 
@@ -7,9 +7,9 @@ interface transaction {
   transaction: DetailedTransaction;
 }
 const TransactionDetailHeader = ({ transaction }: transaction) => {
-  const time = new Date(transaction.PurchaseDate).toString();
+  const time = new Date(transaction.PurchaseDate).toDateString();
 
-  const getReceiptDownload = async (imageReceiptUrl: string) => {
+  const getReceiptDownload = async (imageReceiptUrl: string): Promise<void> => {
     const imageUrl = await viewReceipt(imageReceiptUrl);
     const download = await downloadImage(imageUrl.url);
   };
@@ -22,10 +22,14 @@ const TransactionDetailHeader = ({ transaction }: transaction) => {
             <h1 className="text-white font-bold text-3xl tracking-normal ">
               {transaction.Vendor}
             </h1>
-            <p className="my-2 text-slate-500">{time}</p>
+            <p className="my-2 text-slate-400 flex">
+              <Calendar className="mr-3" />
+              {time}
+            </p>
           </div>
+
           <div className="m-7 flex flex-col text-right">
-            <p className="float-end text-slate-500">Total Amount</p>
+            <p className="float-end text-slate-400">Total Amount</p>
             <h2 className="text-4xl text-mikadoYellow font-bold float-end">
               {transaction.Amount.toLocaleString("en-US")}
             </h2>
