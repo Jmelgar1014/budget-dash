@@ -103,5 +103,12 @@
 []spending trends
 [x]add clear filters button
 [x]search features needs backend queries run
-[]alltransactions component has issue where div is nested inside a p tag which is not allowed
-[]add detailed transaction page
+[x]alltransactions component has issue where div is nested inside a p tag which is not allowed
+[x]add detailed transaction page
+[x]add functionality to download image in detail page
+[]add edit functionality
+[x]add delete functionality in detail page
+[]add view image in detail page
+[]add UI when user selects category and resutls are empty
+[]add UI when user types in value and there are no results
+[x]when deleting transaction in detail page redirect to all transactions or let user know transaction does not exist anymore
