@@ -185,6 +185,29 @@ const AllTransactionsContent = () => {
     );
   }
 
+  if (filteredResults.length == 0) {
+    return (
+      <>
+        <TransactionSearch
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          resultAmount={filteredResults.length}
+          setCategoryValue={setSelectedCategory}
+          categoryValue={selectedCaegory}
+        />
+        <div className="space-y-3">
+          <div className="rounded-lg bg-oxfordBlue border border-yaleBlue h-40">
+            <div className="flex h-full justify-center items-center">
+              <h1 className="text-2xl font-semibold m-7 flex justify-center ">
+                There are no results
+              </h1>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <TransactionSearch
