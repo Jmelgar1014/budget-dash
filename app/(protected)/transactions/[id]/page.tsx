@@ -78,7 +78,11 @@ const Page = () => {
           deletedTransaction={() => setDeletedTransaction(true)}
         />
         <TransactionDetailDescription transaction={transactionDetails.data} />
-        {transactionDetails.data.ImagePath && <TransactionDetailViewReceipt />}
+        {transactionDetails.data.ImagePath && (
+          <TransactionDetailViewReceipt
+            transactionReceipt={transactionDetails.data.ImagePath}
+          />
+        )}
       </main>
     </>
   );
