@@ -10,10 +10,12 @@ import { toast } from "sonner";
 interface transaction {
   transaction: DetailedTransaction;
   deletedTransaction: () => void;
+  setShowModal: () => void;
 }
 const TransactionDetailHeader = ({
   transaction,
   deletedTransaction,
+  setShowModal,
 }: transaction) => {
   const time = new Date(transaction.PurchaseDate).toDateString();
   const queryClient = useQueryClient();
@@ -97,7 +99,10 @@ const TransactionDetailHeader = ({
                 Download Receipt
               </Button>
             )}
-            <Button className="flex-1 max-w-40 cursor-pointer dark:bg-yaleBlue dark:hover:bg-oxfordBlue dark:text-slate-300 dark:hover:text-mikadoYellow mr-2 border border-yaleBlue ">
+            <Button
+              className="flex-1 max-w-40 cursor-pointer dark:bg-yaleBlue dark:hover:bg-oxfordBlue dark:text-slate-300 dark:hover:text-mikadoYellow mr-2 border border-yaleBlue "
+              onClick={setShowModal}
+            >
               <Pencil />
               Edit
             </Button>

@@ -2,6 +2,7 @@
 import SingleTransactionSkeleton from "@/components/skeletons/SingleTransactionSkeleton";
 import TransactionDetailDeleted from "@/components/TransactionDetail/TransactionDetailDeleted";
 import TransactionDetailDescription from "@/components/TransactionDetail/TransactionDetailDescription";
+import TransactionDetailEditForm from "@/components/TransactionDetail/TransactionDetailEditForm";
 import TransactionDetailHeader from "@/components/TransactionDetail/TransactionDetailHeader";
 import TransactionDetailViewReceipt from "@/components/TransactionDetail/TransactionDetailViewReceipt";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,7 @@ import React, { useState } from "react";
 
 const Page = () => {
   const [deletedTransaction, setDeletedTransaction] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const params = useParams();
   console.log(params);
 
@@ -76,11 +78,18 @@ const Page = () => {
         <TransactionDetailHeader
           transaction={transactionDetails.data}
           deletedTransaction={() => setDeletedTransaction(true)}
+          setShowModal={() => setShowModal(true)}
         />
         <TransactionDetailDescription transaction={transactionDetails.data} />
         {transactionDetails.data.ImagePath && (
           <TransactionDetailViewReceipt
             transactionReceipt={transactionDetails.data.ImagePath}
+          />
+        )}
+        {showModal && (
+          <TransactionDetailEditForm
+            setShowModal={() => setShowModal(false)}
+            transaction={transactionDetails.data}
           />
         )}
       </main>

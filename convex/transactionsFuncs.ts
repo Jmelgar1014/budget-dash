@@ -176,3 +176,36 @@ export const getTransactionPerParams = query({
     }
   },
 });
+
+export const updateTransaction = mutation({
+  args: {
+    AuthId: v.string(),
+    TransactionId: v.id("transactions"),
+    Vendor: v.optional(v.string()),
+    Category: v.optional(v.string()),
+    Description: v.optional(v.string()),
+    Amount: v.optional(v.number()),
+    PurchaseDate: v.optional(v.number()),
+    PurchaseType: v.optional(v.string()),
+    ImagePath: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const transaction = await ctx.db.get(args.TransactionId);
+
+    const updates: Partial<typeof transaction> = {};
+
+    if (args.Vendor !== undefined) updates.Vendor = args.Vendor;
+    if (args.Category !== undefined) updates.Category = args.Category;
+    if (args.Description !== undefined) updates.Description = args.Description;
+    if (args.Amount !== undefined) updates.Amount = args.Amount;
+    if (args.PurchaseDate !== undefined)
+      updates.PurchaseDate = args.PurchaseDate;
+    if (args.PurchaseType !== undefined)
+      updates.PurchaseType = args.PurchaseType;
+    if (args.ImagePath !== undefined) updates.ImagePath = args.ImagePath;
+
+    await ctx.db.patch(args.TransactionId, updates);
+
+    return transaction;
+  },
+});
