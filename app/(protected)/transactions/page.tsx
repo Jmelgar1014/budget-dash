@@ -13,7 +13,6 @@ import { saveAs } from "file-saver";
 import { exportTable } from "@/schema/ExportSchema";
 import { z } from "zod";
 import TransactionPageSkeleton from "@/components/TransactionPageSkeleton";
-import TransactionSearch from "@/components/TransactionSearch";
 
 const TransactionsPageContent = () => {
   const searchParams = useSearchParams();

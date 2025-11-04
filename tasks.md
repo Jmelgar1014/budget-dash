@@ -114,6 +114,7 @@
 [x]when deleting transaction in detail page redirect to all transactions or let user know transaction does not exist anymore
 []after selecting a single transaction save url search params to go back to the correct month of transactions
 []if there are no transactions more transactions to load remove load more button from view
-[]add convex function to update a transaction
-[]add endpoint to update transaction
-[]create form to have users update transaction
+[x]add convex function to update a transaction
+[x]add endpoint to update transaction
+[x]create form to have users update transaction
+[]add toast to let user know transaction was updated successfully

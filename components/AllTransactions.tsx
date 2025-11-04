@@ -122,7 +122,7 @@ const AllTransactionsContent = () => {
         },
       });
 
-      const result = response.json();
+      await response.json();
 
       // console.log(result);
     },

@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface filterTransactions {
   setInputValue: (value: string) => void;
@@ -32,7 +32,7 @@ const TransactionSearch = ({
   categoryValue,
 }: filterTransactions) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   const dropwdownValues = [
     {
