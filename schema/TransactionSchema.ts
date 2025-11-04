@@ -37,3 +37,13 @@ export const addTransactionForm = z.object({
   PurchaseType: z.string(),
   ImagePath: z.optional(z.string()),
 });
+
+export const UpdateTransactions = z.object({
+  Vendor: z.string().optional(),
+  Category: z.string().optional(),
+  Description: z.string().optional(),
+  Amount: z.number().optional(),
+  PurchaseDate: z.date().optional(),
+  PurchaseType: z.string().optional(),
+  ImagePath: z.instanceof(File).optional(),
+});

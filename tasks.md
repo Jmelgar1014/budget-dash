@@ -112,3 +112,8 @@
 []add UI when user selects category and resutls are empty
 []add UI when user types in value and there are no results
 [x]when deleting transaction in detail page redirect to all transactions or let user know transaction does not exist anymore
+[]after selecting a single transaction save url search params to go back to the correct month of transactions
+[]if there are no transactions more transactions to load remove load more button from view
+[]add convex function to update a transaction
+[]add endpoint to update transaction
+[]create form to have users update transaction
