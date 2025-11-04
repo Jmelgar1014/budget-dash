@@ -1,36 +1,212 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Budget Dashboard
 
-## Getting Started
+A full-stack personal finance management application built with Next.js. Track transactions, manage budgets, organize receipts, and visualize your spending patterns with an intuitive, modern interface.
 
-First, run the development server:
+## 🌟 Features
+
+- 📊 **Real-time Transaction Tracking** - Log income and expenses with detailed categorization
+- 💰 **Budget Planning & Monitoring** - Set budget goals and track spending against them with progress bars
+- 📁 **Receipt Upload & Storage** - Upload receipts to AWS S3 and view them in a modal
+- 📥 **CSV Export** - Export transactions for further analysis
+- 📈 **Spending Analytics** - Visualize spending patterns with interactive Recharts charts
+- 🔍 **Advanced Search & Filtering** - Find transactions by category, date range, and amount
+- 🌓 **Dark Mode Support** - Seamless dark/light theme switching
+- 📱 **Fully Responsive Design** - Works perfectly on desktop, tablet, and mobile devices
+- 🔐 **Secure Authentication** - Clerk-powered user authentication
+- ⚡ **Optimized Performance** - Tanstack Query for smart data caching
+- 🛡️ **Rate Limiting** - API protection against abuse
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **UI Components**: Shadcn UI (Radix UI)
+- **Styling**: Tailwind CSS
+- **State Management**: Tanstack Query v5
+- **Charts**: Recharts
+- **Forms**: React Hook Form + Zod validation
+- **Icons**: Lucide React
+- **Themes**: Next Themes
+
+### Backend & Database
+
+- **Backend**: Convex (serverless database)
+- **Authentication**: Clerk
+- **File Storage**: AWS S3
+- **Rate Limiting**: Upstash Redis
+
+### Development Tools
+
+- **Testing**: Jest + React Testing Library
+- **Linting**: ESLint
+- **Deployment**: Vercel
+
+## 📋 Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- AWS Account (for S3)
+- Clerk Account (for authentication)
+- Convex Account (for database)
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/budget-dash.git
+cd budget
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret
+
+# Convex Database
+NEXT_PUBLIC_CONVEX_URL=your_convex_url
+
+# AWS S3
+NEXT_PUBLIC_AWS_REGION=your_aws_region
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+
+# Upstash Redis (for rate limiting)
+UPSTASH_REDIS_REST_URL=your_upstash_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_token
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Adding Transactions
 
-## Learn More
+1. Click "Add Transaction" button
+2. Fill in vendor, amount, category, and description
+3. Optionally upload a receipt image
+4. Click Submit
 
-To learn more about Next.js, take a look at the following resources:
+### Managing Budgets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Navigate to the Budgets page
+2. Set budget limits for each category
+3. Monitor spending against your budget goals
+4. View progress bars that update in real-time
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Viewing Receipts
 
-## Deploy on Vercel
+1. Click "Download Receipt" on a transaction with an image
+2. View images in a modal with transaction details
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Exporting Data
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Select a time period on the Transactions page
+2. Click "Export to CSV" to download transaction data
+3. Open in Excel or your preferred spreadsheet application
+
+## 🧪 Testing
+
+Run tests with:
+
+```bash
+npm test
+```
+
+## 🔨 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm test` - Run Jest tests
+
+## 📁 Project Structure
+
+```
+.
+├── app/
+│   ├── (protected)/          # Protected routes requiring authentication
+│   │   ├── budgets/
+│   │   ├── home/
+│   │   └── transactions/
+│   ├── api/                  # API routes
+│   │   ├── transactions/
+│   │   ├── budgets/
+│   │   ├── receipts/
+│   │   └── upload/
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/               # React components
+│   ├── TransactionDetail/
+│   ├── budgetComponents/
+│   ├── FormComponents/
+│   ├── ui/                   # Shadcn UI components
+│   └── skeletons/
+├── convex/                   # Convex database functions and schema
+├── schema/                   # Zod validation schemas
+├── utilities/                # Utility functions
+├── Types/                    # TypeScript type definitions
+└── hooks/                    # Custom React hooks
+```
+
+## 🔐 Security Features
+
+- Authentication with Clerk
+- Protected API routes
+- Rate limiting on endpoints using Upstash Redis
+- Zod schema validation for all inputs
+- Secure AWS S3 signed URLs for file uploads
+- Environment variable protection
+
+## 🚀 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy automatically on push
+
+```bash
+npm run build
+npm start
+```
+
+## 👨‍💻 Author
+
+José Melgar
+
+## 🙏 Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Convex](https://www.convex.dev/)
+- [Clerk](https://clerk.com/)
+- [Recharts](https://recharts.org/)
+
+## 📞 Support
+
+For issues, questions, or suggestions, please open an issue on GitHub or contact me directly.
+
+---
+
+**Made with ❤️ by José Melgar**

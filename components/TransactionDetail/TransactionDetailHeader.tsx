@@ -26,7 +26,7 @@ const TransactionDetailHeader = ({
 
   const getReceiptDownload = async (imageReceiptUrl: string): Promise<void> => {
     const imageUrl = await viewReceipt(imageReceiptUrl);
-    const download = await downloadImage(imageUrl.url);
+    await downloadImage(imageUrl.url);
   };
 
   const deleteMutation = useMutation({
@@ -38,7 +38,7 @@ const TransactionDetailHeader = ({
         },
       });
 
-      const result = response.json();
+      await response.json();
 
       // console.log(result);
     },
