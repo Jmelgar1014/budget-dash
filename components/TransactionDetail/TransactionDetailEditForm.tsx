@@ -73,6 +73,7 @@ const TransactionDetailEditForm = ({
       return response.json();
     },
     onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: ["singleTransaction"] });
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       form.reset();
       setShowModal();
