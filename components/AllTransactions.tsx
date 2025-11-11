@@ -24,6 +24,7 @@ import Image from "next/image";
 import TransactionSearch from "./TransactionSearch";
 import { useRouter } from "next/navigation";
 import { downloadImage, viewReceipt } from "@/utilities/utilityFuncs";
+import { useDebounce } from "@/hooks/useDebounce";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const categoryIcons: Record<string, any> = {
@@ -41,7 +42,10 @@ const AllTransactionsContent = () => {
   const [receiptUrl, setReceiptUrl] = useState<string>("");
   const [imagePath, setImagePath] = useState<string | undefined>("");
   const [inputValue, setInputValue] = useState<string>("");
-  const [selectedCaegory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const debounceInput = useDebounce(inputValue);
+  const debounceCategory = useDebounce(selectedCategory);
 
   const queryClient = useQueryClient();
   const { userId } = useAuth();
@@ -68,10 +72,10 @@ const AllTransactionsContent = () => {
   );
 
   const filters = useQuery({
-    queryKey: ["filtered", inputValue, selectedCaegory, month, year],
+    queryKey: ["filtered", debounceCategory, debounceInput, month, year],
     queryFn: async () => {
       const response = await fetch(
-        `/api/transactions/filters?text=${inputValue}&category=${selectedCaegory}&month=${month}&year=${year}`,
+        `/api/transactions/filters?text=${debounceInput}&category=${debounceCategory}&month=${month}&year=${year}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -80,7 +84,7 @@ const AllTransactionsContent = () => {
       const data = await response.json();
       return data;
     },
-    enabled: !!(inputValue || selectedCaegory),
+    enabled: !!(debounceInput || debounceCategory),
   });
 
   const filteredResults = filters.data ? filters.data : results;
@@ -89,29 +93,6 @@ const AllTransactionsContent = () => {
     const image = await viewReceipt(objectUrl);
     setReceiptUrl(image.url);
   };
-
-  // const viewReceipt = async (objectUrl: string | undefined) => {
-  //   const response = await fetch(`/api/upload/getreadurl?url=${objectUrl}`, {
-  //     method: "GET",
-  //   });
-
-  //   const receiptImage = await response.json();
-  //   setReceiptUrl(receiptImage.url);
-  // };
-
-  // const downloadImage = async (imageUrl: string): Promise<void> => {
-  //   const response = await fetch(imageUrl);
-  //   const blob = await response.blob();
-
-  //   const blobUrl = window.URL.createObjectURL(blob);
-
-  //   const link = document.createElement("a");
-  //   link.href = blobUrl;
-  //   link.download = `receipt-${Date.now()}.jpg`;
-  //   link.click();
-
-  //   window.URL.revokeObjectURL(blobUrl);
-  // };
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
@@ -193,7 +174,7 @@ const AllTransactionsContent = () => {
           setInputValue={setInputValue}
           resultAmount={filteredResults.length}
           setCategoryValue={setSelectedCategory}
-          categoryValue={selectedCaegory}
+          categoryValue={selectedCategory}
         />
         <div className="space-y-3">
           <div className="rounded-lg bg-oxfordBlue border border-yaleBlue h-40">
@@ -215,7 +196,7 @@ const AllTransactionsContent = () => {
         setInputValue={setInputValue}
         resultAmount={filteredResults.length}
         setCategoryValue={setSelectedCategory}
-        categoryValue={selectedCaegory}
+        categoryValue={selectedCategory}
       />
       <div className="space-y-3 ">
         {filteredResults.map((transaction: DetailedTransaction) => {
