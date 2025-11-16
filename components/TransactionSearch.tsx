@@ -68,29 +68,11 @@ const TransactionSearch = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    // const params = new URLSearchParams(searchParams.toString());
-
-    // if (event.target.value) {
-    //   params.set("text", event.target.value);
-    // } else {
-    //   params.delete("text");
-    // }
-    // router.push(`?${params.toString()}`);
   };
 
   const handleCategory = (value: string) => {
     console.log(value);
     setCategoryValue(value);
-
-    // const params = new URLSearchParams(searchParams.toString());
-
-    // if (value) {
-    //   params.set("category", value);
-    // } else {
-    //   params.delete("category");
-    // }
-
-    // router.push(`?${params.toString()}`);
   };
   return (
     <>
