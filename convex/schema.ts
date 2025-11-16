@@ -21,4 +21,14 @@ export default defineSchema({
     Amount: v.number(),
     Category: v.string(),
   }),
+  recurringTransactions: defineTable({
+    Vendor: v.string(),
+    Category: v.string(),
+    Description: v.optional(v.string()),
+    Amount: v.number(),
+    Frequency: v.string(),
+    RecurringDate: v.number(),
+    PurchaseType: v.string(),
+    AuthId: v.string(),
+  }),
 });
