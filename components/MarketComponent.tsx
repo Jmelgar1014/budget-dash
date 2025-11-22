@@ -60,14 +60,15 @@ const MarketComponent = () => {
           <div className="w-full max-w-md mx-auto pt-4 opacity-0 animate-fade-in-up delay-300">
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
               <Button
-                className="dark:bg-yaleBlue dark:text-gold font-semibold px-8 py-3 text-base dark:hover:border dark:hover:border-mikadoYellow cursor-pointer dark:hover:shadow-lg dark:hover:shadow-gold/30 transition-all duration-300"
+                className="dark:bg-gold dark:text-oxfordBlue font-semibold px-8 py-3 text-base dark:hover:border dark:hover:border-mikadoYellow cursor-pointer  dark:hover:shadow-[0_0_30px_rgba(255,215,0,0.5)] transition-all duration-300 dark:hover:-translate-y-0.5"
                 onClick={() => setClerkModal(true)}
               >
                 Get Started
               </Button>
               <Button
+                variant="ghost"
                 disabled={loading}
-                className="dark:bg-yaleBlue dark:text-gold font-semibold px-8 py-3 text-base dark:hover:border dark:hover:border-mikadoYellow cursor-pointer dark:hover:shadow-lg dark:hover:shadow-gold/30 transition-all duration-300"
+                className="dark:bg-gradient-to-br from-slate-800/40 via-slate-800/30 to-slate-900/40  dark:text-gold font-semibold px-8 py-3 text-base dark:border dark:border-white/15 dark:hover:border-white/30  cursor-pointer dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]  transition-all duration-300 dark:hover:-translate-y-0.5"
                 onClick={() => {
                   // Explore App logic will be added here
                   console.log("Explore App clicked");
