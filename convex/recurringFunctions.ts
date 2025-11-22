@@ -27,3 +27,21 @@ export const addRecurringTransaction = mutation({
     return transactions;
   },
 });
+
+export const getRecurringTransactions = query({
+  args: {
+    AuthId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const allTransactions = await ctx.db
+      .query("recurringTransactions")
+      .filter((item) => item.eq(item.field("AuthId"), args.AuthId))
+      .collect();
+
+    if (!allTransactions) {
+      throw new Error("No recurring transactions exist");
+    }
+
+    return allTransactions;
+  },
+});

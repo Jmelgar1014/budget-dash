@@ -9,7 +9,7 @@ type SavingsTotal = {
 const SavingsCard = ({ total }: SavingsTotal) => {
   return (
     <>
-      <Card className="border-0 shadow-lg bg-gradient-to-br from-mikadoYellow to-gold text-white">
+      <Card className="border border-white/5 shadow-lg bg-gradient-to-br from-mikadoYellow to-gold text-white">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium opacity-90 text-oxfordBlue">
             Monthly Savings

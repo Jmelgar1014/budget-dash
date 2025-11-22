@@ -1,15 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { Redis } from "@upstash/redis";
-import { Ratelimit } from "@upstash/ratelimit";
 import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
-
-const rateLimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(10, "60 s"),
-  prefix: "@upstash/ratelimit",
-  analytics: true,
-});
+import { rateLimit } from "@/utilities/rateLimit";
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION!,

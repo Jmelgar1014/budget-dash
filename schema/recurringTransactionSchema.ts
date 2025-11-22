@@ -12,3 +12,14 @@ export const recurringTable = z.object({
 });
 
 export type recurringTableType = z.infer<typeof recurringTable>;
+
+export const recurringTableUserResponse = z.object({
+  Vendor: z.string(),
+  Category: z.string(),
+  Description: z.string().optional(),
+  Amount: z.number(),
+  Frequency: z.string(),
+  RecurringDate: z.number(),
+  PurchaseType: z.string(),
+  _id: z.string(),
+});

@@ -9,7 +9,7 @@ type TimeTotals = {
 const BalanceCard = ({ total }: TimeTotals) => {
   return (
     <>
-      <Card className="border-0 shadow-lg bg-gradient-to-br from-oxfordBlue to-yaleBlue text-white">
+      <Card className="border border-white/5 shadow-lg bg-gradient-to-br from-oxfordBlue to-yaleBlue text-white">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium opacity-90">
             Total Balance
