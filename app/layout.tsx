@@ -35,7 +35,7 @@ export default function RootLayout({
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         </head>
         <body
-          className={`${inter.variable} ${inter.variable} antialiased dark:bg-richBlack`}
+          className={`${inter.variable} ${inter.variable} antialiased dark:bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950`}
         >
           <QueryProvider>{children}</QueryProvider>
           <Toaster position="top-center" richColors />
