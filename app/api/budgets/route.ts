@@ -4,16 +4,8 @@ import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { getBudgetData } from "@/schema/budgetSchema";
-import { Redis } from "@upstash/redis";
-import { Ratelimit } from "@upstash/ratelimit";
 import { budgetTable } from "@/schema/budgetSchema";
-
-const rateLimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(10, "60 s"),
-  prefix: "@upstash/ratelimit",
-  analytics: true,
-});
+import { rateLimit } from "@/utilities/rateLimit";
 
 export async function GET(req: Request) {
   const { userId } = await auth();

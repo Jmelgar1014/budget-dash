@@ -1,9 +1,13 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { rateLimit } from "@/utilities/rateLimit";
-import { recurringTable } from "@/schema/recurringTransactionSchema";
-import { fetchMutation } from "convex/nextjs";
+import {
+  recurringTable,
+  recurringTableUserResponse,
+} from "@/schema/recurringTransactionSchema";
+import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { api } from "@/convex/_generated/api";
+import { z } from "zod";
 
 export async function POST(req: Request) {
   const { userId } = await auth();
@@ -77,5 +81,44 @@ export async function POST(req: Request) {
       },
       { status: 500 }
     );
+  }
+}
+
+export async function GET(req: Request) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json(
+      {
+        error: "Unauthorized",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
+
+  try {
+    const data = await fetchQuery(
+      api.recurringFunctions.getRecurringTransactions,
+      {
+        AuthId: userId,
+      }
+    );
+
+    const parsedData = z.array(recurringTableUserResponse).safeParse(data);
+
+    if (!parsedData.success) {
+      return NextResponse.json({
+        error: {
+          message: "Data is not valid",
+          status: 401,
+        },
+      });
+    }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error: error }, { status: 401 });
   }
 }

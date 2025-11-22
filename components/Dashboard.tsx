@@ -77,7 +77,7 @@ export function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen dark:bg-richBlack ">
+      <div className="min-h-screen dark:bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 ">
         <main className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="text-red-500">Failed to load transactions</p>
@@ -90,13 +90,15 @@ export function Dashboard() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="min-h-screen  dark:bg-richBlack ">
+      <div className="min-h-screen  dark:bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
         {/* Header */}
 
         {/* Main Content */}
-        <main className="container mx-auto px-4 py-8 space-y-8 ">
-          <div className="flex justify-center sm:justify-start">
-            <span className="p-2 mx-2">Transactions TimeFrame: </span>
+        <main className="container mx-auto px-4 py-8 space-y-8 antialiased">
+          <div className="flex justify-center sm:justify-start items-center gap-3">
+            <span className="text-sm font-medium text-slate-300 tracking-wide">
+              Transactions TimeFrame:
+            </span>
             <MonthSelect />
           </div>
 
@@ -122,12 +124,12 @@ export function Dashboard() {
           {/* Charts and Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Budget Breakdown Chart */}
-            <Card className="border-0 shadow-lg dark:bg-gradient-to-br from-richBlack to-oxfordBlue ">
+            <Card className="border border-white/5 bg-gradient-to-br from-slate-800/40 via-slate-800/30 to-slate-900/40    ">
               <CardHeader>
-                <CardTitle className="text-xl font-serif ">
+                <CardTitle className="text-2xl font-semibold tracking-tight">
                   Budget Breakdown
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-sm text-slate-400 mt-1.5">
                   {/* Your spending categories for this month */}
                 </CardDescription>
               </CardHeader>
@@ -137,20 +139,20 @@ export function Dashboard() {
             </Card>
 
             {/* Recent Transactions */}
-            <Card className="border-0 shadow-lg  dark:bg-gradient-to-br from-richBlack to-oxfordBlue">
+            <Card className="border border-white/5 bg-gradient-to-br from-slate-800/40 via-slate-800/30 to-slate-900/40  ">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                 <CardHeader className="pb-2 sm:pb-3 sm:pt-3 ">
-                  <CardTitle className="text-xl font-serif">
+                  <CardTitle className="text-2xl font-semibold tracking-tight">
                     Recent Transactions
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm text-slate-400 mt-1.5">
                     Your latest financial activity
                   </CardDescription>
                 </CardHeader>
                 <div className="flex justify-center sm:justify-center px-6 sm:px-0">
                   {recentTransactions.length > 0 ? (
                     <Button
-                      className="w-full sm:max-w-52 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue dark:border-mikadoYellow bg-yaleBlue text-white"
+                      className="w-full sm:max-w-52 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue dark:border-mikadoYellow bg-yaleBlue text-white text-sm font-medium tracking-wide"
                       variant="outline"
                       asChild
                     >

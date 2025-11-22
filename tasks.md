@@ -118,3 +118,58 @@
 [x]add endpoint to update transaction
 [x]create form to have users update transaction
 []add toast to let user know transaction was updated successfully
+[]create crud endpoints for recurring transactions
+[]create zod schemas for recurring data for user input and user response
+[]create form to add recurring transactions
+[]add check for demo account on frontend and backedn to make sure they cannot do anything on demo account
+
+----Endpoint fixes
+
+1. **Consistent Response Format** ❌
+   - Every endpoint should return `{ success, data, error }` or similar
+   - Makes client code predictable and easier to test
+
+2. **Request/Response Standardization** ❌
+   - Some endpoints return `Success`, others return `message`, some return raw data
+   - Enterprise teams standardize this across ALL endpoints
+
+3. **HTTP Status Code Consistency** ❌
+   - Using 401 for validation errors (should be 400)
+   - Using 401 as catch-all (should be 500 for server errors)
+   - Enterprise teams strictly follow HTTP semantics
+
+4. **Request ID Tracking** ❌
+   - No correlation IDs for tracing requests through logs
+   - Enterprise monitoring needs this for debugging
+
+5. **API Documentation** ❌
+   - No OpenAPI/Swagger specs visible
+   - Enterprise teams auto-generate docs for client teams
+
+6. **Testing** ❌
+   - No visible unit/integration tests for endpoints
+   - Enterprise teams test all API paths thoroughly
+
+7. **Pagination/Limits** ❌
+   - GET endpoints don't have `limit` and `offset` parameters
+   - Could cause performance issues with large datasets
+
+8. **Idempotency Keys** ❌
+   - POST requests could be retried and create duplicates
+   - Enterprise teams use idempotency keys for safe retries
+
+9. **CORS/Security Headers** ❌
+   - Not visible if configured
+
+10. **DELETE/UPDATE Endpoints** ❌
+    - Recurring transactions can't be modified or deleted
+
+### **What You're Doing Well:**
+
+✅ Auth + Authorization\
+✅ Rate Limiting\
+✅ Input Validation (Zod)\
+✅ TypeScript\
+✅ Type-safe backend (Convex)
+
+**To reach enterprise level, prioritize:** consistent responses → proper status codes → tests → documentation → idempoten
