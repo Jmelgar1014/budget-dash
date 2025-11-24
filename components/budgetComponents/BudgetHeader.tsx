@@ -16,6 +16,7 @@ import {
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
+import { useDemoUser } from "@/hooks/useDemoUser";
 
 interface budgetProps {
   budgetName: string;
@@ -38,6 +39,7 @@ const BudgetHeader = ({
   budgetType,
   deleteBudget,
 }: budgetProps) => {
+  const { isDemoUser } = useDemoUser();
   const Icon = categoryIcons[budgetType] || Circle;
   return (
     <div className="flex w-full flex-col gap-6">
@@ -62,6 +64,7 @@ const BudgetHeader = ({
           <Button
             className="cursor-pointer dark:bg-transparent dark:text-gray-400 dark:hover:text-white dark:hover:bg-yaleBlue"
             size="sm"
+            disabled={isDemoUser}
             onClick={() => deleteBudget()}
           >
             <Trash2 />

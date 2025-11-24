@@ -37,7 +37,7 @@ import { transactionType } from "@/schema/TransactionSchema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
-
+import { useDemoUser } from "../hooks/useDemoUser";
 interface AddTransactionModalProps {
   onClose: () => void;
 }
@@ -45,6 +45,7 @@ interface AddTransactionModalProps {
 export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
   const queryClient = useQueryClient();
   const { userId } = useAuth();
+  const { isDemoUser } = useDemoUser();
 
   const mutation = useMutation({
     mutationFn: async (data: z.infer<typeof transactionType>) => {
@@ -89,6 +90,12 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
 
   const handleSubmit = async (data: z.infer<typeof transactionType>) => {
     try {
+      if (isDemoUser) {
+        toast.error(
+          "Demo accounts cannot add transactions. Please create an account."
+        );
+      }
+
       const file = data.ImagePath;
 
       let s3Url = null;
@@ -146,7 +153,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 ">
-      <Card className="w-full max-w-md border-0 shadow-2xl dark:bg-richBlack backdrop-blur-sm">
+      <Card className="w-full max-w-md border-0 shadow-2xl dark:bg-richBlack dark:border dark:border-white/10 backdrop-blur-sm">
         <CardHeader className="relative">
           <div className="absolute -inset-1  rounded-lg blur opacity-25"></div>
           <div className="relative">
@@ -371,7 +378,7 @@ export function AddTransactionModal({ onClose }: AddTransactionModalProps) {
               <Button
                 className="cursor-pointer m-2 bg-mikadoYellow hover:bg-gold text-oxfordBlue"
                 type="submit"
-                disabled={isLoading}
+                disabled={isDemoUser || isLoading}
               >
                 {isLoading ? (
                   <>

@@ -5,7 +5,6 @@ import { SignIn, SignUp, useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { is } from "date-fns/locale";
 import { Spinner } from "./ui/spinner";
 
 const MarketComponent = () => {

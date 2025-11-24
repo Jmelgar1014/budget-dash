@@ -1,0 +1,123 @@
+"filename", "language", "JavaScript", "TypeScript", "Markdown", "JSON with Comments", "JSON", "TypeScript JSX", "XML", "PostCSS", "comment", "blank", "total"
+"/Users/josemelgar/Documents/Projects/budget/ENHANCEMENT_ROADMAP.md", "Markdown", 0, 0, 294, 0, 0, 0, 0, 0, 0, 79, 373
+"/Users/josemelgar/Documents/Projects/budget/FEATURE_RECOMMENDATIONS.md", "Markdown", 0, 0, 165, 0, 0, 0, 0, 0, 0, 35, 200
+"/Users/josemelgar/Documents/Projects/budget/README.md", "Markdown", 0, 0, 156, 0, 0, 0, 0, 0, 0, 57, 213
+"/Users/josemelgar/Documents/Projects/budget/TESTING_RECOMMENDATIONS.md", "Markdown", 0, 0, 202, 0, 0, 0, 0, 0, 0, 45, 247
+"/Users/josemelgar/Documents/Projects/budget/Types/types.ts", "TypeScript", 0, 20, 0, 0, 0, 0, 0, 0, 0, 2, 22
+"/Users/josemelgar/Documents/Projects/budget/app/(protected)/budgets/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 25, 0, 0, 0, 3, 28
+"/Users/josemelgar/Documents/Projects/budget/app/(protected)/home/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 11, 0, 0, 0, 3, 14
+"/Users/josemelgar/Documents/Projects/budget/app/(protected)/layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 112, 0, 0, 0, 5, 117
+"/Users/josemelgar/Documents/Projects/budget/app/(protected)/transactions/[id]/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 88, 0, 0, 2, 11, 101
+"/Users/josemelgar/Documents/Projects/budget/app/(protected)/transactions/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 119, 0, 0, 3, 11, 133
+"/Users/josemelgar/Documents/Projects/budget/app/ConvexClientProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 7, 0, 0, 0, 4, 11
+"/Users/josemelgar/Documents/Projects/budget/app/api/budgets/[id]/route.ts", "TypeScript", 0, 44, 0, 0, 0, 0, 0, 0, 0, 7, 51
+"/Users/josemelgar/Documents/Projects/budget/app/api/budgets/route.ts", "TypeScript", 0, 91, 0, 0, 0, 0, 0, 0, 0, 17, 108
+"/Users/josemelgar/Documents/Projects/budget/app/api/receipts/deletereceipt/route.ts", "TypeScript", 0, 54, 0, 0, 0, 0, 0, 0, 1, 11, 66
+"/Users/josemelgar/Documents/Projects/budget/app/api/recurring-transactions/route.ts", "TypeScript", 0, 106, 0, 0, 0, 0, 0, 0, 1, 18, 125
+"/Users/josemelgar/Documents/Projects/budget/app/api/transactions/[id]/route.ts", "TypeScript", 0, 101, 0, 0, 0, 0, 0, 0, 0, 19, 120
+"/Users/josemelgar/Documents/Projects/budget/app/api/transactions/filters/route.ts", "TypeScript", 0, 40, 0, 0, 0, 0, 0, 0, 0, 10, 50
+"/Users/josemelgar/Documents/Projects/budget/app/api/transactions/route.ts", "TypeScript", 0, 116, 0, 0, 0, 0, 0, 0, 2, 24, 142
+"/Users/josemelgar/Documents/Projects/budget/app/api/upload/getreadurl/route.ts", "TypeScript", 0, 29, 0, 0, 0, 0, 0, 0, 0, 8, 37
+"/Users/josemelgar/Documents/Projects/budget/app/api/upload/getsignedurl/route.ts", "TypeScript", 0, 25, 0, 0, 0, 0, 0, 0, 0, 6, 31
+"/Users/josemelgar/Documents/Projects/budget/app/globals.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 165, 9, 18, 192
+"/Users/josemelgar/Documents/Projects/budget/app/layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 42, 0, 0, 0, 5, 47
+"/Users/josemelgar/Documents/Projects/budget/app/login/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 8, 0, 0, 0, 2, 10
+"/Users/josemelgar/Documents/Projects/budget/app/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 8, 0, 0, 0, 2, 10
+"/Users/josemelgar/Documents/Projects/budget/auth-security-gameplan.md", "Markdown", 0, 0, 96, 0, 0, 0, 0, 0, 0, 24, 120
+"/Users/josemelgar/Documents/Projects/budget/components.json", "JSON", 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 21
+"/Users/josemelgar/Documents/Projects/budget/components/AddTransactionModal.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 359, 0, 0, 16, 24, 399
+"/Users/josemelgar/Documents/Projects/budget/components/AllTransactions.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 327, 0, 0, 5, 21, 353
+"/Users/josemelgar/Documents/Projects/budget/components/BalanceCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 24, 0, 0, 1, 4, 29
+"/Users/josemelgar/Documents/Projects/budget/components/BudgetChart.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 96, 0, 0, 2, 6, 104
+"/Users/josemelgar/Documents/Projects/budget/components/BudgetContainer.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 139, 0, 0, 3, 17, 159
+"/Users/josemelgar/Documents/Projects/budget/components/BudgetStats.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 90, 0, 0, 0, 4, 94
+"/Users/josemelgar/Documents/Projects/budget/components/Card.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/Users/josemelgar/Documents/Projects/budget/components/CardSkeleton.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 10, 0, 0, 0, 3, 13
+"/Users/josemelgar/Documents/Projects/budget/components/CategoryDropdown.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 58, 0, 0, 0, 3, 61
+"/Users/josemelgar/Documents/Projects/budget/components/Dashboard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 154, 0, 0, 12, 20, 186
+"/Users/josemelgar/Documents/Projects/budget/components/DeleteConfirmation.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 59, 0, 0, 0, 2, 61
+"/Users/josemelgar/Documents/Projects/budget/components/FormComponents/BudgetForm.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 211, 0, 0, 8, 13, 232
+"/Users/josemelgar/Documents/Projects/budget/components/FormComponents/RecurringTransactionForm.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 269, 0, 0, 13, 8, 290
+"/Users/josemelgar/Documents/Projects/budget/components/Header.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 37, 0, 0, 0, 3, 40
+"/Users/josemelgar/Documents/Projects/budget/components/HeroCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 22, 0, 0, 0, 3, 25
+"/Users/josemelgar/Documents/Projects/budget/components/LoginForm.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 80, 0, 0, 2, 9, 91
+"/Users/josemelgar/Documents/Projects/budget/components/ManageBudgets.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 34, 0, 0, 1, 4, 39
+"/Users/josemelgar/Documents/Projects/budget/components/MarketComponent.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 93, 0, 0, 1, 11, 105
+"/Users/josemelgar/Documents/Projects/budget/components/MonthSelect.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 78, 0, 0, 0, 5, 83
+"/Users/josemelgar/Documents/Projects/budget/components/PigIcon.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 27, 0, 0, 0, 3, 30
+"/Users/josemelgar/Documents/Projects/budget/components/RecentTransactions.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 79, 0, 0, 1, 4, 84
+"/Users/josemelgar/Documents/Projects/budget/components/SavingsCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 24, 0, 0, 1, 4, 29
+"/Users/josemelgar/Documents/Projects/budget/components/SpendingCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 24, 0, 0, 1, 4, 29
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionCards.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 65, 0, 0, 3, 14, 82
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionDetail/TransactionDetailDeleted.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 25, 0, 0, 0, 3, 28
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionDetail/TransactionDetailDescription.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 24, 0, 0, 0, 4, 28
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionDetail/TransactionDetailEditForm.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 371, 0, 0, 16, 21, 408
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionDetail/TransactionDetailHeader.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 124, 0, 0, 1, 10, 135
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionDetail/TransactionDetailViewReceipt.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 54, 0, 0, 0, 5, 59
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionPageSkeleton.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 46, 0, 0, 4, 6, 56
+"/Users/josemelgar/Documents/Projects/budget/components/TransactionSearch.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 141, 0, 0, 1, 7, 149
+"/Users/josemelgar/Documents/Projects/budget/components/budgetComponents/BudgetCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 60, 0, 0, 9, 7, 76
+"/Users/josemelgar/Documents/Projects/budget/components/budgetComponents/BudgetHeader.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 72, 0, 0, 2, 5, 79
+"/Users/josemelgar/Documents/Projects/budget/components/budgetComponents/EmptyBudgetCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 46, 0, 0, 0, 5, 51
+"/Users/josemelgar/Documents/Projects/budget/components/skeletons/SingleTransactionSkeleton.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 12, 0, 0, 0, 3, 15
+"/Users/josemelgar/Documents/Projects/budget/components/ui/alert-dialog.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 143, 0, 0, 0, 15, 158
+"/Users/josemelgar/Documents/Projects/budget/components/ui/badge.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 41, 0, 0, 0, 6, 47
+"/Users/josemelgar/Documents/Projects/budget/components/ui/button.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 54, 0, 0, 0, 6, 60
+"/Users/josemelgar/Documents/Projects/budget/components/ui/calendar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 203, 0, 0, 0, 11, 214
+"/Users/josemelgar/Documents/Projects/budget/components/ui/card.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 83, 0, 0, 0, 10, 93
+"/Users/josemelgar/Documents/Projects/budget/components/ui/dropdown-menu.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 239, 0, 0, 0, 19, 258
+"/Users/josemelgar/Documents/Projects/budget/components/ui/empty.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 95, 0, 0, 0, 10, 105
+"/Users/josemelgar/Documents/Projects/budget/components/ui/form.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 143, 0, 0, 0, 25, 168
+"/Users/josemelgar/Documents/Projects/budget/components/ui/input-group.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 152, 0, 0, 3, 16, 171
+"/Users/josemelgar/Documents/Projects/budget/components/ui/input.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 18, 0, 0, 0, 4, 22
+"/Users/josemelgar/Documents/Projects/budget/components/ui/item.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 179, 0, 0, 0, 15, 194
+"/Users/josemelgar/Documents/Projects/budget/components/ui/label.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 20, 0, 0, 0, 5, 25
+"/Users/josemelgar/Documents/Projects/budget/components/ui/popover.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 41, 0, 0, 0, 8, 49
+"/Users/josemelgar/Documents/Projects/budget/components/ui/progress.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 27, 0, 0, 0, 5, 32
+"/Users/josemelgar/Documents/Projects/budget/components/ui/select.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 172, 0, 0, 0, 14, 186
+"/Users/josemelgar/Documents/Projects/budget/components/ui/separator.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 24, 0, 0, 0, 5, 29
+"/Users/josemelgar/Documents/Projects/budget/components/ui/skeleton.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 11, 0, 0, 0, 3, 14
+"/Users/josemelgar/Documents/Projects/budget/components/ui/sonner.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 21, 0, 0, 0, 5, 26
+"/Users/josemelgar/Documents/Projects/budget/components/ui/spinner.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 13, 0, 0, 0, 4, 17
+"/Users/josemelgar/Documents/Projects/budget/components/ui/tabs.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 59, 0, 0, 0, 8, 67
+"/Users/josemelgar/Documents/Projects/budget/components/ui/textarea.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 15, 0, 0, 0, 4, 19
+"/Users/josemelgar/Documents/Projects/budget/convex/README.md", "Markdown", 0, 0, 73, 0, 0, 0, 0, 0, 0, 18, 91
+"/Users/josemelgar/Documents/Projects/budget/convex/_generated/api.d.ts", "TypeScript", 0, 21, 0, 0, 0, 0, 0, 0, 17, 3, 41
+"/Users/josemelgar/Documents/Projects/budget/convex/_generated/api.js", "JavaScript", 3, 0, 0, 0, 0, 0, 0, 0, 17, 3, 23
+"/Users/josemelgar/Documents/Projects/budget/convex/_generated/dataModel.d.ts", "TypeScript", 0, 16, 0, 0, 0, 0, 0, 0, 39, 6, 61
+"/Users/josemelgar/Documents/Projects/budget/convex/_generated/server.d.ts", "TypeScript", 0, 24, 0, 0, 0, 0, 0, 0, 105, 14, 143
+"/Users/josemelgar/Documents/Projects/budget/convex/_generated/server.js", "JavaScript", 16, 0, 0, 0, 0, 0, 0, 0, 65, 9, 90
+"/Users/josemelgar/Documents/Projects/budget/convex/budgetFunctions.ts", "TypeScript", 0, 43, 0, 0, 0, 0, 0, 0, 0, 7, 50
+"/Users/josemelgar/Documents/Projects/budget/convex/recurringFunctions.ts", "TypeScript", 0, 42, 0, 0, 0, 0, 0, 0, 0, 6, 48
+"/Users/josemelgar/Documents/Projects/budget/convex/schema.ts", "TypeScript", 0, 33, 0, 0, 0, 0, 0, 0, 0, 2, 35
+"/Users/josemelgar/Documents/Projects/budget/convex/transactionsFuncs.ts", "TypeScript", 0, 194, 0, 0, 0, 0, 0, 0, 1, 17, 212
+"/Users/josemelgar/Documents/Projects/budget/convex/tsconfig.json", "JSON with Comments", 0, 0, 0, 18, 0, 0, 0, 0, 6, 2, 26
+"/Users/josemelgar/Documents/Projects/budget/eslint.config.mjs", "JavaScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 5, 17
+"/Users/josemelgar/Documents/Projects/budget/hooks/QueryProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 9, 0, 0, 0, 4, 13
+"/Users/josemelgar/Documents/Projects/budget/hooks/useDebounce.ts", "TypeScript", 0, 9, 0, 0, 0, 0, 0, 0, 0, 5, 14
+"/Users/josemelgar/Documents/Projects/budget/hooks/useDemoUser.ts", "TypeScript", 0, 8, 0, 0, 0, 0, 0, 0, 0, 4, 12
+"/Users/josemelgar/Documents/Projects/budget/jest.config.ts", "TypeScript", 0, 12, 0, 0, 0, 0, 0, 0, 139, 57, 208
+"/Users/josemelgar/Documents/Projects/budget/lib/utils.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"/Users/josemelgar/Documents/Projects/budget/middleware.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 6, 4, 28
+"/Users/josemelgar/Documents/Projects/budget/next.config.ts", "TypeScript", 0, 12, 0, 0, 0, 0, 0, 0, 0, 3, 15
+"/Users/josemelgar/Documents/Projects/budget/package-lock.json", "JSON", 0, 0, 0, 0, 14904, 0, 0, 0, 0, 1, 14905
+"/Users/josemelgar/Documents/Projects/budget/package.json", "JSON", 0, 0, 0, 0, 72, 0, 0, 0, 0, 1, 73
+"/Users/josemelgar/Documents/Projects/budget/postcss.config.mjs", "JavaScript", 4, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6
+"/Users/josemelgar/Documents/Projects/budget/public/favicon.svg", "XML", 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 21
+"/Users/josemelgar/Documents/Projects/budget/public/file.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/josemelgar/Documents/Projects/budget/public/globe.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/josemelgar/Documents/Projects/budget/public/next.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/josemelgar/Documents/Projects/budget/public/vercel.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/josemelgar/Documents/Projects/budget/public/window.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/josemelgar/Documents/Projects/budget/schema/ExportSchema.ts", "TypeScript", 0, 9, 0, 0, 0, 0, 0, 0, 0, 3, 12
+"/Users/josemelgar/Documents/Projects/budget/schema/TransactionSchema.ts", "TypeScript", 0, 43, 0, 0, 0, 0, 0, 0, 0, 7, 50
+"/Users/josemelgar/Documents/Projects/budget/schema/budgetSchema.ts", "TypeScript", 0, 14, 0, 0, 0, 0, 0, 0, 1, 5, 20
+"/Users/josemelgar/Documents/Projects/budget/schema/recurringTransactionSchema.ts", "TypeScript", 0, 22, 0, 0, 0, 0, 0, 0, 0, 4, 26
+"/Users/josemelgar/Documents/Projects/budget/system-theme-detection.md", "Markdown", 0, 0, 49, 0, 0, 0, 0, 0, 0, 14, 63
+"/Users/josemelgar/Documents/Projects/budget/tasks.md", "Markdown", 0, 0, 161, 0, 0, 0, 0, 0, 0, 15, 176
+"/Users/josemelgar/Documents/Projects/budget/tests/utilityFuncs.test.ts", "TypeScript", 0, 193, 0, 0, 0, 0, 0, 0, 9, 6, 208
+"/Users/josemelgar/Documents/Projects/budget/tsconfig.json", "JSON with Comments", 0, 0, 0, 27, 0, 0, 0, 0, 0, 1, 28
+"/Users/josemelgar/Documents/Projects/budget/utilities/rateLimit.ts", "TypeScript", 0, 8, 0, 0, 0, 0, 0, 0, 0, 2, 10
+"/Users/josemelgar/Documents/Projects/budget/utilities/recurringTransactions.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/Users/josemelgar/Documents/Projects/budget/utilities/utilityFuncs.ts", "TypeScript", 0, 66, 0, 0, 0, 0, 0, 0, 1, 15, 82
+"Total", "-", 35, 1418, 1196, 45, 14997, 5516, 26, 165, 530, 1138, 25066

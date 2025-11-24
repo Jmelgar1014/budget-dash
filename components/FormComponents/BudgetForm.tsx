@@ -25,12 +25,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useDemoUser } from "@/hooks/useDemoUser";
 
 interface budgetFormProps {
   onClose: () => void;
 }
 
 const BudgetForm = ({ onClose }: budgetFormProps) => {
+  const { isDemoUser } = useDemoUser();
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -71,6 +73,11 @@ const BudgetForm = ({ onClose }: budgetFormProps) => {
   const isLoading = mutation.isPending;
 
   const handleSubmit = async (data: z.infer<typeof budgetTable>) => {
+    if (isDemoUser) {
+      toast.error(
+        "Demo accounts can't add budgets. Please create an account. "
+      );
+    }
     console.log("clicked");
     mutation.mutate(data);
   };

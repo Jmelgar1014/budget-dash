@@ -6,7 +6,7 @@ export const recurringTable = z.object({
   Description: z.string().optional(),
   Amount: z.number(),
   Frequency: z.string(),
-  RecurringDate: z.number(),
+  RecurringDate: z.date(),
   PurchaseType: z.string(),
   AuthId: z.string(),
 });
