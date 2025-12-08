@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "./ui/button";
 import { Settings2 } from "lucide-react";
 import Link from "next/link";
 

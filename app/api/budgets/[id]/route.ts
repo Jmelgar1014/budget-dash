@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { api } from "@/convex/_generated/api";
-import { fetchMutation, fetchQuery } from "convex/nextjs";
+import { fetchMutation } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
 import { Id } from "@/convex/_generated/dataModel";
 import { rateLimit } from "@/utilities/rateLimit";
 
@@ -16,6 +15,12 @@ export async function DELETE(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  if (userId === process.env.NEXT_PUBLIC_DEMO_USERID) {
+    return NextResponse.json(
+      { error: "Demo account does not have access" },
+      { status: 403 }
+    );
+  }
   const { success, limit, remaining } = await rateLimit.limit(userId);
 
   if (!success) {

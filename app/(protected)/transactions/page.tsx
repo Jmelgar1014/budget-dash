@@ -1,8 +1,8 @@
 "use client";
 import AllTransactions from "@/components/AllTransactions";
 import TransactionCards from "@/components/TransactionCards";
-import React, { Suspense } from "react";
-import { ArrowLeft } from "lucide-react";
+import React, { Suspense, useState } from "react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import MonthSelect from "@/components/MonthSelect";
@@ -13,8 +13,11 @@ import { saveAs } from "file-saver";
 import { exportTable } from "@/schema/ExportSchema";
 import { z } from "zod";
 import TransactionPageSkeleton from "@/components/TransactionPageSkeleton";
+import RecurringTransactionForm from "@/components/FormComponents/RecurringTransactionForm";
 
 const TransactionsPageContent = () => {
+  const [recurringModal, setRecurringModal] = useState<boolean>(false);
+
   const searchParams = useSearchParams();
   const { data, error } = useQuery({
     queryKey: ["transactions", searchParams.toString()],
@@ -90,9 +93,16 @@ const TransactionsPageContent = () => {
         {data && data.length == 0 ? (
           ""
         ) : (
-          <div className="mt-4 sm:mt-0">
+          <div className="mt-4 sm:mt-0 flex flex-col lg:flex-row justify-center ">
             <Button
-              className="cursor-pointer w-[180px] dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+              onClick={() => setRecurringModal(true)}
+              variant="outline"
+              className="m-2 cursor-pointer w-[180px]  dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
+            >
+              <Plus /> Recurring
+            </Button>
+            <Button
+              className="m-2 cursor-pointer w-[180px] dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
               variant="outline"
               onClick={() => exportData()}
             >
@@ -101,6 +111,9 @@ const TransactionsPageContent = () => {
           </div>
         )}
       </div>
+      {recurringModal && (
+        <RecurringTransactionForm onClose={() => setRecurringModal(false)} />
+      )}
       <TransactionCards />
       {/* <TransactionSearch /> */}
       <AllTransactions />

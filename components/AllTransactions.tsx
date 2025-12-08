@@ -1,4 +1,5 @@
 "use client";
+import { useDemoUser } from "@/hooks/useDemoUser";
 import React, { useState, Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -37,6 +38,7 @@ const categoryIcons: Record<string, any> = {
 };
 
 const AllTransactionsContent = () => {
+  const { isDemoUser } = useDemoUser();
   // const [receipt, setReceipt] = useState<boolean>(false);
   const router = useRouter();
   const [receiptUrl, setReceiptUrl] = useState<string>("");
@@ -274,6 +276,7 @@ const AllTransactionsContent = () => {
                 <Button
                   className="m-2 cursor-pointer hover:bg-oxfordBlue group dark:hover:bg-oxfordBlue"
                   variant="ghost"
+                  disabled={isDemoUser}
                   // onClick={() => handleDelete(transaction._id)}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -290,6 +293,7 @@ const AllTransactionsContent = () => {
         })}
       </div>
       <div className="">
+        
         <Button
           className="float-end my-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
           onClick={() => loadMore(10)}
