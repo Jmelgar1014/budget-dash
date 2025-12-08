@@ -2,8 +2,8 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { rateLimit } from "@/utilities/rateLimit";
 import {
-  recurringTable,
   recurringTableUserResponse,
+  recurringTransactionParsed,
 } from "@/schema/recurringTransactionSchema";
 import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { api } from "@/convex/_generated/api";
@@ -32,14 +32,18 @@ export async function POST(req: Request) {
 
   const userData = await req.json();
 
+  console.log(userData);
+
   const userDataId = {
     ...userData,
     AuthId: userId,
   };
 
-  //   console.log(userDataId);
+  console.log(userDataId);
 
-  const parsedUserData = recurringTable.safeParse(userDataId);
+  const parsedUserData = recurringTransactionParsed.safeParse(userDataId);
+
+  console.log(parsedUserData);
 
   if (!parsedUserData.success) {
     return NextResponse.json({

@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { api } from "@/convex/_generated/api";
-import { fetchMutation, fetchQuery } from "convex/nextjs";
+import { fetchMutation } from "convex/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
 import { Id } from "@/convex/_generated/dataModel";
 import { rateLimit } from "@/utilities/rateLimit";
 

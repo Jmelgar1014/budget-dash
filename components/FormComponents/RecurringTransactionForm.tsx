@@ -1,13 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import {
-  CalendarIcon,
-  DollarSign,
-  Loader2Icon,
-  ReceiptText,
-  Tag,
-  X,
-} from "lucide-react";
+import { CalendarIcon, DollarSign, Loader2Icon, Tag, X } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -68,6 +61,9 @@ const RecurringTransactionForm = ({ onClose }: RecurringTransaction) => {
       onClose();
       toast.success("Recurring Transaction has been added.");
     },
+    onError: (error) => {
+      console.log(error);
+    },
   });
   const form = useForm<z.infer<typeof recurringTable>>({
     resolver: zodResolver(recurringTable),
@@ -75,12 +71,18 @@ const RecurringTransactionForm = ({ onClose }: RecurringTransaction) => {
   });
 
   const handleSubmit = async (data: z.infer<typeof recurringTable>) => {
+    console.log(data);
     try {
       if (isDemoUser) {
         toast.error(
           "Demo account cannot add transactions. Please create an account."
         );
+        return;
       }
+
+      mutation.mutate({
+        ...data,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -186,7 +188,7 @@ const RecurringTransactionForm = ({ onClose }: RecurringTransaction) => {
                           <SelectContent>
                             <SelectItem value="Weekly">Weekly</SelectItem>
                             <SelectItem value="Monthly">Monthly</SelectItem>
-                            <SelectItem value="Utilities">Yearly</SelectItem>
+                            <SelectItem value="Yearly">Yearly</SelectItem>
                           </SelectContent>
                         </Select>
 

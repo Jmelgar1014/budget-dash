@@ -293,6 +293,7 @@ const AllTransactionsContent = () => {
         })}
       </div>
       <div className="">
+        
         <Button
           className="float-end my-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
           onClick={() => loadMore(10)}
