@@ -123,6 +123,8 @@
 []create form to add recurring transactions
 []add check for demo account on frontend and backedn to make sure they cannot do anything on demo account
 
+make sure to remember to always keep active or upstash deletes db
+
 ----Endpoint fixes
 
 1. **Consistent Response Format** ❌
