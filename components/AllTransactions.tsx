@@ -179,7 +179,7 @@ const AllTransactionsContent = () => {
           categoryValue={selectedCategory}
         />
         <div className="space-y-3">
-          <div className="rounded-lg bg-oxfordBlue border border-yaleBlue h-40">
+          <div className="rounded-lg bg-gradient-to-br from-slate-800/40 via-slate-800/30 to-slate-900/40 border border-white/10 h-40">
             <div className="flex h-full justify-center items-center">
               <h1 className="text-2xl font-semibold m-7 flex justify-center ">
                 There are no results
@@ -209,7 +209,7 @@ const AllTransactionsContent = () => {
           return (
             <div
               key={transaction._id}
-              className="flex items-center justify-between p-3 rounded-lg border border-yaleBlue dark:bg-oxfordBlue/50 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-mikadoYellow"
+              className="flex items-center justify-between p-3 rounded-lg border border-white/10 bg-gradient-to-br from-slate-800/40 via-slate-800/30 to-slate-900/40 dark:hover:bg-richBlack/80 transition-colors hover:shadow-md hover:bg-mikadoYellow"
               onClick={() => transactionPage(transaction._id)}
             >
               <div className="flex items-center gap-3">
@@ -293,7 +293,6 @@ const AllTransactionsContent = () => {
         })}
       </div>
       <div className="">
-        
         <Button
           className="float-end my-4 cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white text-white"
           onClick={() => loadMore(10)}

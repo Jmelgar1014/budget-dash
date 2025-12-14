@@ -76,7 +76,7 @@ const TransactionSearch = ({
   };
   return (
     <>
-      <div className="dark:bg-oxfordBlue h-44 rounded-lg flex flex-col justify-center items-start border border-yaleBlue">
+      <div className="bg-gradient-to-br from-slate-800/40 via-slate-800/30 to-slate-900/40 h-44 rounded-lg flex flex-col justify-center items-start border border-white/10">
         <div className="flex p-4 w-full">
           <h1 className="text-xl whitespace-nowrap dark:text-mikadoYellow mr-4 my-2">
             Filter & Search

@@ -1,5 +1,6 @@
 // middleware.ts
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 // Define which routes should be protected
 const isProtectedRoute = createRouteMatcher([
@@ -11,6 +12,13 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
+  const { userId } = await auth();
+
+  // If user is authenticated and on the landing page, redirect to /home
+  if (userId && req.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/home", req.url));
+  }
+
   // Only protect routes that match your protected route matcher
   if (isProtectedRoute(req)) {
     await auth.protect(); // redirects to /sign-in if not signed in

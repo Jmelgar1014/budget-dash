@@ -73,7 +73,7 @@ const TransactionsPageContent = () => {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8 space-y-8">
+    <main className="container mx-auto px-4 py-8 space-y-8 min-h-screen">
       <Button
         className="cursor-pointer dark:bg-richBlack hover:bg-mikadoYellow dark:hover:bg-mikadoYellow dark:hover:text-yaleBlue bg-yaleBlue dark:border dark:border-mikadoYellow dark:text-white"
         // variant="ghost"
