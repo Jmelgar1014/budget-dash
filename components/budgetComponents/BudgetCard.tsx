@@ -33,7 +33,7 @@ const BudgetCard = ({
 
   return (
     <>
-      <div className="h-56 rounded-2xl hover:shadow-lg hover:shadow-gold transition-all duration-300 hover:-translate-y-1  dark:bg-oxfordBlue border-2 border-yaleBlue hover:border-gold">
+      <div className="h-56 rounded-2xl  hover:shadow-[0_0_25px_rgba(255,255,255,.5)] transition-all duration-300 hover:-translate-y-1  border border-white/5 bg-gradient-to-br from-slate-800/40 via-slate-800/30 to-slate-900/40">
         <div className="flex justify-between px-2 py-6">
           <BudgetHeader
             budgetName={budgetName}
